@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Figure Render</title>
+<link rel="stylesheet" href="assets/tokens.css">
+<style>
+  /* Renders one chart at a fixed size for the README; scripts/build.sh screenshots it. */
+  body { width: 1200px; padding: 36px 44px; }
+  h1 { font: 600 26px/1.2 var(--serif); margin: 0 0 6px; max-width: 1050px; }
+  .legend { margin: 10px 0 6px; font-size: 14px; }
+  .source { font-size: 13px; margin-top: 8px; }
+</style>
+</head>
+<body>
+<h1 id="title"></h1>
+<div class="legend" id="legend"></div>
+<div id="fig"></div>
+<p class="source" id="src"></p>
+<script type="module">
+  import { burstStrip, dumbbell, bars, lines, fmt } from "./assets/charts.js";
+  await document.fonts.ready;
+  await Promise.all(["600 26px \"Source Serif 4\"", "400 14px \"IBM Plex Mono\"", "500 14px \"IBM Plex Mono\""].map((f) => document.fonts.load(f)));
+  const load = (n) => fetch(`data/${n}.json`).then((r) => r.json());
+  const [R, head, policy, bursts] = await Promise.all(["report", "headline", "policy", "bursts"].map(load));
+  const pol = {};
+  for (const r of policy) (pol[r.window] ||= {})[r.policy] = r;
+  const gap = Object.fromEntries(R.split_gap.filter((r) => r.model === "boosted_trees").map((r) => [r.split, r]));
+  const fig = document.getElementById("fig");
+  const set = (id, html) => (document.getElementById(id).innerHTML = html);
+  const L = { lost: '<span><i style="background:var(--lost)"></i>lost</span>', stopped: '<span><i style="background:var(--stopped)"></i>stopped</span>',
+    block: '<span><i style="background:var(--ink);width:2px;height:12px"></i>card blocked</span>' };
+
+  const figures = {
+    bursts() {
+      set("title", `Every compromised card in Nov–Dec 2010. Blocking the card after its first confirmed alert stopped ${fmt.pct(pol.oot.next_day_block.prevented_share)} of fraud dollars.`);
+      set("legend", L.lost + L.stopped + L.block);
+      burstStrip(fig, bursts, { width: 1110, rowH: 26 });
+      set("src", "Out-of-time replay, next-day blocking. Bar height ∝ √(daily fraud $). Cards renumbered.");
+    },
+    validation() {
+      set("title", `A random test split promised ${fmt.pct(gap.random.test)} detection; on later months the model delivered ${fmt.pct(gap.random.oot)}.`);
+      set("legend", '<span><svg width="12" height="12"><circle cx="6" cy="6" r="4.5" fill="none" stroke="var(--ink)" stroke-width="2"/></svg>test set claimed</span><span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="var(--ink)"/></svg>out-of-time, Nov–Dec</span>');
+      dumbbell(fig, [
+        { key: "random", label: "Random records", note: "the usual default", ...gap.random },
+        { key: "card_grouped", label: "Whole cards held out", note: "no card on both sides", ...gap.card_grouped },
+        { key: "temporal", label: "Later months held out", note: "train Jan–Aug, test Sep–Oct", ...gap.temporal },
+      ], { width: 1110, rowH: 80, domain: [0.5, 0.9], left: 250, fs: 15 });
+      set("src", "FDR@3% (share of fraud in the top 3% of scores), boosted trees, mean of 5 seeds.");
+    },
+    speed() {
+      set("title", "Same alerts, faster response: the share of out-of-time fraud dollars stopped by blocking policy.");
+      const names = { next_day_block: "Block next day", same_day_block: "Block same day", realtime_decline: "Decline in real time" };
+      bars(fig, Object.keys(names).map((k) => ({ label: names[k], value: pol.oot[k].prevented_share, color: "var(--stopped)" })),
+        { width: 1110, height: 360, valueLabels: true, yFmt: (v) => fmt.pct(v), fs: 15, title: "Share stopped by policy" });
+      set("src", "Nov–Dec 2010 replay, same model and cutoff for every policy.");
+    },
+    value() {
+      set("title", "Net value stops rising at a 3% review budget, chosen on Sep–Oct and confirmed on Nov–Dec.");
+      set("legend", '<span><i style="background:var(--context);height:2px;width:14px"></i>Sep–Oct (chosen on)</span><span><i style="background:var(--stopped);height:2px;width:14px"></i>Nov–Dec (out-of-time)</span>');
+      lines(fig, [
+        { name: "Sep–Oct", color: "var(--context)", dash: "5 4", points: R.value_curve.validation.map((r) => ({ x: r.target_alert_rate, y: r.net_value })) },
+        { name: "Nov–Dec", color: "var(--stopped)", points: R.value_curve.oot.map((r) => ({ x: r.target_alert_rate, y: r.net_value })) },
+      ], { width: 1110, height: 380, xFmt: (v) => fmt.pct(v, v < 0.01 ? 2 : 0), yFmt: fmt.usdK, xTicks: [0.0025, 0.01, 0.02, 0.03, 0.05, 0.075, 0.1], markers: true, labelW: 70, fs: 14, title: "Net value by review budget" });
+      set("src", "Next-day blocking; two-month windows; cost assumptions in the report's Appendix B.");
+    },
+  };
+  figures[new URLSearchParams(location.search).get("f") || "bursts"]();
+  document.body.dataset.ready = "1";
+</script>
+</body>
+</html>

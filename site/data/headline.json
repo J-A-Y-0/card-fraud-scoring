@@ -1,0 +1,155 @@
+{
+ "assumptions": {
+  "minutes_per_review": 10.0,
+  "analyst_cost_per_hour": 50.0,
+  "loss_share": 0.8,
+  "reissue_cost": 15.0,
+  "false_alert_cost": 5.0,
+  "declined_purchase_cost": 10.0,
+  "reissue_lag_days": 5
+ },
+ "final_model": {
+  "model": "boosted_trees",
+  "params": {
+   "learning_rate": 0.03,
+   "max_iter": 300,
+   "max_leaf_nodes": 31,
+   "min_samples_leaf": 50
+  },
+  "n_vars": 60,
+  "test": 0.6541037473291078,
+  "test_se": 0.04058056583492225,
+  "train": 0.9957537154989384,
+  "configs_within_one_se": 35,
+  "configs_evaluated": 49
+ },
+ "chosen_alert_rate": 0.03,
+ "cutoff": 0.11547437037269867,
+ "oot": {
+  "alerts": 159.0,
+  "alert_rate": 0.012602044860109376,
+  "false_alerts": 98.0,
+  "fraud_dollars": 209052.39999999997,
+  "fraud_dollars_prevented": 144427.26,
+  "legit_txns_declined": 43.0,
+  "fraud_cards": 16.0,
+  "fraud_cards_detected": 16.0,
+  "benefit": 115541.80800000002,
+  "cost_total": 2485.0,
+  "net_value": 113056.80800000002
+ },
+ "oot_best_alert_rate_hindsight": 0.1,
+ "staffing": {
+  "alerts_per_day": 2.6065573770491803,
+  "analyst_hours_per_day": 0.4344262295081967,
+  "analyst_fte": 0.07240437158469945
+ },
+ "net_value_annualized_run_rate": 676487.4577049182,
+ "monte_carlo_oot_net_value": {
+  "p05": 23995.361453158304,
+  "p50": 101215.854099082,
+  "p95": 239612.85036153084
+ },
+ "monte_carlo_prob_negative": 0.0,
+ "monte_carlo_cards_only": {
+  "p05": 26931.245600000002,
+  "p50": 107782.35999999999,
+  "p95": 250758.06319999998
+ },
+ "fraud_dollars_on_first_fraud_day_share": 0.3940845912822068,
+ "policy_comparison": [
+  {
+   "window": "validation",
+   "policy": "next_day_block",
+   "fraud_dollars_prevented": 260203.58000000002,
+   "prevented_share": 0.3857575698544421,
+   "alerts": 320,
+   "legit_txns_declined": 97,
+   "net_value": 203341.19733333337
+  },
+  {
+   "window": "validation",
+   "policy": "same_day_block",
+   "fraud_dollars_prevented": 434764.66000000003,
+   "prevented_share": 0.6445482368082437,
+   "alerts": 161,
+   "legit_txns_declined": 103,
+   "net_value": 344325.0613333334
+  },
+  {
+   "window": "validation",
+   "policy": "realtime_decline",
+   "fraud_dollars_prevented": 553223.11,
+   "prevented_share": 0.820165512330448,
+   "alerts": 161,
+   "legit_txns_declined": 233,
+   "net_value": 437791.8213333333
+  },
+  {
+   "window": "oot",
+   "policy": "next_day_block",
+   "fraud_dollars_prevented": 144427.26,
+   "prevented_share": 0.6908663091167575,
+   "alerts": 159,
+   "legit_txns_declined": 43,
+   "net_value": 113056.80800000002
+  },
+  {
+   "window": "oot",
+   "policy": "same_day_block",
+   "fraud_dollars_prevented": 169991.26,
+   "prevented_share": 0.8131514395433874,
+   "alerts": 100,
+   "legit_txns_declined": 59,
+   "net_value": 133909.67466666666
+  },
+  {
+   "window": "oot",
+   "policy": "realtime_decline",
+   "fraud_dollars_prevented": 184906.21,
+   "prevented_share": 0.884496949090276,
+   "alerts": 100,
+   "legit_txns_declined": 143,
+   "net_value": 145001.63466666665
+  }
+ ],
+ "rule_baseline": {
+  "variable": "card_total_3",
+  "alert_rate": 0.02,
+  "oot_net_value": 58384.09333333334,
+  "oot_prevented": 74250.95,
+  "oot_alerts": 71
+ },
+ "oot_days": 61,
+ "oot_start": "2010-11-01",
+ "performance": [
+  {
+   "window": "train (Jan 15-Aug 31)",
+   "records": 66537,
+   "frauds": 1413,
+   "fdr@1%": 0.4706298655343241,
+   "fdr@2%": 0.9058740268931352,
+   "fdr@3%": 0.9915074309978767,
+   "fdr@5%": 0.9978768577494692
+  },
+  {
+   "window": "validation (Sep-Oct)",
+   "records": 15192,
+   "frauds": 415,
+   "fdr@1%": 0.3228915662650602,
+   "fdr@2%": 0.5662650602409639,
+   "fdr@3%": 0.6867469879518072,
+   "fdr@5%": 0.8144578313253013
+  },
+  {
+   "window": "out-of-time (Nov-Dec)",
+   "records": 12617,
+   "frauds": 335,
+   "fdr@1%": 0.3134328358208955,
+   "fdr@2%": 0.5044776119402985,
+   "fdr@3%": 0.6447761194029851,
+   "fdr@5%": 0.7343283582089553
+  }
+ ],
+ "oot_fdr_at_3": 0.6447761194029851
+}

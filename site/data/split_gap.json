@@ -1,0 +1,68 @@
+[
+ {
+  "model": "boosted_trees",
+  "split": "random",
+  "train": 0.949,
+  "test": 0.843,
+  "oot": 0.61,
+  "test_frauds_on_train_fraud_cards": 0.964,
+  "test_sd": 0.016,
+  "oot_sd": 0.011,
+  "test_minus_oot": 0.233
+ },
+ {
+  "model": "boosted_trees",
+  "split": "card_grouped",
+  "train": 0.961,
+  "test": 0.65,
+  "oot": 0.591,
+  "test_frauds_on_train_fraud_cards": 0.0,
+  "test_sd": 0.061,
+  "oot_sd": 0.008,
+  "test_minus_oot": 0.059
+ },
+ {
+  "model": "boosted_trees",
+  "split": "temporal",
+  "train": 0.96,
+  "test": 0.665,
+  "oot": 0.639,
+  "test_frauds_on_train_fraud_cards": 0.157,
+  "test_sd": 0.0,
+  "oot_sd": 0.0,
+  "test_minus_oot": 0.026
+ },
+ {
+  "model": "random_forest",
+  "split": "random",
+  "train": 0.815,
+  "test": 0.756,
+  "oot": 0.519,
+  "test_frauds_on_train_fraud_cards": 0.964,
+  "test_sd": 0.015,
+  "oot_sd": 0.007,
+  "test_minus_oot": 0.237
+ },
+ {
+  "model": "random_forest",
+  "split": "card_grouped",
+  "train": 0.823,
+  "test": 0.647,
+  "oot": 0.531,
+  "test_frauds_on_train_fraud_cards": 0.0,
+  "test_sd": 0.046,
+  "oot_sd": 0.025,
+  "test_minus_oot": 0.116
+ },
+ {
+  "model": "random_forest",
+  "split": "temporal",
+  "train": 0.835,
+  "test": 0.652,
+  "oot": 0.553,
+  "test_frauds_on_train_fraud_cards": 0.157,
+  "test_sd": 0.005,
+  "oot_sd": 0.008,
+  "test_minus_oot": 0.099
+ }
+]

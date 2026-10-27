@@ -1,0 +1,1924 @@
+{
+ "start": "2010-12-06",
+ "end": "2010-12-19",
+ "policy": "same_day_block",
+ "bands": [
+  {
+   "name": "urgent",
+   "min_score": 0.7609005814985853,
+   "fraud_rate": 0.8874172185430463
+  },
+  {
+   "name": "review",
+   "min_score": 0.11621441721495837,
+   "fraud_rate": 0.4967105263157895
+  }
+ ],
+ "alerts": [
+  {
+   "id": "A-001",
+   "date": "2010-12-07",
+   "card": "C-01",
+   "amount": 310.0,
+   "score": 0.13467859593209722,
+   "score_pct": 0.02817272248551872,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.10926739852812503,
+     "value": 2154.460000000894,
+     "typical": 320.32499999925494,
+     "value_text": "$2,150",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.8823511730315463
+    },
+    {
+     "variable": "card_velocity_1_by_7",
+     "label": "Card: purchases in the last 2 days vs. its 7-day pace",
+     "contribution": 0.062111111847225314,
+     "value": 4.0,
+     "typical": 2.0,
+     "value_text": "4.0\u00d7",
+     "typical_text": "2.0\u00d7",
+     "first_seen": false,
+     "percentile": 1.0
+    },
+    {
+     "variable": "card_max_30",
+     "label": "Card: largest purchase, 30-day window",
+     "contribution": 0.058896679568135046,
+     "value": 915.0,
+     "typical": 1160.0,
+     "value_text": "$920",
+     "typical_text": "$1,160",
+     "first_seen": false,
+     "percentile": 0.41951094879540707
+    }
+   ],
+   "context": {
+    "card_count_7": 4.0,
+    "card_total_7": 2150.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-001 \u00b7 2010-12-07 \u00b7 C-01 \u00b7 $310\nScore in the top 2.8% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: spend, 1-day window: $2,150 (typical $320; higher than 88% of purchases).\n2. Card: purchases in the last 2 days vs. its 7-day pace: 4.0\u00d7 (typical 2.0\u00d7; higher than 100% of purchases).\n3. Card: largest purchase, 30-day window: $920 (typical $1,160; lower than 58% of purchases).\nContext: 4 purchases on this card in the last 7 days, $2,150 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-002",
+   "date": "2010-12-07",
+   "card": "C-01",
+   "amount": 370.0,
+   "score": 0.29681813241472327,
+   "score_pct": 0.01948393891521849,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.15565128263466804,
+     "value": 2524.460000000894,
+     "typical": 320.32499999925494,
+     "value_text": "$2,520",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.9152802200279544
+    },
+    {
+     "variable": "card_velocity_1_by_7",
+     "label": "Card: purchases in the last 2 days vs. its 7-day pace",
+     "contribution": 0.15057646931128355,
+     "value": 4.0,
+     "typical": 2.0,
+     "value_text": "4.0\u00d7",
+     "typical_text": "2.0\u00d7",
+     "first_seen": false,
+     "percentile": 1.0
+    },
+    {
+     "variable": "card_zip_max_30",
+     "label": "Card in this ZIP: largest purchase, 30-day window",
+     "contribution": 0.1074207857385713,
+     "value": 915.0,
+     "typical": 203.0,
+     "value_text": "$920",
+     "typical_text": "$200",
+     "first_seen": false,
+     "percentile": 0.8313569893442746
+    }
+   ],
+   "context": {
+    "card_count_7": 5.0,
+    "card_total_7": 2520.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-002 \u00b7 2010-12-07 \u00b7 C-01 \u00b7 $370\nScore in the top 1.9% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: spend, 1-day window: $2,520 (typical $320; higher than 92% of purchases).\n2. Card: purchases in the last 2 days vs. its 7-day pace: 4.0\u00d7 (typical 2.0\u00d7; higher than 100% of purchases).\n3. Card in this ZIP: largest purchase, 30-day window: $920 (typical $200; higher than 83% of purchases).\nContext: 5 purchases on this card in the last 7 days, $2,520 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-003",
+   "date": "2010-12-07",
+   "card": "C-01",
+   "amount": 440.0,
+   "score": 0.45348956349580644,
+   "score_pct": 0.015073723012111628,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_max_30",
+     "label": "Card: largest purchase, 30-day window",
+     "contribution": 0.2294144567816965,
+     "value": 915.0,
+     "typical": 1160.0,
+     "value_text": "$920",
+     "typical_text": "$1,160",
+     "first_seen": false,
+     "percentile": 0.41951094879540707
+    },
+    {
+     "variable": "card_velocity_1_by_30",
+     "label": "Card: purchases in the last 2 days vs. its 30-day pace",
+     "contribution": 0.19951630508687024,
+     "value": 8.454545454545453,
+     "typical": 2.5833333333333335,
+     "value_text": "8.5\u00d7",
+     "typical_text": "2.6\u00d7",
+     "first_seen": false,
+     "percentile": 0.9105760704570389
+    },
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.16173702425921582,
+     "value": 2968.460000000894,
+     "typical": 320.32499999925494,
+     "value_text": "$2,970",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.9353743030193726
+    }
+   ],
+   "context": {
+    "card_count_7": 6.0,
+    "card_total_7": 2970.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-003 \u00b7 2010-12-07 \u00b7 C-01 \u00b7 $440\nScore in the top 1.5% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: largest purchase, 30-day window: $920 (typical $1,160; lower than 58% of purchases).\n2. Card: purchases in the last 2 days vs. its 30-day pace: 8.5\u00d7 (typical 2.6\u00d7; higher than 91% of purchases).\n3. Card: spend, 1-day window: $2,970 (typical $320; higher than 94% of purchases).\nContext: 6 purchases on this card in the last 7 days, $2,970 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-004",
+   "date": "2010-12-07",
+   "card": "C-01",
+   "amount": 920.0,
+   "score": 0.32546691428864544,
+   "score_pct": 0.01875987361769349,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "merch_total_7",
+     "label": "Merchant: spend, 7-day window",
+     "contribution": 0.19066429920391328,
+     "value": 11942.029999999795,
+     "typical": 1009.304999999702,
+     "value_text": "$11,940",
+     "typical_text": "$1,010",
+     "first_seen": false,
+     "percentile": 0.9635541127492974
+    },
+    {
+     "variable": "card_velocity_1_by_30",
+     "label": "Card: purchases in the last 2 days vs. its 30-day pace",
+     "contribution": 0.15168493700301902,
+     "value": 9.041666666666666,
+     "typical": 2.5833333333333335,
+     "value_text": "9.0\u00d7",
+     "typical_text": "2.6\u00d7",
+     "first_seen": false,
+     "percentile": 0.915054781550115
+    },
+    {
+     "variable": "card_state_total_7",
+     "label": "Card in this state: spend, 7-day window",
+     "contribution": 0.1377641300148494,
+     "value": 3888.14999999851,
+     "typical": 266.3199999984354,
+     "value_text": "$3,890",
+     "typical_text": "$270",
+     "first_seen": false,
+     "percentile": 0.9668004268301847
+    }
+   ],
+   "context": {
+    "card_count_7": 7.0,
+    "card_total_7": 3890.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-004 \u00b7 2010-12-07 \u00b7 C-01 \u00b7 $920\nScore in the top 1.9% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Merchant: spend, 7-day window: $11,940 (typical $1,010; higher than 96% of purchases).\n2. Card: purchases in the last 2 days vs. its 30-day pace: 9.0\u00d7 (typical 2.6\u00d7; higher than 92% of purchases).\n3. Card in this state: spend, 7-day window: $3,890 (typical $270; higher than 97% of purchases).\nContext: 7 purchases on this card in the last 7 days, $3,890 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-005",
+   "date": "2010-12-07",
+   "card": "C-02",
+   "amount": 1610.0,
+   "score": 0.24209390413408455,
+   "score_pct": 0.02145866245392314,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_velocity_1_by_30",
+     "label": "Card: purchases in the last 2 days vs. its 30-day pace",
+     "contribution": 0.2186412187884007,
+     "value": 8.205882352941178,
+     "typical": 2.5833333333333335,
+     "value_text": "8.2\u00d7",
+     "typical_text": "2.6\u00d7",
+     "first_seen": false,
+     "percentile": 0.909073147271443
+    },
+    {
+     "variable": "card_count_1",
+     "label": "Card: purchases, 1-day window",
+     "contribution": 0.17300506093539536,
+     "value": 9.0,
+     "typical": 2.0,
+     "value_text": "9",
+     "typical_text": "2",
+     "first_seen": false,
+     "percentile": 0.9356147707290681
+    },
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.16526893756935204,
+     "value": 7417.39999999851,
+     "typical": 320.32499999925494,
+     "value_text": "$7,420",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.9875257375595533
+    }
+   ],
+   "context": {
+    "card_count_7": 12.0,
+    "card_total_7": 7670.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-005 \u00b7 2010-12-07 \u00b7 C-02 \u00b7 $1,610\nScore in the top 2.1% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: purchases in the last 2 days vs. its 30-day pace: 8.2\u00d7 (typical 2.6\u00d7; higher than 91% of purchases).\n2. Card: purchases, 1-day window: 9 (typical 2; higher than 94% of purchases).\n3. Card: spend, 1-day window: $7,420 (typical $320; higher than 99% of purchases).\nContext: 12 purchases on this card in the last 7 days, $7,670 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-006",
+   "date": "2010-12-08",
+   "card": "C-03",
+   "amount": 390.0,
+   "score": 0.24576891264387896,
+   "score_pct": 0.021327014218009532,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_count_1",
+     "label": "Card: purchases, 1-day window",
+     "contribution": 0.22852666530587928,
+     "value": 10.0,
+     "typical": 2.0,
+     "value_text": "10",
+     "typical_text": "2",
+     "first_seen": false,
+     "percentile": 0.94237792506425
+    },
+    {
+     "variable": "card_velocity_1_by_30",
+     "label": "Card: purchases in the last 2 days vs. its 30-day pace",
+     "contribution": 0.21805880544941375,
+     "value": 6.458333333333334,
+     "typical": 2.5833333333333335,
+     "value_text": "6.5\u00d7",
+     "typical_text": "2.6\u00d7",
+     "first_seen": false,
+     "percentile": 0.8425387378451087
+    },
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.14209154240484445,
+     "value": 3240.5800000000745,
+     "typical": 320.32499999925494,
+     "value_text": "$3,240",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.9443617836692366
+    }
+   ],
+   "context": {
+    "card_count_7": 13.0,
+    "card_total_7": 4330.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-006 \u00b7 2010-12-08 \u00b7 C-03 \u00b7 $390\nScore in the top 2.1% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: purchases, 1-day window: 10 (typical 2; higher than 94% of purchases).\n2. Card: purchases in the last 2 days vs. its 30-day pace: 6.5\u00d7 (typical 2.6\u00d7; higher than 84% of purchases).\n3. Card: spend, 1-day window: $3,240 (typical $320; higher than 94% of purchases).\nContext: 13 purchases on this card in the last 7 days, $4,330 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-007",
+   "date": "2010-12-08",
+   "card": "C-02",
+   "amount": 150.0,
+   "score": 0.18975791168974068,
+   "score_pct": 0.023828330700368605,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_velocity_1_by_30",
+     "label": "Card: purchases in the last 2 days vs. its 30-day pace",
+     "contribution": 0.17989918242837058,
+     "value": 8.61111111111111,
+     "typical": 2.5833333333333335,
+     "value_text": "8.6\u00d7",
+     "typical_text": "2.6\u00d7",
+     "first_seen": false,
+     "percentile": 0.9116281166869561
+    },
+    {
+     "variable": "card_count_1",
+     "label": "Card: purchases, 1-day window",
+     "contribution": 0.17799696701805093,
+     "value": 10.0,
+     "typical": 2.0,
+     "value_text": "10",
+     "typical_text": "2",
+     "first_seen": false,
+     "percentile": 0.94237792506425
+    },
+    {
+     "variable": "card_total_3",
+     "label": "Card: spend, 3-day window",
+     "contribution": 0.15755904571832213,
+     "value": 7570.39999999851,
+     "typical": 498.91500000003725,
+     "value_text": "$7,570",
+     "typical_text": "$500",
+     "first_seen": false,
+     "percentile": 0.9789139877060884
+    }
+   ],
+   "context": {
+    "card_count_7": 12.0,
+    "card_total_7": 7790.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-007 \u00b7 2010-12-08 \u00b7 C-02 \u00b7 $150\nScore in the top 2.4% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: purchases in the last 2 days vs. its 30-day pace: 8.6\u00d7 (typical 2.6\u00d7; higher than 91% of purchases).\n2. Card: purchases, 1-day window: 10 (typical 2; higher than 94% of purchases).\n3. Card: spend, 3-day window: $7,570 (typical $500; higher than 98% of purchases).\nContext: 12 purchases on this card in the last 7 days, $7,790 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-008",
+   "date": "2010-12-08",
+   "card": "C-04",
+   "amount": 80.0,
+   "score": 0.2070502371817373,
+   "score_pct": 0.023104265402843605,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_count_0",
+     "label": "Card: purchases, same day",
+     "contribution": 0.18902414761390263,
+     "value": 7.0,
+     "typical": 1.0,
+     "value_text": "7",
+     "typical_text": "1",
+     "first_seen": false,
+     "percentile": 0.9441363451913972
+    },
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.18493741442988695,
+     "value": 2311.560000002384,
+     "typical": 320.32499999925494,
+     "value_text": "$2,310",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.8956520432240708
+    },
+    {
+     "variable": "card_zip_total_30",
+     "label": "Card in this ZIP: spend, 30-day window",
+     "contribution": 0.10560327514336658,
+     "value": 76.80000000074506,
+     "typical": 315.0,
+     "value_text": "$80",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.19183311540947143
+    }
+   ],
+   "context": {
+    "card_count_7": 17.0,
+    "card_total_7": 4920.0,
+    "new_merchant": true
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-008 \u00b7 2010-12-08 \u00b7 C-04 \u00b7 $80\nScore in the top 2.3% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: purchases, same day: 7 (typical 1; higher than 94% of purchases).\n2. Card: spend, 1-day window: $2,310 (typical $320; higher than 90% of purchases).\n3. Card in this ZIP: spend, 30-day window: $80 (typical $320; lower than 81% of purchases).\nContext: 17 purchases on this card in the last 7 days, $4,920 in total; first purchase at this merchant.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-009",
+   "date": "2010-12-08",
+   "card": "C-05",
+   "amount": 50.0,
+   "score": 0.12590747107583153,
+   "score_pct": 0.029094260136914185,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "merch_actual_over_avg_30",
+     "label": "Merchant: this purchase vs. its average, 30-day window",
+     "contribution": 0.09697724237012172,
+     "value": 5.422086247601521,
+     "typical": 0.9539955918958677,
+     "value_text": "5.4\u00d7",
+     "typical_text": "1.0\u00d7",
+     "first_seen": false,
+     "percentile": 0.9916738055517983
+    },
+    {
+     "variable": "card_max_7",
+     "label": "Card: largest purchase, 7-day window",
+     "contribution": 0.05926007495807867,
+     "value": 2500.0,
+     "typical": 538.71,
+     "value_text": "$2,500",
+     "typical_text": "$540",
+     "first_seen": false,
+     "percentile": 0.9758480244074725
+    },
+    {
+     "variable": "card_count_0",
+     "label": "Card: purchases, same day",
+     "contribution": 0.058906904809155655,
+     "value": 6.0,
+     "typical": 1.0,
+     "value_text": "6",
+     "typical_text": "1",
+     "first_seen": false,
+     "percentile": 0.9356748876564919
+    }
+   ],
+   "context": {
+    "card_count_7": 11.0,
+    "card_total_7": 5890.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-009 \u00b7 2010-12-08 \u00b7 C-05 \u00b7 $50\nScore in the top 2.9% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Merchant: this purchase vs. its average, 30-day window: 5.4\u00d7 (typical 1.0\u00d7; higher than 99% of purchases).\n2. Card: largest purchase, 7-day window: $2,500 (typical $540; higher than 98% of purchases).\n3. Card: purchases, same day: 6 (typical 1; higher than 94% of purchases).\nContext: 11 purchases on this card in the last 7 days, $5,890 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-010",
+   "date": "2010-12-09",
+   "card": "C-04",
+   "amount": 2740.0,
+   "score": 0.15077283951287773,
+   "score_pct": 0.02705371248025279,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.079355210835977,
+     "value": 4670.560000002384,
+     "typical": 320.32499999925494,
+     "value_text": "$4,670",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.9706328809534545
+    },
+    {
+     "variable": "card_max_7",
+     "label": "Card: largest purchase, 7-day window",
+     "contribution": 0.0704790519976469,
+     "value": 2744.0,
+     "typical": 538.71,
+     "value_text": "$2,740",
+     "typical_text": "$540",
+     "first_seen": false,
+     "percentile": 0.9778619414761711
+    },
+    {
+     "variable": "card_state_max_14",
+     "label": "Card in this state: largest purchase, 14-day window",
+     "contribution": 0.05881922227245108,
+     "value": 2744.0,
+     "typical": 245.0,
+     "value_text": "$2,740",
+     "typical_text": "$240",
+     "first_seen": false,
+     "percentile": 0.9875557960232653
+    }
+   ],
+   "context": {
+    "card_count_7": 19.0,
+    "card_total_7": 8120.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-010 \u00b7 2010-12-09 \u00b7 C-04 \u00b7 $2,740\nScore in the top 2.7% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: spend, 1-day window: $4,670 (typical $320; higher than 97% of purchases).\n2. Card: largest purchase, 7-day window: $2,740 (typical $540; higher than 98% of purchases).\n3. Card in this state: largest purchase, 14-day window: $2,740 (typical $240; higher than 99% of purchases).\nContext: 19 purchases on this card in the last 7 days, $8,120 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-011",
+   "date": "2010-12-09",
+   "card": "C-06",
+   "amount": 260.0,
+   "score": 0.16240334762682496,
+   "score_pct": 0.025671406003159536,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_count_1",
+     "label": "Card: purchases, 1-day window",
+     "contribution": 0.11756441961035805,
+     "value": 8.0,
+     "typical": 2.0,
+     "value_text": "8",
+     "typical_text": "2",
+     "first_seen": false,
+     "percentile": 0.9271683424260186
+    },
+    {
+     "variable": "card_total_3",
+     "label": "Card: spend, 3-day window",
+     "contribution": 0.11013247436329382,
+     "value": 5677.700000001118,
+     "typical": 498.91500000003725,
+     "value_text": "$5,680",
+     "typical_text": "$500",
+     "first_seen": false,
+     "percentile": 0.9631032357936186
+    },
+    {
+     "variable": "card_max_7",
+     "label": "Card: largest purchase, 7-day window",
+     "contribution": 0.08140434427194183,
+     "value": 2223.97,
+     "typical": 538.71,
+     "value_text": "$2,220",
+     "typical_text": "$540",
+     "first_seen": false,
+     "percentile": 0.9011377128514961
+    }
+   ],
+   "context": {
+    "card_count_7": 26.0,
+    "card_total_7": 11790.0,
+    "new_merchant": true
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-011 \u00b7 2010-12-09 \u00b7 C-06 \u00b7 $260\nScore in the top 2.6% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: purchases, 1-day window: 8 (typical 2; higher than 93% of purchases).\n2. Card: spend, 3-day window: $5,680 (typical $500; higher than 96% of purchases).\n3. Card: largest purchase, 7-day window: $2,220 (typical $540; higher than 90% of purchases).\nContext: 26 purchases on this card in the last 7 days, $11,790 in total; first purchase at this merchant.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-012",
+   "date": "2010-12-10",
+   "card": "C-07",
+   "amount": 440.0,
+   "score": 0.1774275941415777,
+   "score_pct": 0.02474986835176407,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_count_0",
+     "label": "Card: purchases, same day",
+     "contribution": 0.16932849437660982,
+     "value": 5.0,
+     "typical": 1.0,
+     "value_text": "5",
+     "typical_text": "1",
+     "first_seen": false,
+     "percentile": 0.9246434314742173
+    },
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.16127236893862434,
+     "value": 1469.5,
+     "typical": 320.32499999925494,
+     "value_text": "$1,470",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.813637524986098
+    },
+    {
+     "variable": "card_state_velocity_1_by_30",
+     "label": "Card in this state: purchases in the last 2 days vs. its 30-day pace",
+     "contribution": 0.0714104821177896,
+     "value": 15.5,
+     "typical": 7.75,
+     "value_text": "15.5\u00d7",
+     "typical_text": "7.8\u00d7",
+     "first_seen": false,
+     "percentile": 0.9993086553346259
+    }
+   ],
+   "context": {
+    "card_count_7": 6.0,
+    "card_total_7": 1600.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-012 \u00b7 2010-12-10 \u00b7 C-07 \u00b7 $440\nScore in the top 2.5% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: purchases, same day: 5 (typical 1; higher than 92% of purchases).\n2. Card: spend, 1-day window: $1,470 (typical $320; higher than 81% of purchases).\n3. Card in this state: purchases in the last 2 days vs. its 30-day pace: 15.5\u00d7 (typical 7.8\u00d7; higher than 100% of purchases).\nContext: 6 purchases on this card in the last 7 days, $1,600 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-013",
+   "date": "2010-12-10",
+   "card": "C-08",
+   "amount": 1130.0,
+   "score": 0.12992170666940395,
+   "score_pct": 0.02889678778304372,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "merch_actual_over_avg_30",
+     "label": "Merchant: this purchase vs. its average, 30-day window",
+     "contribution": 0.09083813209275371,
+     "value": 1.9499754603455275,
+     "typical": 0.9539955918958677,
+     "value_text": "1.9\u00d7",
+     "typical_text": "1.0\u00d7",
+     "first_seen": false,
+     "percentile": 0.9189022649052407
+    },
+    {
+     "variable": "merch_total_1",
+     "label": "Merchant: spend, 1-day window",
+     "contribution": 0.08137420458381048,
+     "value": 9218.759999999776,
+     "typical": 399.0,
+     "value_text": "$9,220",
+     "typical_text": "$400",
+     "first_seen": false,
+     "percentile": 0.9908321685678645
+    },
+    {
+     "variable": "card_zip_total_3",
+     "label": "Card in this ZIP: spend, 3-day window",
+     "contribution": 0.07746002995923046,
+     "value": 5627.780000001192,
+     "typical": 173.99500000011176,
+     "value_text": "$5,630",
+     "typical_text": "$170",
+     "first_seen": false,
+     "percentile": 0.9923952086808843
+    }
+   ],
+   "context": {
+    "card_count_7": 4.0,
+    "card_total_7": 7710.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-013 \u00b7 2010-12-10 \u00b7 C-08 \u00b7 $1,130\nScore in the top 2.9% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Merchant: this purchase vs. its average, 30-day window: 1.9\u00d7 (typical 1.0\u00d7; higher than 92% of purchases).\n2. Merchant: spend, 1-day window: $9,220 (typical $400; higher than 99% of purchases).\n3. Card in this ZIP: spend, 3-day window: $5,630 (typical $170; higher than 99% of purchases).\nContext: 4 purchases on this card in the last 7 days, $7,710 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-014",
+   "date": "2010-12-13",
+   "card": "C-09",
+   "amount": 420.0,
+   "score": 0.7456037540356917,
+   "score_pct": 0.010334386519220695,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_count_0",
+     "label": "Card: purchases, same day",
+     "contribution": 0.6061120590608422,
+     "value": 7.0,
+     "typical": 1.0,
+     "value_text": "7",
+     "typical_text": "1",
+     "first_seen": false,
+     "percentile": 0.9441363451913972
+    },
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.6037630537272414,
+     "value": 1178.6799999987707,
+     "typical": 320.32499999925494,
+     "value_text": "$1,180",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.7728181312653111
+    },
+    {
+     "variable": "card_avg_7",
+     "label": "Card: average purchase, 7-day window",
+     "contribution": 0.324822799352685,
+     "value": 149.3849999998929,
+     "typical": 239.99749999959022,
+     "value_text": "$150",
+     "typical_text": "$240",
+     "first_seen": false,
+     "percentile": 0.35371297173001487
+    }
+   ],
+   "context": {
+    "card_count_7": 8.0,
+    "card_total_7": 1200.0,
+    "new_merchant": true
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-014 \u00b7 2010-12-13 \u00b7 C-09 \u00b7 $420\nScore in the top 1.0% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: purchases, same day: 7 (typical 1; higher than 94% of purchases).\n2. Card: spend, 1-day window: $1,180 (typical $320; higher than 77% of purchases).\n3. Card: average purchase, 7-day window: $150 (typical $240; lower than 65% of purchases).\nContext: 8 purchases on this card in the last 7 days, $1,200 in total; first purchase at this merchant.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": true,
+    "status": "alert_fraud"
+   }
+  },
+  {
+   "id": "A-015",
+   "date": "2010-12-15",
+   "card": "C-04",
+   "amount": 180.0,
+   "score": 0.1370327899378487,
+   "score_pct": 0.027909426013691396,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.1002546850610545,
+     "value": 3836.5899999979883,
+     "typical": 320.32499999925494,
+     "value_text": "$3,840",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.957707741557329
+    },
+    {
+     "variable": "merch_actual_over_avg_30",
+     "label": "Merchant: this purchase vs. its average, 30-day window",
+     "contribution": 0.09161304810775729,
+     "value": 2.9995504120521495,
+     "typical": 0.9539955918958677,
+     "value_text": "3.0\u00d7",
+     "typical_text": "1.0\u00d7",
+     "first_seen": false,
+     "percentile": 0.9658084975276914
+    },
+    {
+     "variable": "merch_total_7",
+     "label": "Merchant: spend, 7-day window",
+     "contribution": 0.07359540624695408,
+     "value": 8758.60000000149,
+     "typical": 1009.304999999702,
+     "value_text": "$8,760",
+     "typical_text": "$1,010",
+     "first_seen": false,
+     "percentile": 0.9340667598479042
+    }
+   ],
+   "context": {
+    "card_count_7": 74.0,
+    "card_total_7": 12280.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-015 \u00b7 2010-12-15 \u00b7 C-04 \u00b7 $180\nScore in the top 2.8% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: spend, 1-day window: $3,840 (typical $320; higher than 96% of purchases).\n2. Merchant: this purchase vs. its average, 30-day window: 3.0\u00d7 (typical 1.0\u00d7; higher than 97% of purchases).\n3. Merchant: spend, 7-day window: $8,760 (typical $1,010; higher than 93% of purchases).\nContext: 74 purchases on this card in the last 7 days, $12,280 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-016",
+   "date": "2010-12-15",
+   "card": "C-04",
+   "amount": 2050.0,
+   "score": 0.2377557302035464,
+   "score_pct": 0.02172195892575035,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_count_1",
+     "label": "Card: purchases, 1-day window",
+     "contribution": 0.21582763996709664,
+     "value": 73.0,
+     "typical": 2.0,
+     "value_text": "73",
+     "typical_text": "2",
+     "first_seen": false,
+     "percentile": 0.9959871950944588
+    },
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.2146327812035788,
+     "value": 6755.260000003502,
+     "typical": 320.32499999925494,
+     "value_text": "$6,760",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.9852713527811594
+    },
+    {
+     "variable": "card_velocity_1_by_30",
+     "label": "Card: purchases in the last 2 days vs. its 30-day pace",
+     "contribution": 0.19960119200222082,
+     "value": 11.429292929292929,
+     "typical": 2.5833333333333335,
+     "value_text": "11.4\u00d7",
+     "typical_text": "2.6\u00d7",
+     "first_seen": false,
+     "percentile": 0.9400784525902881
+    }
+   ],
+   "context": {
+    "card_count_7": 86.0,
+    "card_total_7": 15200.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-016 \u00b7 2010-12-15 \u00b7 C-04 \u00b7 $2,050\nScore in the top 2.2% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: purchases, 1-day window: 73 (typical 2; higher than 100% of purchases).\n2. Card: spend, 1-day window: $6,760 (typical $320; higher than 99% of purchases).\n3. Card: purchases in the last 2 days vs. its 30-day pace: 11.4\u00d7 (typical 2.6\u00d7; higher than 94% of purchases).\nContext: 86 purchases on this card in the last 7 days, $15,200 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-017",
+   "date": "2010-12-15",
+   "card": "C-04",
+   "amount": 70.0,
+   "score": 0.13703311468046092,
+   "score_pct": 0.027909426013691396,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.1215323415121623,
+     "value": 6823.180000003427,
+     "typical": 320.32499999925494,
+     "value_text": "$6,820",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.9855268497227107
+    },
+    {
+     "variable": "card_velocity_1_by_30",
+     "label": "Card: purchases in the last 2 days vs. its 30-day pace",
+     "contribution": 0.11145258590181864,
+     "value": 11.47,
+     "typical": 2.5833333333333335,
+     "value_text": "11.5\u00d7",
+     "typical_text": "2.6\u00d7",
+     "first_seen": false,
+     "percentile": 0.9402137156769917
+    },
+    {
+     "variable": "card_max_7",
+     "label": "Card: largest purchase, 7-day window",
+     "contribution": 0.08213000222242328,
+     "value": 2744.0,
+     "typical": 538.71,
+     "value_text": "$2,740",
+     "typical_text": "$540",
+     "first_seen": false,
+     "percentile": 0.9778619414761711
+    }
+   ],
+   "context": {
+    "card_count_7": 87.0,
+    "card_total_7": 15270.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-017 \u00b7 2010-12-15 \u00b7 C-04 \u00b7 $70\nScore in the top 2.8% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: spend, 1-day window: $6,820 (typical $320; higher than 99% of purchases).\n2. Card: purchases in the last 2 days vs. its 30-day pace: 11.5\u00d7 (typical 2.6\u00d7; higher than 94% of purchases).\n3. Card: largest purchase, 7-day window: $2,740 (typical $540; higher than 98% of purchases).\nContext: 87 purchases on this card in the last 7 days, $15,270 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-018",
+   "date": "2010-12-15",
+   "card": "C-04",
+   "amount": 100.0,
+   "score": 0.20804346612070762,
+   "score_pct": 0.023104265402843605,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.18321171410520493,
+     "value": 6921.520000003278,
+     "typical": 320.32499999925494,
+     "value_text": "$6,920",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.9859176097509657
+    },
+    {
+     "variable": "card_velocity_1_by_30",
+     "label": "Card: purchases in the last 2 days vs. its 30-day pace",
+     "contribution": 0.16544768850283836,
+     "value": 11.509900990099009,
+     "typical": 2.5833333333333335,
+     "value_text": "11.5\u00d7",
+     "typical_text": "2.6\u00d7",
+     "first_seen": false,
+     "percentile": 0.9403189202999834
+    },
+    {
+     "variable": "card_max_7",
+     "label": "Card: largest purchase, 7-day window",
+     "contribution": 0.12251325263051314,
+     "value": 2744.0,
+     "typical": 538.71,
+     "value_text": "$2,740",
+     "typical_text": "$540",
+     "first_seen": false,
+     "percentile": 0.9778619414761711
+    }
+   ],
+   "context": {
+    "card_count_7": 88.0,
+    "card_total_7": 15370.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-018 \u00b7 2010-12-15 \u00b7 C-04 \u00b7 $100\nScore in the top 2.3% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: spend, 1-day window: $6,920 (typical $320; higher than 99% of purchases).\n2. Card: purchases in the last 2 days vs. its 30-day pace: 11.5\u00d7 (typical 2.6\u00d7; higher than 94% of purchases).\n3. Card: largest purchase, 7-day window: $2,740 (typical $540; higher than 98% of purchases).\nContext: 88 purchases on this card in the last 7 days, $15,370 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-019",
+   "date": "2010-12-15",
+   "card": "C-04",
+   "amount": 90.0,
+   "score": 0.23137453199130173,
+   "score_pct": 0.021919431279620816,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.20302246096969184,
+     "value": 7016.350000003353,
+     "typical": 320.32499999925494,
+     "value_text": "$7,020",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.9862632820836527
+    },
+    {
+     "variable": "card_velocity_1_by_30",
+     "label": "Card: purchases in the last 2 days vs. its 30-day pace",
+     "contribution": 0.18286535943054083,
+     "value": 11.549019607843137,
+     "typical": 2.5833333333333335,
+     "value_text": "11.5\u00d7",
+     "typical_text": "2.6\u00d7",
+     "first_seen": false,
+     "percentile": 0.9403489787636954
+    },
+    {
+     "variable": "card_max_7",
+     "label": "Card: largest purchase, 7-day window",
+     "contribution": 0.13457316008355613,
+     "value": 2744.0,
+     "typical": 538.71,
+     "value_text": "$2,740",
+     "typical_text": "$540",
+     "first_seen": false,
+     "percentile": 0.9778619414761711
+    }
+   ],
+   "context": {
+    "card_count_7": 89.0,
+    "card_total_7": 15460.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-019 \u00b7 2010-12-15 \u00b7 C-04 \u00b7 $90\nScore in the top 2.2% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: spend, 1-day window: $7,020 (typical $320; higher than 99% of purchases).\n2. Card: purchases in the last 2 days vs. its 30-day pace: 11.5\u00d7 (typical 2.6\u00d7; higher than 94% of purchases).\n3. Card: largest purchase, 7-day window: $2,740 (typical $540; higher than 98% of purchases).\nContext: 89 purchases on this card in the last 7 days, $15,460 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-020",
+   "date": "2010-12-15",
+   "card": "C-04",
+   "amount": 100.0,
+   "score": 0.18911716160494532,
+   "score_pct": 0.02395997893628221,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.16700969199061452,
+     "value": 7195.290000004694,
+     "typical": 320.32499999925494,
+     "value_text": "$7,200",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.9868644513578911
+    },
+    {
+     "variable": "card_velocity_1_by_30",
+     "label": "Card: purchases in the last 2 days vs. its 30-day pace",
+     "contribution": 0.15090908080450796,
+     "value": 11.733644859813085,
+     "typical": 2.5833333333333335,
+     "value_text": "11.7\u00d7",
+     "typical_text": "2.6\u00d7",
+     "first_seen": false,
+     "percentile": 0.9442114913506771
+    },
+    {
+     "variable": "card_max_7",
+     "label": "Card: largest purchase, 7-day window",
+     "contribution": 0.08954141382405306,
+     "value": 2744.0,
+     "typical": 538.71,
+     "value_text": "$2,740",
+     "typical_text": "$540",
+     "first_seen": false,
+     "percentile": 0.9778619414761711
+    }
+   ],
+   "context": {
+    "card_count_7": 94.0,
+    "card_total_7": 15640.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-020 \u00b7 2010-12-15 \u00b7 C-04 \u00b7 $100\nScore in the top 2.4% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: spend, 1-day window: $7,200 (typical $320; higher than 99% of purchases).\n2. Card: purchases in the last 2 days vs. its 30-day pace: 11.7\u00d7 (typical 2.6\u00d7; higher than 94% of purchases).\n3. Card: largest purchase, 7-day window: $2,740 (typical $540; higher than 98% of purchases).\nContext: 94 purchases on this card in the last 7 days, $15,640 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-021",
+   "date": "2010-12-15",
+   "card": "C-04",
+   "amount": 100.0,
+   "score": 0.18911716160494532,
+   "score_pct": 0.02395997893628221,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.16700969199061452,
+     "value": 7333.230000004172,
+     "typical": 320.32499999925494,
+     "value_text": "$7,330",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.9873153283135699
+    },
+    {
+     "variable": "card_velocity_1_by_30",
+     "label": "Card: purchases in the last 2 days vs. its 30-day pace",
+     "contribution": 0.15090908080450796,
+     "value": 11.802752293577981,
+     "typical": 2.5833333333333335,
+     "value_text": "11.8\u00d7",
+     "typical_text": "2.6\u00d7",
+     "first_seen": false,
+     "percentile": 0.9443317252055248
+    },
+    {
+     "variable": "card_max_7",
+     "label": "Card: largest purchase, 7-day window",
+     "contribution": 0.08954141382405306,
+     "value": 2744.0,
+     "typical": 538.71,
+     "value_text": "$2,740",
+     "typical_text": "$540",
+     "first_seen": false,
+     "percentile": 0.9778619414761711
+    }
+   ],
+   "context": {
+    "card_count_7": 96.0,
+    "card_total_7": 15780.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-021 \u00b7 2010-12-15 \u00b7 C-04 \u00b7 $100\nScore in the top 2.4% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: spend, 1-day window: $7,330 (typical $320; higher than 99% of purchases).\n2. Card: purchases in the last 2 days vs. its 30-day pace: 11.8\u00d7 (typical 2.6\u00d7; higher than 94% of purchases).\n3. Card: largest purchase, 7-day window: $2,740 (typical $540; higher than 98% of purchases).\nContext: 96 purchases on this card in the last 7 days, $15,780 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-022",
+   "date": "2010-12-15",
+   "card": "C-04",
+   "amount": 70.0,
+   "score": 0.2004063331894934,
+   "score_pct": 0.023433385992627676,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.1790776842434733,
+     "value": 7467.560000004247,
+     "typical": 320.32499999925494,
+     "value_text": "$7,470",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.9878263221966725
+    },
+    {
+     "variable": "card_velocity_1_by_30",
+     "label": "Card: purchases in the last 2 days vs. its 30-day pace",
+     "contribution": 0.17355950932196418,
+     "value": 11.901785714285715,
+     "typical": 2.5833333333333335,
+     "value_text": "11.9\u00d7",
+     "typical_text": "2.6\u00d7",
+     "first_seen": false,
+     "percentile": 0.9445120759877963
+    },
+    {
+     "variable": "card_count_1",
+     "label": "Card: purchases, 1-day window",
+     "contribution": 0.111210311372792,
+     "value": 86.0,
+     "typical": 2.0,
+     "value_text": "86",
+     "typical_text": "2",
+     "first_seen": false,
+     "percentile": 0.9967687151509687
+    }
+   ],
+   "context": {
+    "card_count_7": 99.0,
+    "card_total_7": 15910.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-022 \u00b7 2010-12-15 \u00b7 C-04 \u00b7 $70\nScore in the top 2.3% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: spend, 1-day window: $7,470 (typical $320; higher than 99% of purchases).\n2. Card: purchases in the last 2 days vs. its 30-day pace: 11.9\u00d7 (typical 2.6\u00d7; higher than 94% of purchases).\n3. Card: purchases, 1-day window: 86 (typical 2; higher than 100% of purchases).\nContext: 99 purchases on this card in the last 7 days, $15,910 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-023",
+   "date": "2010-12-16",
+   "card": "C-04",
+   "amount": 1700.0,
+   "score": 0.17501010253778057,
+   "score_pct": 0.024947340705634535,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_count_1",
+     "label": "Card: purchases, 1-day window",
+     "contribution": 0.1650653519035943,
+     "value": 87.0,
+     "typical": 2.0,
+     "value_text": "87",
+     "typical_text": "2",
+     "first_seen": false,
+     "percentile": 0.9968288320783925
+    },
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.1633262396653711,
+     "value": 9163.240000003949,
+     "typical": 320.32499999925494,
+     "value_text": "$9,160",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.9914333378421029
+    },
+    {
+     "variable": "card_velocity_1_by_30",
+     "label": "Card: purchases in the last 2 days vs. its 30-day pace",
+     "contribution": 0.14300507364663775,
+     "value": 11.933628318584072,
+     "typical": 2.5833333333333335,
+     "value_text": "11.9\u00d7",
+     "typical_text": "2.6\u00d7",
+     "first_seen": false,
+     "percentile": 0.9446924267700678
+    }
+   ],
+   "context": {
+    "card_count_7": 93.0,
+    "card_total_7": 16130.0,
+    "new_merchant": true
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-023 \u00b7 2010-12-16 \u00b7 C-04 \u00b7 $1,700\nScore in the top 2.5% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: purchases, 1-day window: 87 (typical 2; higher than 100% of purchases).\n2. Card: spend, 1-day window: $9,160 (typical $320; higher than 99% of purchases).\n3. Card: purchases in the last 2 days vs. its 30-day pace: 11.9\u00d7 (typical 2.6\u00d7; higher than 94% of purchases).\nContext: 93 purchases on this card in the last 7 days, $16,130 in total; first purchase at this merchant.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-024",
+   "date": "2010-12-16",
+   "card": "C-10",
+   "amount": 4680.0,
+   "score": 0.2487344319228795,
+   "score_pct": 0.021195365982095815,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "merch_total_7",
+     "label": "Merchant: spend, 7-day window",
+     "contribution": 0.20422999612490944,
+     "value": 16070.0,
+     "typical": 1009.304999999702,
+     "value_text": "$16,070",
+     "typical_text": "$1,010",
+     "first_seen": false,
+     "percentile": 0.9830169680027654
+    },
+    {
+     "variable": "card_max_30",
+     "label": "Card: largest purchase, 30-day window",
+     "contribution": 0.19700050653188364,
+     "value": 4677.0,
+     "typical": 1160.0,
+     "value_text": "$4,680",
+     "typical_text": "$1,160",
+     "first_seen": false,
+     "percentile": 0.9803417647324045
+    },
+    {
+     "variable": "card_state_total_7",
+     "label": "Card in this state: spend, 7-day window",
+     "contribution": 0.12307340789540858,
+     "value": 4677.0,
+     "typical": 266.3199999984354,
+     "value_text": "$4,680",
+     "typical_text": "$270",
+     "first_seen": false,
+     "percentile": 0.9750514751191066
+    }
+   ],
+   "context": {
+    "card_count_7": 10.0,
+    "card_total_7": 7020.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-024 \u00b7 2010-12-16 \u00b7 C-10 \u00b7 $4,680\nScore in the top 2.1% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Merchant: spend, 7-day window: $16,070 (typical $1,010; higher than 98% of purchases).\n2. Card: largest purchase, 30-day window: $4,680 (typical $1,160; higher than 98% of purchases).\n3. Card in this state: spend, 7-day window: $4,680 (typical $270; higher than 98% of purchases).\nContext: 10 purchases on this card in the last 7 days, $7,020 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-025",
+   "date": "2010-12-16",
+   "card": "C-11",
+   "amount": 40.0,
+   "score": 0.26189868406604766,
+   "score_pct": 0.020800421274354886,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.23820566651147176,
+     "value": 772.9399999994785,
+     "typical": 320.32499999925494,
+     "value_text": "$770",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.6868960127447886
+    },
+    {
+     "variable": "card_count_0",
+     "label": "Card: purchases, same day",
+     "contribution": 0.20297980366015306,
+     "value": 6.0,
+     "typical": 1.0,
+     "value_text": "6",
+     "typical_text": "1",
+     "first_seen": false,
+     "percentile": 0.9356748876564919
+    },
+    {
+     "variable": "card_state_velocity_1_by_30",
+     "label": "Card in this state: purchases in the last 2 days vs. its 30-day pace",
+     "contribution": 0.13581109343601228,
+     "value": 15.5,
+     "typical": 7.75,
+     "value_text": "15.5\u00d7",
+     "typical_text": "7.8\u00d7",
+     "first_seen": false,
+     "percentile": 0.9993086553346259
+    }
+   ],
+   "context": {
+    "card_count_7": 15.0,
+    "card_total_7": 1330.0,
+    "new_merchant": true
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-025 \u00b7 2010-12-16 \u00b7 C-11 \u00b7 $40\nScore in the top 2.1% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: spend, 1-day window: $770 (typical $320; higher than 69% of purchases).\n2. Card: purchases, same day: 6 (typical 1; higher than 94% of purchases).\n3. Card in this state: purchases in the last 2 days vs. its 30-day pace: 15.5\u00d7 (typical 7.8\u00d7; higher than 100% of purchases).\nContext: 15 purchases on this card in the last 7 days, $1,330 in total; first purchase at this merchant.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-026",
+   "date": "2010-12-17",
+   "card": "C-12",
+   "amount": 4820.0,
+   "score": 0.24356681302691263,
+   "score_pct": 0.02145866245392314,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_max_30",
+     "label": "Card: largest purchase, 30-day window",
+     "contribution": 0.13913048184019827,
+     "value": 4815.36,
+     "typical": 1160.0,
+     "value_text": "$4,820",
+     "typical_text": "$1,160",
+     "first_seen": false,
+     "percentile": 0.9808227001517953
+    },
+    {
+     "variable": "merch_actual_over_avg_30",
+     "label": "Merchant: this purchase vs. its average, 30-day window",
+     "contribution": 0.1335471106051411,
+     "value": 1.9427114431877364,
+     "typical": 0.9539955918958677,
+     "value_text": "1.9\u00d7",
+     "typical_text": "1.0\u00d7",
+     "first_seen": false,
+     "percentile": 0.9182259494717225
+    },
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.12214270684528838,
+     "value": 4815.359999999404,
+     "typical": 320.32499999925494,
+     "value_text": "$4,820",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.9724814764717375
+    }
+   ],
+   "context": {
+    "card_count_7": 1.0,
+    "card_total_7": 4820.0,
+    "new_merchant": true
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-026 \u00b7 2010-12-17 \u00b7 C-12 \u00b7 $4,820\nScore in the top 2.1% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: largest purchase, 30-day window: $4,820 (typical $1,160; higher than 98% of purchases).\n2. Merchant: this purchase vs. its average, 30-day window: 1.9\u00d7 (typical 1.0\u00d7; higher than 92% of purchases).\n3. Card: spend, 1-day window: $4,820 (typical $320; higher than 97% of purchases).\nContext: 1 purchases on this card in the last 7 days, $4,820 in total; first purchase at this merchant.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-027",
+   "date": "2010-12-17",
+   "card": "C-12",
+   "amount": 3860.0,
+   "score": 0.3610588174245114,
+   "score_pct": 0.017443391258557095,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_actual_over_avg_0",
+     "label": "Card: this purchase vs. its average, same day",
+     "contribution": 0.20383317731223588,
+     "value": 0.8896462352249686,
+     "typical": 1.0,
+     "value_text": "0.9\u00d7",
+     "typical_text": "1.0\u00d7",
+     "first_seen": false,
+     "percentile": 0.1537039541909013
+    },
+    {
+     "variable": "card_state_max_7",
+     "label": "Card in this state: largest purchase, 7-day window",
+     "contribution": 0.15801663730290655,
+     "value": 4815.36,
+     "typical": 200.0,
+     "value_text": "$4,820",
+     "typical_text": "$200",
+     "first_seen": false,
+     "percentile": 0.9944391842132949
+    },
+    {
+     "variable": "card_state_total_7",
+     "label": "Card in this state: spend, 7-day window",
+     "contribution": 0.14922867981706617,
+     "value": 8673.560000002384,
+     "typical": 266.3199999984354,
+     "value_text": "$8,670",
+     "typical_text": "$270",
+     "first_seen": false,
+     "percentile": 0.9918541563340698
+    }
+   ],
+   "context": {
+    "card_count_7": 2.0,
+    "card_total_7": 8670.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-027 \u00b7 2010-12-17 \u00b7 C-12 \u00b7 $3,860\nScore in the top 1.7% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: this purchase vs. its average, same day: 0.9\u00d7 (typical 1.0\u00d7; lower than 85% of purchases).\n2. Card in this state: largest purchase, 7-day window: $4,820 (typical $200; higher than 99% of purchases).\n3. Card in this state: spend, 7-day window: $8,670 (typical $270; higher than 99% of purchases).\nContext: 2 purchases on this card in the last 7 days, $8,670 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-028",
+   "date": "2010-12-17",
+   "card": "C-13",
+   "amount": 1020.0,
+   "score": 0.11996374526191793,
+   "score_pct": 0.029489204844655115,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "merch_total_1",
+     "label": "Merchant: spend, 1-day window",
+     "contribution": 0.08070154211393571,
+     "value": 8087.229999999981,
+     "typical": 399.0,
+     "value_text": "$8,090",
+     "typical_text": "$400",
+     "first_seen": false,
+     "percentile": 0.9882771991523513
+    },
+    {
+     "variable": "card_max_7",
+     "label": "Card: largest purchase, 7-day window",
+     "contribution": 0.07301752768238937,
+     "value": 1806.1,
+     "typical": 538.71,
+     "value_text": "$1,810",
+     "typical_text": "$540",
+     "first_seen": false,
+     "percentile": 0.8334159941085411
+    },
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.07030345678062841,
+     "value": 6158.019999999553,
+     "typical": 320.32499999925494,
+     "value_text": "$6,160",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.9829418218434856
+    }
+   ],
+   "context": {
+    "card_count_7": 23.0,
+    "card_total_7": 10450.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-028 \u00b7 2010-12-17 \u00b7 C-13 \u00b7 $1,020\nScore in the top 2.9% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Merchant: spend, 1-day window: $8,090 (typical $400; higher than 99% of purchases).\n2. Card: largest purchase, 7-day window: $1,810 (typical $540; higher than 83% of purchases).\n3. Card: spend, 1-day window: $6,160 (typical $320; higher than 98% of purchases).\nContext: 23 purchases on this card in the last 7 days, $10,450 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-029",
+   "date": "2010-12-17",
+   "card": "C-13",
+   "amount": 80.0,
+   "score": 0.12184192247951105,
+   "score_pct": 0.029357556608741397,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_count_1",
+     "label": "Card: purchases, 1-day window",
+     "contribution": 0.11562887496425242,
+     "value": 15.0,
+     "typical": 2.0,
+     "value_text": "15",
+     "typical_text": "2",
+     "first_seen": false,
+     "percentile": 0.9636142296767212
+    },
+    {
+     "variable": "card_velocity_1_by_30",
+     "label": "Card: purchases in the last 2 days vs. its 30-day pace",
+     "contribution": 0.07402510228265227,
+     "value": 3.9406779661016946,
+     "typical": 2.5833333333333335,
+     "value_text": "3.9\u00d7",
+     "typical_text": "2.6\u00d7",
+     "first_seen": false,
+     "percentile": 0.707696469633437
+    },
+    {
+     "variable": "card_max_7",
+     "label": "Card: largest purchase, 7-day window",
+     "contribution": 0.05680218808030005,
+     "value": 1806.1,
+     "typical": 538.71,
+     "value_text": "$1,810",
+     "typical_text": "$540",
+     "first_seen": false,
+     "percentile": 0.8334159941085411
+    }
+   ],
+   "context": {
+    "card_count_7": 25.0,
+    "card_total_7": 10950.0,
+    "new_merchant": true
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-029 \u00b7 2010-12-17 \u00b7 C-13 \u00b7 $80\nScore in the top 2.9% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: purchases, 1-day window: 15 (typical 2; higher than 96% of purchases).\n2. Card: purchases in the last 2 days vs. its 30-day pace: 3.9\u00d7 (typical 2.6\u00d7; higher than 71% of purchases).\n3. Card: largest purchase, 7-day window: $1,810 (typical $540; higher than 83% of purchases).\nContext: 25 purchases on this card in the last 7 days, $10,950 in total; first purchase at this merchant.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": true,
+    "status": "alert_fraud"
+   }
+  },
+  {
+   "id": "A-030",
+   "date": "2010-12-17",
+   "card": "C-14",
+   "amount": 300.0,
+   "score": 0.262648645077918,
+   "score_pct": 0.020800421274354886,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_count_0",
+     "label": "Card: purchases, same day",
+     "contribution": 0.24582476501258907,
+     "value": 5.0,
+     "typical": 1.0,
+     "value_text": "5",
+     "typical_text": "1",
+     "first_seen": false,
+     "percentile": 0.9246434314742173
+    },
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.23820553038232836,
+     "value": 1254.9699999997392,
+     "typical": 320.32499999925494,
+     "value_text": "$1,250",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.78517215985091
+    },
+    {
+     "variable": "card_avg_7",
+     "label": "Card: average purchase, 7-day window",
+     "contribution": 0.12597291700724944,
+     "value": 127.72769230768944,
+     "typical": 239.99749999959022,
+     "value_text": "$130",
+     "typical_text": "$240",
+     "first_seen": false,
+     "percentile": 0.31678614905992153
+    }
+   ],
+   "context": {
+    "card_count_7": 13.0,
+    "card_total_7": 1660.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-030 \u00b7 2010-12-17 \u00b7 C-14 \u00b7 $300\nScore in the top 2.1% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: purchases, same day: 5 (typical 1; higher than 92% of purchases).\n2. Card: spend, 1-day window: $1,250 (typical $320; higher than 79% of purchases).\n3. Card: average purchase, 7-day window: $130 (typical $240; lower than 68% of purchases).\nContext: 13 purchases on this card in the last 7 days, $1,660 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-031",
+   "date": "2010-12-17",
+   "card": "C-15",
+   "amount": 150.0,
+   "score": 0.1650048946187526,
+   "score_pct": 0.02547393364928907,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_max_30",
+     "label": "Card: largest purchase, 30-day window",
+     "contribution": 0.13882147200141823,
+     "value": 608.9,
+     "typical": 1160.0,
+     "value_text": "$610",
+     "typical_text": "$1,160",
+     "first_seen": false,
+     "percentile": 0.2972030599516059
+    },
+    {
+     "variable": "card_total_3",
+     "label": "Card: spend, 3-day window",
+     "contribution": 0.1363140524097563,
+     "value": 3208.420000001788,
+     "typical": 498.91500000003725,
+     "value_text": "$3,210",
+     "typical_text": "$500",
+     "first_seen": false,
+     "percentile": 0.9005215143454018
+    },
+    {
+     "variable": "card_count_3",
+     "label": "Card: purchases, 3-day window",
+     "contribution": 0.12039469644726433,
+     "value": 20.0,
+     "typical": 2.0,
+     "value_text": "20",
+     "typical_text": "2",
+     "first_seen": false,
+     "percentile": 0.9617506049265822
+    }
+   ],
+   "context": {
+    "card_count_7": 20.0,
+    "card_total_7": 3210.0,
+    "new_merchant": true
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-031 \u00b7 2010-12-17 \u00b7 C-15 \u00b7 $150\nScore in the top 2.5% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: largest purchase, 30-day window: $610 (typical $1,160; lower than 70% of purchases).\n2. Card: spend, 3-day window: $3,210 (typical $500; higher than 90% of purchases).\n3. Card: purchases, 3-day window: 20 (typical 2; higher than 96% of purchases).\nContext: 20 purchases on this card in the last 7 days, $3,210 in total; first purchase at this merchant.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": false,
+    "status": "alert_legit"
+   }
+  },
+  {
+   "id": "A-032",
+   "date": "2010-12-19",
+   "card": "C-16",
+   "amount": 40.0,
+   "score": 0.12814266408003722,
+   "score_pct": 0.029028436018957327,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_zip_total_30",
+     "label": "Card in this ZIP: spend, 30-day window",
+     "contribution": 0.12338919235895703,
+     "value": 7094.130000025034,
+     "typical": 315.0,
+     "value_text": "$7,090",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.9853164404767273
+    },
+    {
+     "variable": "card_velocity_0_by_14",
+     "label": "Card: purchases today vs. its 14-day pace",
+     "contribution": 0.06185915328496118,
+     "value": 1.0,
+     "typical": 3.3333333333333335,
+     "value_text": "1.0\u00d7",
+     "typical_text": "3.3\u00d7",
+     "first_seen": false,
+     "percentile": 0.08991989419420773
+    },
+    {
+     "variable": "card_max_30",
+     "label": "Card: largest purchase, 30-day window",
+     "contribution": 0.052221061256108245,
+     "value": 766.71,
+     "typical": 1160.0,
+     "value_text": "$770",
+     "typical_text": "$1,160",
+     "first_seen": false,
+     "percentile": 0.3635270601319567
+    }
+   ],
+   "context": {
+    "card_count_7": 19.0,
+    "card_total_7": 2660.0,
+    "new_merchant": false
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-032 \u00b7 2010-12-19 \u00b7 C-16 \u00b7 $40\nScore in the top 2.9% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card in this ZIP: spend, 30-day window: $7,090 (typical $320; higher than 99% of purchases).\n2. Card: purchases today vs. its 14-day pace: 1.0\u00d7 (typical 3.3\u00d7; lower than 91% of purchases).\n3. Card: largest purchase, 30-day window: $770 (typical $1,160; lower than 64% of purchases).\nContext: 19 purchases on this card in the last 7 days, $2,660 in total; card has bought here before.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": true,
+    "status": "alert_fraud"
+   }
+  },
+  {
+   "id": "A-033",
+   "date": "2010-12-19",
+   "card": "C-17",
+   "amount": 6240.0,
+   "score": 0.35461836041525974,
+   "score_pct": 0.01764086361242756,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_max_30",
+     "label": "Card: largest purchase, 30-day window",
+     "contribution": 0.24899719555879016,
+     "value": 6239.56,
+     "typical": 1160.0,
+     "value_text": "$6,240",
+     "typical_text": "$1,160",
+     "first_seen": false,
+     "percentile": 0.9866390128800517
+    },
+    {
+     "variable": "card_count_3",
+     "label": "Card: purchases, 3-day window",
+     "contribution": 0.22955650679208855,
+     "value": 10.0,
+     "typical": 2.0,
+     "value_text": "10",
+     "typical_text": "2",
+     "first_seen": false,
+     "percentile": 0.9102454273562078
+    },
+    {
+     "variable": "card_state_total_7",
+     "label": "Card in this state: spend, 7-day window",
+     "contribution": 0.16471988547264835,
+     "value": 8154.879999998957,
+     "typical": 266.3199999984354,
+     "value_text": "$8,150",
+     "typical_text": "$270",
+     "first_seen": false,
+     "percentile": 0.9907720516404407
+    }
+   ],
+   "context": {
+    "card_count_7": 16.0,
+    "card_total_7": 8670.0,
+    "new_merchant": true
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-033 \u00b7 2010-12-19 \u00b7 C-17 \u00b7 $6,240\nScore in the top 1.8% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: largest purchase, 30-day window: $6,240 (typical $1,160; higher than 99% of purchases).\n2. Card: purchases, 3-day window: 10 (typical 2; higher than 91% of purchases).\n3. Card in this state: spend, 7-day window: $8,150 (typical $270; higher than 99% of purchases).\nContext: 16 purchases on this card in the last 7 days, $8,670 in total; first purchase at this merchant.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": true,
+    "status": "alert_fraud"
+   }
+  }
+ ],
+ "reason_mix": [
+  {
+   "top_reason": "Card: purchases",
+   "false_alerts": 15,
+   "true_alerts": 5
+  },
+  {
+   "top_reason": "Card: spend",
+   "false_alerts": 31,
+   "true_alerts": 3
+  },
+  {
+   "top_reason": "Card in this ZIP: spend",
+   "false_alerts": 2,
+   "true_alerts": 2
+  },
+  {
+   "top_reason": "Card in this state: days since previous purchase",
+   "false_alerts": 2,
+   "true_alerts": 2
+  },
+  {
+   "top_reason": "Merchant: this purchase vs. average",
+   "false_alerts": 6,
+   "true_alerts": 2
+  },
+  {
+   "top_reason": "Card: largest purchase",
+   "false_alerts": 12,
+   "true_alerts": 1
+  },
+  {
+   "top_reason": "Card: purchases in the last 2 days vs. 30-day pace",
+   "false_alerts": 5,
+   "true_alerts": 1
+  },
+  {
+   "top_reason": "Card in this state: largest purchase",
+   "false_alerts": 1,
+   "true_alerts": 0
+  },
+  {
+   "top_reason": "Card in this state: spend",
+   "false_alerts": 5,
+   "true_alerts": 0
+  },
+  {
+   "top_reason": "Card: this purchase vs. average",
+   "false_alerts": 1,
+   "true_alerts": 0
+  },
+  {
+   "top_reason": "Merchant: spend",
+   "false_alerts": 4,
+   "true_alerts": 0
+  }
+ ]
+}

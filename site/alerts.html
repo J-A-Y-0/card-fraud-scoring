@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alert Queue Replay</title>
+<meta name="description" content="Two weeks of fraud alerts as an analyst would see them: measured reasons, a calibrated fraud rate, and the action.">
+<link rel="stylesheet" href="assets/app.css">
+<style>
+  .summary { display: flex; flex-wrap: wrap; gap: 12px 40px; padding: 16px 0 20px; border-bottom: 1px solid var(--line); margin-top: 20px; }
+  .summary .label { display: block; }
+  .summary .mid { margin-top: 2px; }
+  .filters { margin: 16px 0; }
+  .pop .opt .n { font-size: 13px; color: var(--ink-3); }
+  td .reason { color: var(--ink-2); max-width: 340px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  td.id { font-weight: 500; white-space: nowrap; }
+  .empty { padding: 40px 20px; text-align: center; color: var(--ink-3); }
+
+  /* Detail view */
+  .dbar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+  .dbar .crumb { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-2); border: 0; background: none; cursor: pointer; padding: 6px 8px 6px 4px; border-radius: 6px; font-weight: 500; }
+  .dbar .crumb:hover { background: var(--hover); color: var(--ink); }
+  .dbar .pos { color: var(--ink-3); font-size: 13px; margin-left: 4px; }
+  .dbar .grow { flex: 1; }
+  .detail { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 32px; margin-top: 24px; align-items: start; }
+  .d-amount { font-size: 32px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; margin-top: 8px; }
+  .d-sub { color: var(--ink-2); margin-top: 4px; }
+  .result { display: flex; gap: 12px; align-items: flex-start; border-radius: 10px; padding: 14px 16px; margin-top: 20px; }
+  .result.ok { background: var(--good-wash); } .result.miss { background: var(--lost-wash); }
+  .result .t { font-weight: 600; }
+  .result p { color: var(--ink-2); }
+  .result .grow { flex: 1; }
+  section.block { margin-top: 28px; }
+  section.block > h2 { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  section.block > p.sub { font-size: 13px; color: var(--ink-3); margin-bottom: 12px; }
+  .likely { display: flex; align-items: center; gap: 16px; padding: 16px 20px; }
+  .likely .mid { min-width: 64px; }
+  .meter { flex: 1; height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; }
+  .meter i { display: block; height: 100%; background: var(--lost); }
+  .ins li { display: grid !important; grid-template-columns: minmax(0, 1fr) 120px; gap: 2px 20px; padding: 14px 20px !important; }
+  .ins .l { font-weight: 500; }
+  .ins .v { font-size: 13px; color: var(--ink-2); grid-column: 1; }
+  .ins .v b { color: var(--ink); font-weight: 500; }
+  .ins .w { grid-column: 2; grid-row: 1 / 3; align-self: center; height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+  .ins .w i { display: block; height: 100%; background: var(--accent); }
+  .action { padding: 14px 20px; }
+  .action b { font-weight: 500; }
+  .props { position: sticky; top: 24px; }
+  .props h3 { font-size: 13px; font-weight: 500; color: var(--ink-3); margin: 0 0 8px; }
+  .props dl { display: grid; grid-template-columns: 112px 1fr; gap: 10px 12px; margin: 0 0 24px; font-size: 14px; }
+  .props dt { color: var(--ink-3); }
+  .props dd { margin: 0; }
+  .props .keys { font-size: 13px; color: var(--ink-3); display: grid; gap: 8px; }
+  .props .keys span { display: flex; justify-content: space-between; }
+
+  @media (max-width: 960px) {
+    .detail { grid-template-columns: 1fr; }
+    .props { position: static; border-top: 1px solid var(--line); padding-top: 20px; }
+    table.t .hide-md { display: none; }
+  }
+  @media (max-width: 600px) {
+    table.t .hide-sm { display: none; }
+    table.t th, table.t td { padding-left: 8px; padding-right: 8px; }
+    td.id { white-space: normal; }
+    td.id .muted { display: block; }
+    .dbar .act { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .ins li { grid-template-columns: minmax(0, 1fr) 64px; padding: 12px 16px !important; }
+    .summary { gap: 12px 28px; }
+    .pop { position: fixed; left: 12px !important; right: 12px; top: auto; bottom: 12px; min-width: 0 !important; max-height: 75vh; overflow: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <a class="brand" href="index.html"><i class="brand-mark" aria-hidden="true"></i><span>Stopping the card</span></a>
+    <a class="nav" href="index.html"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></svg>Planner</a>
+    <a class="nav" href="alerts.html" aria-current="page"><svg class="i" viewBox="0 0 24 24"><path d="M3 13h5l2 3h4l2-3h5"/><path d="M5.5 5h13L21 13v6H3v-6z"/></svg>Alert queue<span class="count" id="nav-count"></span></a>
+    <div class="group">Documents</div>
+    <a class="nav" href="report.html"><svg class="i" viewBox="0 0 24 24"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg>Report</a>
+    <a class="nav" href="deck.html"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8 20h8"/></svg>Deck</a>
+    <a class="nav" href="https://github.com/J-A-Y-0/card-fraud-scoring"><svg class="i" viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg>Source code</a>
+    <p class="about">Purchase-card program, 2010. Cards are relabeled and amounts rounded to $10.</p>
+  </aside>
+
+  <div class="main"><main class="page">
+    <div id="list-view">
+      <div class="title-row">
+        <div>
+          <h1 class="title">Alert queue</h1>
+          <p class="lede">Two weeks of alerts as an analyst would have seen them. Open one, read why it fired, make the call, then see what really happened.</p>
+        </div>
+      </div>
+      <div class="summary">
+        <div><span class="label">Alerts</span><span class="mid" id="s-alerts"></span></div>
+        <div><span class="label">Urgent</span><span class="mid" id="s-urgent"></span></div>
+        <div><span class="label">Turned out to be fraud</span><span class="mid" id="s-fraud"></span></div>
+        <div><span class="label">Your calls</span><span class="mid" id="s-calls"></span></div>
+      </div>
+
+      <div class="filters">
+        <div class="fwrap">
+          <button class="chip" type="button" aria-expanded="false" aria-controls="pop-day" id="chip-day">Day: <b id="c-day"></b><svg class="i caret" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="pop" id="pop-day" role="menu"><div id="day-opts"></div></div>
+        </div>
+        <div class="fwrap">
+          <button class="chip" type="button" aria-expanded="false" aria-controls="pop-pri" id="chip-pri">Priority: <b id="c-pri"></b><svg class="i caret" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="pop" id="pop-pri" role="menu"><div id="pri-opts"></div></div>
+        </div>
+        <div class="fwrap">
+          <button class="chip" type="button" aria-expanded="false" aria-controls="pop-st" id="chip-st">Status: <b id="c-st"></b><svg class="i caret" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="pop" id="pop-st" role="menu"><div id="st-opts"></div></div>
+        </div>
+        <button class="linkbtn" type="button" id="clear">Clear filters</button>
+      </div>
+
+      <section class="card">
+        <table class="t click"><thead><tr><th>Priority</th><th>Alert</th><th class="hide-sm">Date</th><th class="hide-md">Top reason</th><th class="r hide-sm">Score</th><th class="r">Amount</th><th>Status</th></tr></thead>
+          <tbody id="rows"></tbody></table>
+        <div class="empty" id="empty" hidden>No alerts match these filters.</div>
+      </section>
+
+      <section class="card" style="margin-top:16px">
+        <div class="card-h"><div><h2>Which reasons lead the alerts</h2><p class="muted" style="font-size:13px;margin-top:2px">Top reason for every alert worked in Nov–Dec. No single reason separates fraud from false alarms, so every alert gets a call before a block.</p></div></div>
+        <div style="padding:8px 8px 8px"><table class="t"><thead><tr><th>Top reason</th><th class="r">Fraud</th><th class="r">False alarm</th><th class="r hide-sm">Share fraud</th></tr></thead><tbody id="mix"></tbody></table></div>
+      </section>
+      <footer class="foot"><span>Same-day blocking replay; cutoffs set on Sep–Oct scores.</span><span>Generated by <code>fraudscore export</code></span></footer>
+    </div>
+
+    <div id="detail-view" hidden></div>
+  </main></div>
+</div>
+
+<script type="module">
+  import { fmt } from "./assets/charts.js";
+  const A = await fetch("data/alerts.json").then((r) => r.json());
+  const $ = (id) => document.getElementById(id);
+  const day = (d, o = { month: "short", day: "numeric" }) => new Date(d + "T00:00:00").toLocaleDateString("en-US", o);
+  const TICK = `<svg class="i tick" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>`;
+  const ICON = {
+    back: `<svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>`,
+    up: `<svg class="i" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg>`,
+    down: `<svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>`,
+  };
+  const alerts = [...A.alerts].sort((x, y) => (x.date === y.date ? y.score - x.score : x.date.localeCompare(y.date)));
+  const byId = Object.fromEntries(alerts.map((a) => [a.id, a]));
+  const days = [...new Set(alerts.map((a) => a.date))];
+  const calls = {}; // alert id -> "block" | "clear"
+  $("nav-count").textContent = alerts.length;
+
+  // Open on the busiest day that includes a real fraud, so the first view shows a full queue.
+  const count = (d) => alerts.filter((a) => a.date === d).length;
+  const fraudDays = days.filter((d) => alerts.some((a) => a.date === d && a.outcome.fraud));
+  const DEFAULT_DAY = (fraudDays.length ? fraudDays : days).reduce((x, y) => (count(y) > count(x) ? y : x));
+  const F = { day: DEFAULT_DAY, pri: "all", st: "all" };
+
+  const pri = (a) => (a.priority === "urgent" ? "Urgent" : "Review");
+  const correct = (a) => (calls[a.id] === "block") === a.outcome.fraud;
+  const status = (a) => {
+    const c = calls[a.id];
+    if (!c) return `<span class="pill open">Open</span>`;
+    return `<span class="pill ${correct(a) ? "ok" : "miss"}">${c === "block" ? "Blocked" : "Cleared"} · ${correct(a) ? "right" : "wrong"}</span>`;
+  };
+  const visible = () => alerts.filter((a) => (F.day === "all" || a.date === F.day) && (F.pri === "all" || a.priority === F.pri)
+    && (F.st === "all" || (F.st === "open" ? !calls[a.id] : !!calls[a.id])));
+
+  // Filter chips
+  const chips = [...document.querySelectorAll(".chip[aria-controls]")];
+  const closeAll = (except) => chips.forEach((c) => { if (c !== except) { c.setAttribute("aria-expanded", "false"); $(c.getAttribute("aria-controls")).classList.remove("on"); } });
+  chips.forEach((c) => c.addEventListener("click", (e) => {
+    e.stopPropagation(); const open = c.getAttribute("aria-expanded") !== "true"; closeAll(c);
+    c.setAttribute("aria-expanded", open); $(c.getAttribute("aria-controls")).classList.toggle("on", open);
+  }));
+  document.addEventListener("click", () => closeAll());
+  const menu = (id, key, opts) => {
+    $(id).innerHTML = opts.map(([v, label, note]) => `<button class="opt" type="button" role="menuitemradio" data-v="${v}">${TICK}<span class="grow">${label}</span><span class="n">${note ?? ""}</span></button>`).join("");
+    $(id).onclick = (e) => { const b = e.target.closest("[data-v]"); if (b) { F[key] = b.dataset.v; closeAll(); renderList(); } };
+  };
+  menu("day-opts", "day", [["all", "All days", alerts.length], ...days.map((d) => [d, day(d, { weekday: "short", month: "short", day: "numeric" }), count(d)])]);
+  menu("pri-opts", "pri", [["all", "All", ""], ["urgent", "Urgent", "top 1% of scores"], ["review", "Review", "top 1–3%"]]);
+  menu("st-opts", "st", [["all", "All", ""], ["open", "Open", ""], ["decided", "Decided", ""]]);
+  $("clear").onclick = () => { F.day = "all"; F.pri = "all"; F.st = "all"; renderList(); };
+
+  function renderSummary(list) {
+    $("s-alerts").textContent = list.length;
+    $("s-urgent").textContent = list.filter((a) => a.priority === "urgent").length;
+    $("s-fraud").textContent = list.filter((a) => a.outcome.fraud).length;
+    const done = alerts.filter((a) => calls[a.id]);
+    $("s-calls").textContent = done.length ? `${done.filter(correct).length} of ${done.length} right` : "None yet";
+  }
+
+  function renderList() {
+    const list = visible();
+    $("c-day").textContent = F.day === "all" ? "All" : day(F.day, { weekday: "short", month: "short", day: "numeric" });
+    $("c-pri").textContent = { all: "All", urgent: "Urgent", review: "Review" }[F.pri];
+    $("c-st").textContent = { all: "All", open: "Open", decided: "Decided" }[F.st];
+    $("chip-day").classList.toggle("set", F.day !== "all");
+    $("chip-pri").classList.toggle("set", F.pri !== "all");
+    $("chip-st").classList.toggle("set", F.st !== "all");
+    for (const [id, k] of [["day-opts", "day"], ["pri-opts", "pri"], ["st-opts", "st"]])
+      $(id).querySelectorAll("[data-v]").forEach((b) => b.setAttribute("aria-checked", b.dataset.v === F[k]));
+    $("clear").disabled = F.day === "all" && F.pri === "all" && F.st === "all";
+    renderSummary(list);
+    $("rows").innerHTML = list.map((a) => `<tr data-id="${a.id}" tabindex="0">
+      <td><span class="pill ${a.priority}">${pri(a)}</span></td>
+      <td class="id">${a.id} <span class="muted" style="font-weight:400">· Card ${a.card}</span></td>
+      <td class="hide-sm">${day(a.date)}</td>
+      <td class="hide-md"><div class="reason">${a.reasons[0]?.label ?? ""}</div></td>
+      <td class="r hide-sm">Top ${fmt.pct(a.score_pct, 1)}</td>
+      <td class="r" style="font-weight:500">${fmt.usd(a.amount)}</td>
+      <td>${status(a)}</td></tr>`).join("");
+    $("empty").hidden = list.length > 0;
+  }
+  $("rows").addEventListener("click", (e) => { const tr = e.target.closest("tr[data-id]"); if (tr) location.hash = tr.dataset.id; });
+  $("rows").addEventListener("keydown", (e) => { if (e.key === "Enter") { const tr = e.target.closest("tr[data-id]"); if (tr) location.hash = tr.dataset.id; } });
+
+  const compare = (r) => {
+    if (r.first_seen) return "no earlier purchase to compare";
+    const higher = r.value >= r.typical, share = higher ? r.percentile : 1 - r.percentile;
+    return `${higher ? "higher" : "lower"} than ${fmt.pct(share)} of purchases`;
+  };
+
+  // Detail view: header with position and actions, content left, properties right.
+  function renderDetail(id) {
+    const a = byId[id];
+    let list = visible();
+    if (!list.includes(a)) list = alerts.filter((x) => x.date === a.date);
+    const i = list.indexOf(a), prev = list[i - 1], next = list[i + 1];
+    const maxC = Math.max(...a.reasons.map((r) => r.contribution), 1e-9);
+    const related = alerts.filter((x) => x.card === a.card && x.id !== a.id);
+    const c = calls[a.id];
+    const band = a.priority === "urgent" ? "urgent band, the top 1% of scores" : "review band, the top 1–3% of scores";
+    $("detail-view").innerHTML = `
+      <div class="dbar">
+        <button class="crumb" type="button" id="back">${ICON.back}Alert queue</button>
+        <span class="pos">${i + 1} of ${list.length}</span>
+        <button class="btn icon" type="button" id="prev" aria-label="Previous alert" ${prev ? "" : "disabled"}>${ICON.up}</button>
+        <button class="btn icon" type="button" id="next" aria-label="Next alert" ${next ? "" : "disabled"}>${ICON.down}</button>
+        <span class="grow"></span>
+        <span class="act">${c ? `<button class="btn" type="button" id="undo">Undo call</button>` : `
+          <button class="btn" type="button" data-c="clear">Clear alert <kbd>C</kbd></button>
+          <button class="btn danger" type="button" data-c="block">Block card <kbd>B</kbd></button>`}</span>
+      </div>
+      <div class="detail">
+        <div>
+          <div style="display:flex;align-items:center;gap:8px"><span class="pill ${a.priority}">${pri(a)}</span><span class="muted">Alert ${a.id}</span></div>
+          <div class="d-amount">${fmt.usd(a.amount)}</div>
+          <div class="d-sub">Card ${a.card} · ${day(a.date, { weekday: "long", month: "long", day: "numeric" })}, 2010</div>
+          ${c ? `<div class="result ${correct(a) ? "ok" : "miss"}"><div class="grow"><span class="t">${correct(a) ? "Right call" : "Not this time"}.</span>
+            <p>${a.outcome.fraud ? "This was fraud. Blocking the card declines every later purchase on it." : "This was a legitimate purchase. Clearing it keeps the card working."}</p></div>
+            ${next ? `<button class="btn" type="button" id="next2">Next alert</button>` : ""}</div>` : ""}
+
+          <section class="block"><h2>Likelihood of fraud</h2><p class="sub">Measured, not guessed: the share of Sep–Oct alerts in the ${band} that were fraud.</p>
+            <div class="card likely"><span class="mid">${fmt.pct(a.band_fraud_rate)}</span><div class="meter" aria-hidden="true"><i style="width:${(100 * a.band_fraud_rate).toFixed(0)}%"></i></div></div></section>
+
+          <section class="block"><h2>Risk insights</h2><p class="sub">Each reason is how much the score drops when that variable is reset to a typical purchase.</p>
+            <ul class="card rowlist ins">${a.reasons.map((r) => `<li><span class="l">${r.label}</span>
+              <span class="v"><b>${r.value_text}</b> · typical ${r.typical_text} · ${compare(r)}</span>
+              <span class="w" role="img" aria-label="relative weight ${(100 * r.contribution / maxC).toFixed(0)} of 100"><i style="width:${(100 * r.contribution / maxC).toFixed(0)}%"></i></span></li>`).join("")}</ul></section>
+
+          <section class="block"><h2>Recommended action</h2><div class="card action">${a.action}</div></section>
+
+          <section class="block"><h2>Related alerts</h2><p class="sub">Other alerts on card ${a.card} in this sample.</p>
+            ${related.length ? `<div class="card"><table class="t click"><tbody>${related.map((x) => `<tr data-id="${x.id}"><td><span class="pill ${x.priority}">${pri(x)}</span></td>
+              <td class="id">${x.id}</td><td>${day(x.date)}</td><td class="r" style="font-weight:500">${fmt.usd(x.amount)}</td><td>${status(x)}</td></tr>`).join("")}</tbody></table></div>`
+              : `<div class="card" style="padding:14px 20px" class="muted"><span class="muted">None. This is the only alert on this card.</span></div>`}</section>
+        </div>
+
+        <aside class="props">
+          <h3>Details</h3>
+          <dl>
+            <dt>Status</dt><dd>${status(a)}</dd>
+            <dt>Priority</dt><dd>${pri(a)}</dd>
+            <dt>Risk score</dt><dd>Top ${fmt.pct(a.score_pct, 1)}</dd>
+            <dt>Band fraud rate</dt><dd>${fmt.pct(a.band_fraud_rate)}</dd>
+            <dt>Card</dt><dd>${a.card}</dd>
+            <dt>Date</dt><dd>${day(a.date)}, 2010</dd>
+          </dl>
+          <h3>Card, last 7 days</h3>
+          <dl>
+            <dt>Purchases</dt><dd>${a.context.card_count_7}</dd>
+            <dt>Spend</dt><dd>${fmt.usd(a.context.card_total_7)}</dd>
+            <dt>Merchant</dt><dd>${a.context.new_merchant ? "First purchase here" : "Bought here before"}</dd>
+          </dl>
+          <h3>Shortcuts</h3>
+          <div class="keys"><span>Next / previous <span><kbd>J</kbd> <kbd>K</kbd></span></span><span>Block card <kbd>B</kbd></span><span>Clear alert <kbd>C</kbd></span><span>Back to queue <kbd>Esc</kbd></span></div>
+        </aside>
+      </div>`;
+    const go = (x) => { if (x) location.hash = x.id; };
+    $("back").onclick = () => { location.hash = ""; };
+    $("prev").onclick = () => go(prev); $("next").onclick = () => go(next);
+    if ($("next2")) $("next2").onclick = () => go(next);
+    if ($("undo")) $("undo").onclick = () => { delete calls[a.id]; renderDetail(id); };
+    $("detail-view").querySelectorAll("[data-c]").forEach((b) => (b.onclick = () => decide(a, b.dataset.c)));
+    $("detail-view").querySelectorAll("tr[data-id]").forEach((tr) => (tr.onclick = () => go(byId[tr.dataset.id])));
+    detailNav = { a, prev, next };
+  }
+  let detailNav = null;
+  function decide(a, c) { calls[a.id] = c; renderDetail(a.id); }
+
+  function route() {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const open = !!byId[id];
+    $("list-view").hidden = open; $("detail-view").hidden = !open;
+    if (open) { renderDetail(id); scrollTo(0, 0); } else { detailNav = null; renderList(); }
+  }
+  addEventListener("hashchange", route);
+
+  addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey || /INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
+    const k = e.key.toLowerCase();
+    if (k === "escape") { closeAll(); if (detailNav) location.hash = ""; return; }
+    if (!detailNav) return;
+    const { a, prev, next } = detailNav;
+    if ((k === "j" || k === "arrowdown") && next) { e.preventDefault(); location.hash = next.id; }
+    else if ((k === "k" || k === "arrowup") && prev) { e.preventDefault(); location.hash = prev.id; }
+    else if ((k === "b" || k === "c") && !calls[a.id]) decide(a, k === "b" ? "block" : "clear");
+  });
+
+  $("mix").innerHTML = A.reason_mix.map((r) => `<tr><td>${r.top_reason}</td><td class="r">${r.true_alerts}</td><td class="r">${r.false_alerts}</td>
+    <td class="r hide-sm">${fmt.pct(r.true_alerts / (r.true_alerts + r.false_alerts))}</td></tr>`).join("");
+  route();
+</script>
+</body>
+</html>

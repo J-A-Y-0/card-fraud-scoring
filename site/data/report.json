@@ -1,0 +1,1547 @@
+{
+ "data": {
+  "raw_records": 98161,
+  "clean_records": 97805,
+  "cards": 1643,
+  "merchants": 13606,
+  "fraud_records": 2283,
+  "fraud_rate": 0.023342364909769438,
+  "fraud_dollars": 2491407.56,
+  "fraud_cards": 155,
+  "frauds_per_card_median": 8.0,
+  "single_fraud_cards": 51,
+  "top10_card_dollar_share": 0.5763897858606483,
+  "first_day_dollar_share": 0.3940845912822068,
+  "frauds_per_card_hist": {
+   "1": 51,
+   "2": 12,
+   "3": 10,
+   "4": 2,
+   "5": 1,
+   "8": 2,
+   "9": 4,
+   "10": 3,
+   "12": 4,
+   "13": 2,
+   "14": 2,
+   "17": 2,
+   "18": 1,
+   "19": 2,
+   "20": 2,
+   "21": 2,
+   "22": 1,
+   "24": 2,
+   "25": 2,
+   "26": 2,
+   "27": 5,
+   "28": 5,
+   "29": 2,
+   "30": 3,
+   "31": 1,
+   "32": 7,
+   "33": 2,
+   "34": 2,
+   "35": 2,
+   "36": 3,
+   "37": 2,
+   "38": 1,
+   "39": 1,
+   "41": 3,
+   "44": 1,
+   "45": 1,
+   "46": 1,
+   "51": 1,
+   "58": 1,
+   "60": 1,
+   "69": 1
+  }
+ },
+ "dqr": {
+  "records": 98161,
+  "fields": [
+   {
+    "field": "Recnum",
+    "type": "numeric",
+    "populated": 1.0,
+    "unique": 98161,
+    "zeros": 0,
+    "min": 1.0,
+    "max": 98161.0,
+    "mean": 49081.0,
+    "median": 49081.0
+   },
+   {
+    "field": "Cardnum",
+    "type": "categorical",
+    "populated": 1.0,
+    "unique": 1645,
+    "zeros": null,
+    "most_common_share": 0.01214331557339473
+   },
+   {
+    "field": "Date",
+    "type": "date",
+    "populated": 1.0,
+    "unique": 365,
+    "zeros": null,
+    "min": "2010-01-01",
+    "max": "2010-12-31"
+   },
+   {
+    "field": "Merchnum",
+    "type": "categorical",
+    "populated": 0.9652713399415246,
+    "unique": 13091,
+    "zeros": null,
+    "most_common_share": 0.09970238095238096
+   },
+   {
+    "field": "Merch_desc",
+    "type": "categorical",
+    "populated": 1.0,
+    "unique": 13126,
+    "zeros": null,
+    "most_common_share": 0.01743054777355569
+   },
+   {
+    "field": "Merch_state",
+    "type": "categorical",
+    "populated": 0.9877140615926896,
+    "unique": 227,
+    "zeros": null,
+    "most_common_share": 0.1258934557268836
+   },
+   {
+    "field": "Merch_zip",
+    "type": "categorical",
+    "populated": 0.951895355589287,
+    "unique": 4567,
+    "zeros": null,
+    "most_common_share": 0.12880060788321793
+   },
+   {
+    "field": "Transtype",
+    "type": "categorical",
+    "populated": 1.0,
+    "unique": 4,
+    "zeros": null,
+    "most_common_share": 0.9963834924257088
+   },
+   {
+    "field": "Amount",
+    "type": "numeric",
+    "populated": 1.0,
+    "unique": 35452,
+    "zeros": 0,
+    "min": 0.01,
+    "max": 3102045.53,
+    "mean": 424.8198355762472,
+    "median": 137.2
+   },
+   {
+    "field": "Fraud",
+    "type": "numeric",
+    "populated": 1.0,
+    "unique": 2,
+    "zeros": 95878,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.023257709273540407,
+    "median": 0.0
+   }
+  ],
+  "transtype": {
+   "P": 97806,
+   "A": 181,
+   "D": 173,
+   "Y": 1
+  },
+  "months": [
+   {
+    "month": 1,
+    "records": 6955,
+    "fraud": 152,
+    "fraud_rate": 0.021854780733285405
+   },
+   {
+    "month": 2,
+    "records": 7796,
+    "fraud": 56,
+    "fraud_rate": 0.007183170856849667
+   },
+   {
+    "month": 3,
+    "records": 9471,
+    "fraud": 95,
+    "fraud_rate": 0.010030619786717349
+   },
+   {
+    "month": 4,
+    "records": 7796,
+    "fraud": 129,
+    "fraud_rate": 0.01654694715238584
+   },
+   {
+    "month": 5,
+    "records": 9133,
+    "fraud": 275,
+    "fraud_rate": 0.030110587977663417
+   },
+   {
+    "month": 6,
+    "records": 9347,
+    "fraud": 155,
+    "fraud_rate": 0.016582860810955388
+   },
+   {
+    "month": 7,
+    "records": 8528,
+    "fraud": 291,
+    "fraud_rate": 0.03412288930581613
+   },
+   {
+    "month": 8,
+    "records": 11219,
+    "fraud": 380,
+    "fraud_rate": 0.03387111150726446
+   },
+   {
+    "month": 9,
+    "records": 10087,
+    "fraud": 258,
+    "fraud_rate": 0.025577475959155348
+   },
+   {
+    "month": 10,
+    "records": 5185,
+    "fraud": 157,
+    "fraud_rate": 0.030279652844744456
+   },
+   {
+    "month": 11,
+    "records": 5878,
+    "fraud": 132,
+    "fraud_rate": 0.02245661789724396
+   },
+   {
+    "month": 12,
+    "records": 6766,
+    "fraud": 203,
+    "fraud_rate": 0.030002955956251846
+   }
+  ],
+  "amount_hist": {
+   "edges": [
+    0.01,
+    0.01778279410038923,
+    0.03162277660168379,
+    0.05623413251903491,
+    0.1,
+    0.1778279410038923,
+    0.31622776601683794,
+    0.5623413251903491,
+    1.0,
+    1.7782794100389228,
+    3.1622776601683795,
+    5.623413251903491,
+    10.0,
+    17.78279410038923,
+    31.622776601683793,
+    56.23413251903491,
+    100.0,
+    177.82794100389228,
+    316.22776601683796,
+    562.341325190349,
+    1000.0,
+    1778.2794100389228,
+    3162.2776601683795,
+    5623.413251903491,
+    10000.0,
+    17782.794100389227,
+    31622.776601683792,
+    56234.13251903491,
+    100000.0,
+    177827.94100389228,
+    316227.7660168379,
+    562341.3251903491,
+    1000000.0,
+    1778279.410038923,
+    3162277.6601683795,
+    5623413.251903491,
+    10000000.0
+   ],
+   "legit": [
+    3.128976407517887e-05,
+    1.0429921358392958e-05,
+    0.0,
+    1.0429921358392958e-05,
+    3.128976407517887e-05,
+    4.171968543357183e-05,
+    0.00020859842716785916,
+    0.0006257952815035775,
+    0.0015436283610421578,
+    0.004766474060785582,
+    0.10025240409687311,
+    0.03152965226642191,
+    0.042157742130624336,
+    0.06456121320845241,
+    0.0830847535409583,
+    0.10984793174659463,
+    0.1208619287010576,
+    0.13130227998080896,
+    0.11817100899059221,
+    0.08573395356599012,
+    0.05899163520307057,
+    0.04237677047915059,
+    0.002252863013412879,
+    0.0010117023717641168,
+    0.0003441874048269676,
+    0.00022945826988464508,
+    1.0429921358392958e-05,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0429921358392958e-05,
+    0.0,
+    0.0
+   ],
+   "fraud": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0004380201489268506,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0004380201489268506,
+    0.0008760402978537013,
+    0.06482698204117389,
+    0.08147174770039421,
+    0.09286027157249234,
+    0.07577748576434516,
+    0.09154621112571178,
+    0.10468681559351731,
+    0.11344721857205431,
+    0.14410862899693386,
+    0.06351292159439334,
+    0.05825667980727114,
+    0.0718353044240035,
+    0.025843188786684186,
+    0.006132282084975909,
+    0.003942181340341655,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "states_top10": {
+   "TN": 12206,
+   "VA": 7982,
+   "CA": 6919,
+   "IL": 6593,
+   "MD": 5490,
+   "GA": 5115,
+   "PA": 4977,
+   "NJ": 3982,
+   "TX": 3841,
+   "NC": 3366
+  }
+ },
+ "exclusions": [
+  {
+   "rule": "Non-purchase transaction type (A, D, Y)",
+   "records": 355,
+   "fraud_records": 0
+  },
+  {
+   "rule": "Amount above $1,000,000",
+   "records": 1,
+   "fraud_records": 0
+  }
+ ],
+ "imputation": [
+  {
+   "field": "Merchnum",
+   "step": "missing or '0' before imputation",
+   "records": 3291
+  },
+  {
+   "field": "Merchnum",
+   "step": "most common Merchnum for the same description",
+   "records": 1166
+  },
+  {
+   "field": "Merchnum",
+   "step": "new id created from description",
+   "records": 2125
+  },
+  {
+   "field": "Merch_state",
+   "step": "non-US code mapped to FOREIGN",
+   "records": 203
+  },
+  {
+   "field": "Merch_state",
+   "step": "looked up from ZIP",
+   "records": 57
+  },
+  {
+   "field": "Merch_state",
+   "step": "most common state for the same merchant",
+   "records": 661
+  },
+  {
+   "field": "Merch_state",
+   "step": "most common state for the same description",
+   "records": 1
+  },
+  {
+   "field": "Merch_zip",
+   "step": "most common ZIP for the same merchant",
+   "records": 2271
+  },
+  {
+   "field": "Merch_zip",
+   "step": "most common ZIP for the same description",
+   "records": 28
+  },
+  {
+   "field": "Merch_zip",
+   "step": "most populated ZIP in the state",
+   "records": 1598
+  },
+  {
+   "field": "Merch_state",
+   "step": "left as UNK",
+   "records": 312
+  },
+  {
+   "field": "Merch_zip",
+   "step": "left as UNK",
+   "records": 469
+  }
+ ],
+ "variables": {
+  "candidates": 224,
+  "entities": [
+   "card",
+   "merch",
+   "card_merch",
+   "card_zip",
+   "card_state",
+   "merch_zip"
+  ],
+  "windows": [
+   0,
+   1,
+   3,
+   7,
+   14,
+   30
+  ],
+  "final": [
+   {
+    "variable": "card_total_3",
+    "ks": 0.6088399905012172,
+    "psi_oot": 0.0052225179664801636
+   },
+   {
+    "variable": "card_total_1",
+    "ks": 0.6073651949421721,
+    "psi_oot": 0.008923809972837768
+   },
+   {
+    "variable": "card_count_1",
+    "ks": 0.5787915811365443,
+    "psi_oot": 0.010854144358190597
+   },
+   {
+    "variable": "card_count_3",
+    "ks": 0.5730609162256657,
+    "psi_oot": 0.01878932529828396
+   },
+   {
+    "variable": "card_total_0",
+    "ks": 0.5656379383259843,
+    "psi_oot": 0.015746273646913486
+   },
+   {
+    "variable": "card_total_7",
+    "ks": 0.5500499390286125,
+    "psi_oot": 0.007185263042869455
+   },
+   {
+    "variable": "card_count_7",
+    "ks": 0.532506434564615,
+    "psi_oot": 0.029310752981865622
+   },
+   {
+    "variable": "card_count_0",
+    "ks": 0.5235481200586671,
+    "psi_oot": 0.005547760818586775
+   },
+   {
+    "variable": "card_total_14",
+    "ks": 0.5002230922919413,
+    "psi_oot": 0.006663370923987545
+   },
+   {
+    "variable": "card_velocity_1_by_30",
+    "ks": 0.4521485127636959,
+    "psi_oot": 0.04678224416707234
+   },
+   {
+    "variable": "card_count_14",
+    "ks": 0.4479952404369597,
+    "psi_oot": 0.039946973057310126
+   },
+   {
+    "variable": "card_days_since",
+    "ks": 0.4440539106777976,
+    "psi_oot": 0.015052788954120048
+   },
+   {
+    "variable": "card_velocity_1_by_14",
+    "ks": 0.4335375688984503,
+    "psi_oot": 0.03213216527150419
+   },
+   {
+    "variable": "card_max_7",
+    "ks": 0.4182529594693827,
+    "psi_oot": 0.018467891147275924
+   },
+   {
+    "variable": "card_total_30",
+    "ks": 0.39829720235810795,
+    "psi_oot": 0.015813562013684952
+   },
+   {
+    "variable": "card_avg_0",
+    "ks": 0.3595174829634168,
+    "psi_oot": 0.0717295390030383
+   },
+   {
+    "variable": "card_avg_1",
+    "ks": 0.3492968044889964,
+    "psi_oot": 0.055953507938487704
+   },
+   {
+    "variable": "card_count_30",
+    "ks": 0.34156026504264086,
+    "psi_oot": 0.06551665528343836
+   },
+   {
+    "variable": "card_velocity_1_by_7",
+    "ks": 0.3409671779499921,
+    "psi_oot": 0.024562692704804354
+   },
+   {
+    "variable": "card_avg_3",
+    "ks": 0.33758646415637467,
+    "psi_oot": 0.05153999265208118
+   },
+   {
+    "variable": "card_max_14",
+    "ks": 0.33625426770370836,
+    "psi_oot": 0.008740523240578623
+   },
+   {
+    "variable": "card_state_total_3",
+    "ks": 0.3305821877480569,
+    "psi_oot": 0.007614536317011665
+   },
+   {
+    "variable": "card_max_30",
+    "ks": 0.3106824726724168,
+    "psi_oot": 0.011209753815662676
+   },
+   {
+    "variable": "card_state_total_7",
+    "ks": 0.30590667406851874,
+    "psi_oot": 0.0038081734079492657
+   },
+   {
+    "variable": "card_zip_total_14",
+    "ks": 0.3033970080399293,
+    "psi_oot": 0.0018289215628536424
+   },
+   {
+    "variable": "card_state_total_14",
+    "ks": 0.30296480951380556,
+    "psi_oot": 0.0012524403473526751
+   },
+   {
+    "variable": "card_velocity_0_by_30",
+    "ks": 0.30208975176018943,
+    "psi_oot": 0.05132521223675997
+   },
+   {
+    "variable": "card_actual_over_avg_0",
+    "ks": 0.30083315826309986,
+    "psi_oot": 0.015196280140920478
+   },
+   {
+    "variable": "card_state_max_3",
+    "ks": 0.2995881057087762,
+    "psi_oot": 0.03936662759489609
+   },
+   {
+    "variable": "card_state_total_0",
+    "ks": 0.29667391985578123,
+    "psi_oot": 0.019004656089090702
+   },
+   {
+    "variable": "card_zip_total_30",
+    "ks": 0.2961844078342266,
+    "psi_oot": 0.003272164972148367
+   },
+   {
+    "variable": "card_state_max_7",
+    "ks": 0.2914070443567332,
+    "psi_oot": 0.03603728298755385
+   },
+   {
+    "variable": "card_zip_total_3",
+    "ks": 0.2878077372827613,
+    "psi_oot": 0.007581264650899818
+   },
+   {
+    "variable": "card_state_days_since",
+    "ks": 0.28605067764894954,
+    "psi_oot": 0.21240553057662884
+   },
+   {
+    "variable": "card_state_count_1",
+    "ks": 0.28605067764894954,
+    "psi_oot": 0.009693582632443933
+   },
+   {
+    "variable": "card_merch_total_7",
+    "ks": 0.2857242058951135,
+    "psi_oot": 0.003161625900841812
+   },
+   {
+    "variable": "card_state_total_30",
+    "ks": 0.2828465989624106,
+    "psi_oot": 0.0023817946569216746
+   },
+   {
+    "variable": "card_avg_7",
+    "ks": 0.28156447846479643,
+    "psi_oot": 0.03986793431988919
+   },
+   {
+    "variable": "merch_total_3",
+    "ks": 0.27782227887064637,
+    "psi_oot": 0.030984011569357463
+   },
+   {
+    "variable": "card_state_velocity_1_by_30",
+    "ks": 0.2777898077435422,
+    "psi_oot": 0.045278258670850516
+   },
+   {
+    "variable": "card_zip_max_7",
+    "ks": 0.2741650714736453,
+    "psi_oot": 0.033116989726786936
+   },
+   {
+    "variable": "card_state_max_14",
+    "ks": 0.27230991382632325,
+    "psi_oot": 0.03311999516025502
+   },
+   {
+    "variable": "merch_total_1",
+    "ks": 0.2654038332361156,
+    "psi_oot": 0.012412352304863289
+   },
+   {
+    "variable": "card_state_count_3",
+    "ks": 0.26414342535963725,
+    "psi_oot": 0.013255100012671557
+   },
+   {
+    "variable": "merch_total_7",
+    "ks": 0.25808051822353983,
+    "psi_oot": 0.042807134641248426
+   },
+   {
+    "variable": "merch_total_0",
+    "ks": 0.2539321361267892,
+    "psi_oot": 0.004575732072480133
+   },
+   {
+    "variable": "merch_zip_max_3",
+    "ks": 0.25309170120147084,
+    "psi_oot": 0.005538107339402751
+   },
+   {
+    "variable": "card_zip_max_30",
+    "ks": 0.2511498886788046,
+    "psi_oot": 0.02223116966494406
+   },
+   {
+    "variable": "card_avg_14",
+    "ks": 0.25012333160023587,
+    "psi_oot": 0.03677245139644883
+   },
+   {
+    "variable": "merch_zip_max_1",
+    "ks": 0.24768525853863493,
+    "psi_oot": 0.007010926506935104
+   },
+   {
+    "variable": "card_zip_velocity_1_by_30",
+    "ks": 0.24426737899712728,
+    "psi_oot": 0.06361245648513586
+   },
+   {
+    "variable": "merch_zip_max_0",
+    "ks": 0.2439587076804388,
+    "psi_oot": 0.007612771350301916
+   },
+   {
+    "variable": "card_actual_over_avg_1",
+    "ks": 0.24192779516743557,
+    "psi_oot": 0.01466145888503246
+   },
+   {
+    "variable": "merch_actual_over_avg_30",
+    "ks": 0.23754135667498794,
+    "psi_oot": 0.022119496251728453
+   },
+   {
+    "variable": "merch_zip_max_30",
+    "ks": 0.23730153979649604,
+    "psi_oot": 0.02876954174490669
+   },
+   {
+    "variable": "card_merch_avg_30",
+    "ks": 0.23688997804091133,
+    "psi_oot": 0.07087048043835527
+   },
+   {
+    "variable": "card_velocity_0_by_14",
+    "ks": 0.23676077816469276,
+    "psi_oot": 0.03301673003569651
+   },
+   {
+    "variable": "merch_actual_over_avg_14",
+    "ks": 0.2360546289547779,
+    "psi_oot": 0.03318212965662066
+   },
+   {
+    "variable": "card_state_max_30",
+    "ks": 0.2354299509764225,
+    "psi_oot": 0.03329359072013217
+   },
+   {
+    "variable": "card_merch_avg_0",
+    "ks": 0.23212523135678065,
+    "psi_oot": 0.06880382570906306
+   }
+  ]
+ },
+ "split_gap": [
+  {
+   "model": "boosted_trees",
+   "split": "random",
+   "train": 0.949,
+   "test": 0.843,
+   "oot": 0.61,
+   "test_frauds_on_train_fraud_cards": 0.964,
+   "test_sd": 0.016,
+   "oot_sd": 0.011,
+   "test_minus_oot": 0.233
+  },
+  {
+   "model": "boosted_trees",
+   "split": "card_grouped",
+   "train": 0.961,
+   "test": 0.65,
+   "oot": 0.591,
+   "test_frauds_on_train_fraud_cards": 0.0,
+   "test_sd": 0.061,
+   "oot_sd": 0.008,
+   "test_minus_oot": 0.059
+  },
+  {
+   "model": "boosted_trees",
+   "split": "temporal",
+   "train": 0.96,
+   "test": 0.665,
+   "oot": 0.639,
+   "test_frauds_on_train_fraud_cards": 0.157,
+   "test_sd": 0.0,
+   "oot_sd": 0.0,
+   "test_minus_oot": 0.026
+  },
+  {
+   "model": "random_forest",
+   "split": "random",
+   "train": 0.815,
+   "test": 0.756,
+   "oot": 0.519,
+   "test_frauds_on_train_fraud_cards": 0.964,
+   "test_sd": 0.015,
+   "oot_sd": 0.007,
+   "test_minus_oot": 0.237
+  },
+  {
+   "model": "random_forest",
+   "split": "card_grouped",
+   "train": 0.823,
+   "test": 0.647,
+   "oot": 0.531,
+   "test_frauds_on_train_fraud_cards": 0.0,
+   "test_sd": 0.046,
+   "oot_sd": 0.025,
+   "test_minus_oot": 0.116
+  },
+  {
+   "model": "random_forest",
+   "split": "temporal",
+   "train": 0.835,
+   "test": 0.652,
+   "oot": 0.553,
+   "test_frauds_on_train_fraud_cards": 0.157,
+   "test_sd": 0.005,
+   "oot_sd": 0.008,
+   "test_minus_oot": 0.099
+  }
+ ],
+ "tuning": {
+  "configs": 49,
+  "within_one_se": 35,
+  "n_vars": [
+   {
+    "n_vars": 10,
+    "train": 0.8491653361260381,
+    "test": 0.5410195177131776,
+    "test_se": 0.043250439754001,
+    "oot": 0.4686567164179104
+   },
+   {
+    "n_vars": 20,
+    "train": 0.9309487565406324,
+    "test": 0.5472034187420323,
+    "test_se": 0.0488859747870414,
+    "oot": 0.4925373134328358
+   },
+   {
+    "n_vars": 30,
+    "train": 0.9643958773270154,
+    "test": 0.6056398470184763,
+    "test_se": 0.0483213483924225,
+    "oot": 0.5940298507462687
+   },
+   {
+    "n_vars": 40,
+    "train": 0.9795101512142732,
+    "test": 0.6283572441779038,
+    "test_se": 0.0449479181603312,
+    "oot": 0.6388059701492538
+   },
+   {
+    "n_vars": 50,
+    "train": 0.9827287242261404,
+    "test": 0.6441312193632952,
+    "test_se": 0.0432011512781681,
+    "oot": 0.6417910447761194
+   },
+   {
+    "n_vars": 60,
+    "train": 0.9876488631746414,
+    "test": 0.6494586393263067,
+    "test_se": 0.0402941097642709,
+    "oot": 0.6268656716417911
+   }
+  ],
+  "best_by_family": [
+   {
+    "model": "boosted_trees",
+    "train": 0.9957537154989384,
+    "test": 0.6541037473291078,
+    "test_se": 0.0405805658349222,
+    "oot": 0.6447761194029851
+   },
+   {
+    "model": "logistic",
+    "train": 0.663334115443237,
+    "test": 0.5503240981811,
+    "test_se": 0.0449779036060667,
+    "oot": 0.435820895522388
+   },
+   {
+    "model": "random_forest",
+    "train": 0.8784710895935508,
+    "test": 0.6218250049377839,
+    "test_se": 0.0381968596912507,
+    "oot": 0.5880597014925373
+   }
+  ],
+  "final": {
+   "model": "boosted_trees",
+   "params": {
+    "learning_rate": 0.03,
+    "max_iter": 300,
+    "max_leaf_nodes": 31,
+    "min_samples_leaf": 50
+   },
+   "n_vars": 60,
+   "test": 0.6541037473291078,
+   "test_se": 0.04058056583492225,
+   "train": 0.9957537154989384,
+   "configs_within_one_se": 35,
+   "configs_evaluated": 49
+  }
+ },
+ "complexity": [
+  {
+   "param": "max_leaf_nodes",
+   "value": 3,
+   "train": 0.809054066685361,
+   "test": 0.6045607167866698,
+   "test_se": 0.0401078928654137
+  },
+  {
+   "param": "max_leaf_nodes",
+   "value": 7,
+   "train": 0.9129578442761954,
+   "test": 0.6310523764207351,
+   "test_se": 0.040984318157233
+  },
+  {
+   "param": "max_leaf_nodes",
+   "value": 15,
+   "train": 0.9708330233507496,
+   "test": 0.6525021097804033,
+   "test_se": 0.038780714011197
+  },
+  {
+   "param": "max_leaf_nodes",
+   "value": 31,
+   "train": 0.9957537154989384,
+   "test": 0.6541037473291078,
+   "test_se": 0.0405805658349222
+  },
+  {
+   "param": "max_leaf_nodes",
+   "value": 63,
+   "train": 1.0,
+   "test": 0.6479683263605839,
+   "test_se": 0.0412322257328226
+  },
+  {
+   "param": "max_leaf_nodes",
+   "value": 127,
+   "train": 1.0,
+   "test": 0.6430377246691685,
+   "test_se": 0.0394397047738703
+  },
+  {
+   "param": "min_samples_leaf",
+   "value": 800,
+   "train": 0.9904797195086824,
+   "test": 0.649869822060223,
+   "test_se": 0.0381727992881223
+  },
+  {
+   "param": "min_samples_leaf",
+   "value": 400,
+   "train": 0.995046001415428,
+   "test": 0.6521052915088072,
+   "test_se": 0.0382888881821564
+  },
+  {
+   "param": "min_samples_leaf",
+   "value": 200,
+   "train": 0.994692144373673,
+   "test": 0.6462553642288977,
+   "test_se": 0.0382133382161121
+  },
+  {
+   "param": "min_samples_leaf",
+   "value": 100,
+   "train": 0.9964614295824488,
+   "test": 0.6581778679546801,
+   "test_se": 0.0397088600258816
+  },
+  {
+   "param": "min_samples_leaf",
+   "value": 50,
+   "train": 0.9957537154989384,
+   "test": 0.6541037473291078,
+   "test_se": 0.0405805658349222
+  },
+  {
+   "param": "min_samples_leaf",
+   "value": 20,
+   "train": 0.9968152866242038,
+   "test": 0.6502666403318191,
+   "test_se": 0.0403923293365895
+  },
+  {
+   "param": "min_samples_leaf",
+   "value": 5,
+   "train": 0.9961075725406936,
+   "test": 0.6496328084319394,
+   "test_se": 0.0421833049477445
+  }
+ ],
+ "performance": [
+  {
+   "window": "train (Jan 15-Aug 31)",
+   "records": 66537,
+   "frauds": 1413,
+   "fdr@1%": 0.4706298655343241,
+   "fdr@2%": 0.9058740268931352,
+   "fdr@3%": 0.9915074309978767,
+   "fdr@5%": 0.9978768577494692
+  },
+  {
+   "window": "validation (Sep-Oct)",
+   "records": 15192,
+   "frauds": 415,
+   "fdr@1%": 0.3228915662650602,
+   "fdr@2%": 0.5662650602409639,
+   "fdr@3%": 0.6867469879518072,
+   "fdr@5%": 0.8144578313253013
+  },
+  {
+   "window": "out-of-time (Nov-Dec)",
+   "records": 12617,
+   "frauds": 335,
+   "fdr@1%": 0.3134328358208955,
+   "fdr@2%": 0.5044776119402985,
+   "fdr@3%": 0.6447761194029851,
+   "fdr@5%": 0.7343283582089553
+  }
+ ],
+ "value_curve": {
+  "validation": [
+   {
+    "target_alert_rate": 0.0025,
+    "net_value": 56251.034666666674,
+    "alerts": 25,
+    "fraud_dollars_prevented": 70705.46
+   },
+   {
+    "target_alert_rate": 0.005,
+    "net_value": 68257.17866666669,
+    "alerts": 52,
+    "fraud_dollars_prevented": 86313.14000000001
+   },
+   {
+    "target_alert_rate": 0.0075,
+    "net_value": 68083.944,
+    "alerts": 81,
+    "fraud_dollars_prevented": 86523.68000000001
+   },
+   {
+    "target_alert_rate": 0.01,
+    "net_value": 69093.53333333334,
+    "alerts": 101,
+    "fraud_dollars_prevented": 88087.75000000001
+   },
+   {
+    "target_alert_rate": 0.015,
+    "net_value": 78723.54133333334,
+    "alerts": 149,
+    "fraud_dollars_prevented": 101294.01
+   },
+   {
+    "target_alert_rate": 0.02,
+    "net_value": 168827.2826666667,
+    "alerts": 208,
+    "fraud_dollars_prevented": 215057.02
+   },
+   {
+    "target_alert_rate": 0.03,
+    "net_value": 203341.19733333337,
+    "alerts": 320,
+    "fraud_dollars_prevented": 260203.58
+   },
+   {
+    "target_alert_rate": 0.04,
+    "net_value": 201697.86400000003,
+    "alerts": 444,
+    "fraud_dollars_prevented": 260203.58
+   },
+   {
+    "target_alert_rate": 0.05,
+    "net_value": 199979.5306666667,
+    "alerts": 574,
+    "fraud_dollars_prevented": 260203.58
+   },
+   {
+    "target_alert_rate": 0.075,
+    "net_value": 195683.12533333336,
+    "alerts": 917,
+    "fraud_dollars_prevented": 260605.99
+   },
+   {
+    "target_alert_rate": 0.1,
+    "net_value": 192500.36533333335,
+    "alerts": 1268,
+    "fraud_dollars_prevented": 262477.54000000004
+   }
+  ],
+  "oot": [
+   {
+    "target_alert_rate": 0.0025,
+    "net_value": 18381.16,
+    "alerts": 18,
+    "fraud_dollars_prevented": 23401.45
+   },
+   {
+    "target_alert_rate": 0.005,
+    "net_value": 20777.258666666672,
+    "alerts": 34,
+    "fraud_dollars_prevented": 26650.74
+   },
+   {
+    "target_alert_rate": 0.0075,
+    "net_value": 20937.288,
+    "alerts": 48,
+    "fraud_dollars_prevented": 27034.11
+   },
+   {
+    "target_alert_rate": 0.01,
+    "net_value": 21520.610666666667,
+    "alerts": 73,
+    "fraud_dollars_prevented": 28261.179999999997
+   },
+   {
+    "target_alert_rate": 0.015,
+    "net_value": 71677.48,
+    "alerts": 69,
+    "fraud_dollars_prevented": 91059.35
+   },
+   {
+    "target_alert_rate": 0.02,
+    "net_value": 108633.66400000002,
+    "alerts": 90,
+    "fraud_dollars_prevented": 137654.58000000002
+   },
+   {
+    "target_alert_rate": 0.03,
+    "net_value": 113056.80800000002,
+    "alerts": 159,
+    "fraud_dollars_prevented": 144427.26
+   },
+   {
+    "target_alert_rate": 0.04,
+    "net_value": 112255.48,
+    "alerts": 234,
+    "fraud_dollars_prevented": 144638.1
+   },
+   {
+    "target_alert_rate": 0.05,
+    "net_value": 110960.48,
+    "alerts": 333,
+    "fraud_dollars_prevented": 144638.1
+   },
+   {
+    "target_alert_rate": 0.075,
+    "net_value": 110989.46933333333,
+    "alerts": 584,
+    "fraud_dollars_prevented": 148813.91999999998
+   },
+   {
+    "target_alert_rate": 0.1,
+    "net_value": 113615.79466666664,
+    "alerts": 829,
+    "fraud_dollars_prevented": 156173.90999999997
+   }
+  ]
+ },
+ "capacity": [
+  {
+   "capacity_per_day": "2",
+   "chosen_alert_rate": 0.03,
+   "val_net_value": 197998.1440000001,
+   "oot_net_value": 106939.056,
+   "oot_prevented": 135523.82,
+   "oot_unworked": 110.0
+  },
+  {
+   "capacity_per_day": "4",
+   "chosen_alert_rate": 0.03,
+   "val_net_value": 201642.4426666667,
+   "oot_net_value": 109257.05066666668,
+   "oot_prevented": 138944.23,
+   "oot_unworked": 63.0
+  },
+  {
+   "capacity_per_day": "8",
+   "chosen_alert_rate": 0.03,
+   "val_net_value": 200807.4426666667,
+   "oot_net_value": 108928.71733333336,
+   "oot_prevented": 138944.23,
+   "oot_unworked": 32.0
+  },
+  {
+   "capacity_per_day": "16",
+   "chosen_alert_rate": 0.03,
+   "val_net_value": 203343.088,
+   "oot_net_value": 113171.80800000002,
+   "oot_prevented": 144427.26,
+   "oot_unworked": 12.0
+  },
+  {
+   "capacity_per_day": "unlimited",
+   "chosen_alert_rate": 0.03,
+   "val_net_value": 203341.19733333337,
+   "oot_net_value": 113056.80800000002,
+   "oot_prevented": 144427.26,
+   "oot_unworked": 0.0
+  }
+ ],
+ "tornado": [
+  {
+   "assumption": "loss_share",
+   "low": 0.5,
+   "high": 1.0,
+   "default": 0.8,
+   "net_at_low": 69728.63,
+   "net_at_high": 141942.26,
+   "swing": 72213.63,
+   "base": 113056.80800000002
+  },
+  {
+   "assumption": "minutes_per_review",
+   "low": 5.0,
+   "high": 20.0,
+   "default": 10.0,
+   "net_at_low": 113719.30800000002,
+   "net_at_high": 111731.80800000002,
+   "swing": 1987.5,
+   "base": 113056.80800000002
+  },
+  {
+   "assumption": "false_alert_cost",
+   "low": 0.0,
+   "high": 15.0,
+   "default": 5.0,
+   "net_at_low": 113546.80800000002,
+   "net_at_high": 112076.80800000002,
+   "swing": 1470.0,
+   "base": 113056.80800000002
+  },
+  {
+   "assumption": "analyst_cost_per_hour",
+   "low": 35.0,
+   "high": 75.0,
+   "default": 50.0,
+   "net_at_low": 113454.30800000002,
+   "net_at_high": 112394.30800000002,
+   "swing": 1060.0,
+   "base": 113056.80800000002
+  },
+  {
+   "assumption": "declined_purchase_cost",
+   "low": 2.0,
+   "high": 25.0,
+   "default": 10.0,
+   "net_at_low": 113400.80800000002,
+   "net_at_high": 112411.80800000002,
+   "swing": 989.0,
+   "base": 113056.80800000002
+  },
+  {
+   "assumption": "reissue_cost",
+   "low": 10.0,
+   "high": 30.0,
+   "default": 15.0,
+   "net_at_low": 113136.80800000002,
+   "net_at_high": 112816.80800000002,
+   "swing": 320.0,
+   "base": 113056.80800000002
+  },
+  {
+   "assumption": "reissue_lag_days",
+   "low": 3.0,
+   "high": 7.0,
+   "default": 5.0,
+   "net_at_low": 113146.80800000002,
+   "net_at_high": 112996.80800000002,
+   "swing": 150.0,
+   "base": 113056.80800000002
+  }
+ ],
+ "monte_carlo": {
+  "p05": 23995.361453158304,
+  "p50": 101215.854099082,
+  "p95": 239612.85036153084,
+  "prob_negative": 0.0,
+  "draws": 5000,
+  "hist": [
+   97,
+   556,
+   609,
+   343,
+   190,
+   280,
+   424,
+   518,
+   431,
+   244,
+   192,
+   172,
+   195,
+   187,
+   143,
+   84,
+   75,
+   64,
+   57,
+   37,
+   26,
+   13,
+   18,
+   11,
+   5,
+   6,
+   10,
+   7,
+   1,
+   5
+  ],
+  "edges": [
+   5928.605822164023,
+   19540.302450243442,
+   33151.999078322864,
+   46763.695706402286,
+   60375.3923344817,
+   73987.08896256113,
+   87598.78559064055,
+   101210.48221871998,
+   114822.17884679939,
+   128433.8754748788,
+   142045.57210295822,
+   155657.26873103765,
+   169268.96535911705,
+   182880.66198719648,
+   196492.3586152759,
+   210104.0552433553,
+   223715.75187143474,
+   237327.44849951417,
+   250939.14512759357,
+   264550.841755673,
+   278162.53838375246,
+   291774.23501183186,
+   305385.9316399113,
+   318997.6282679907,
+   332609.3248960701,
+   346221.0215241496,
+   359832.718152229,
+   373444.4147803084,
+   387056.11140838783,
+   400667.80803646724,
+   414279.50466454664
+  ]
+ },
+ "delay": {
+  "median_frauds": 3.0,
+  "median_dollars": 503.6700000000001,
+  "total_dollars": 24146.190000000002,
+  "caught_on_first_fraud": 5,
+  "detected": 16,
+  "cards": 16
+ },
+ "monitoring": {
+  "score_psi_oot": 0.04804362657715032
+ },
+ "pilot": {
+  "oot_fraud_cards": 16,
+  "fdr_se_at_oot": 0.08359160724677782,
+  "se_by_cards": {
+   "16": 0.08359160724677782,
+   "32": 0.05910819233447915,
+   "48": 0.048261636945920644,
+   "96": 0.03412613075562371
+  }
+ },
+ "assumptions": {
+  "minutes_per_review": 10.0,
+  "analyst_cost_per_hour": 50.0,
+  "loss_share": 0.8,
+  "reissue_cost": 15.0,
+  "false_alert_cost": 5.0,
+  "declined_purchase_cost": 10.0,
+  "reissue_lag_days": 5
+ },
+ "ranges": {
+  "minutes_per_review": [
+   5.0,
+   20.0
+  ],
+  "analyst_cost_per_hour": [
+   35.0,
+   75.0
+  ],
+  "loss_share": [
+   0.5,
+   1.0
+  ],
+  "reissue_cost": [
+   10.0,
+   30.0
+  ],
+  "false_alert_cost": [
+   0.0,
+   15.0
+  ],
+  "declined_purchase_cost": [
+   2.0,
+   25.0
+  ],
+  "reissue_lag_days": [
+   3,
+   7
+  ]
+ },
+ "alerts": {
+  "total": 100,
+  "true": 16,
+  "bands": [
+   {
+    "name": "urgent",
+    "min_score": 0.7609005814985853,
+    "fraud_rate": 0.8874172185430463
+   },
+   {
+    "name": "review",
+    "min_score": 0.11621441721495837,
+    "fraud_rate": 0.4967105263157895
+   }
+  ],
+  "reason_mix": [
+   {
+    "top_reason": "Card: purchases",
+    "false_alerts": 15,
+    "true_alerts": 5
+   },
+   {
+    "top_reason": "Card: spend",
+    "false_alerts": 31,
+    "true_alerts": 3
+   },
+   {
+    "top_reason": "Card in this ZIP: spend",
+    "false_alerts": 2,
+    "true_alerts": 2
+   },
+   {
+    "top_reason": "Card in this state: days since previous purchase",
+    "false_alerts": 2,
+    "true_alerts": 2
+   },
+   {
+    "top_reason": "Merchant: this purchase vs. average",
+    "false_alerts": 6,
+    "true_alerts": 2
+   },
+   {
+    "top_reason": "Card: largest purchase",
+    "false_alerts": 12,
+    "true_alerts": 1
+   },
+   {
+    "top_reason": "Card: purchases in the last 2 days vs. 30-day pace",
+    "false_alerts": 5,
+    "true_alerts": 1
+   },
+   {
+    "top_reason": "Card in this state: largest purchase",
+    "false_alerts": 1,
+    "true_alerts": 0
+   },
+   {
+    "top_reason": "Card in this state: spend",
+    "false_alerts": 5,
+    "true_alerts": 0
+   },
+   {
+    "top_reason": "Card: this purchase vs. average",
+    "false_alerts": 1,
+    "true_alerts": 0
+   },
+   {
+    "top_reason": "Merchant: spend",
+    "false_alerts": 4,
+    "true_alerts": 0
+   }
+  ],
+  "example": {
+   "id": "A-014",
+   "date": "2010-12-13",
+   "card": "C-09",
+   "amount": 420.0,
+   "score": 0.7456037540356917,
+   "score_pct": 0.010334386519220695,
+   "priority": "review",
+   "band_fraud_rate": 0.4967105263157895,
+   "reasons": [
+    {
+     "variable": "card_count_0",
+     "label": "Card: purchases, same day",
+     "contribution": 0.6061120590608422,
+     "value": 7.0,
+     "typical": 1.0,
+     "value_text": "7",
+     "typical_text": "1",
+     "first_seen": false,
+     "percentile": 0.9441363451913972
+    },
+    {
+     "variable": "card_total_1",
+     "label": "Card: spend, 1-day window",
+     "contribution": 0.6037630537272414,
+     "value": 1178.6799999987707,
+     "typical": 320.32499999925494,
+     "value_text": "$1,180",
+     "typical_text": "$320",
+     "first_seen": false,
+     "percentile": 0.7728181312653111
+    },
+    {
+     "variable": "card_avg_7",
+     "label": "Card: average purchase, 7-day window",
+     "contribution": 0.324822799352685,
+     "value": 149.3849999998929,
+     "typical": 239.99749999959022,
+     "value_text": "$150",
+     "typical_text": "$240",
+     "first_seen": false,
+     "percentile": 0.35371297173001487
+    }
+   ],
+   "context": {
+    "card_count_7": 8.0,
+    "card_total_7": 1200.0,
+    "new_merchant": true
+   },
+   "action": "Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "text": "A-014 \u00b7 2010-12-13 \u00b7 C-09 \u00b7 $420\nScore in the top 1.0% of purchases. In this band, 50% of Sep\u2013Oct alerts were fraud.\nWhy:\n1. Card: purchases, same day: 7 (typical 1; higher than 94% of purchases).\n2. Card: spend, 1-day window: $1,180 (typical $320; higher than 77% of purchases).\n3. Card: average purchase, 7-day window: $150 (typical $240; lower than 65% of purchases).\nContext: 8 purchases on this card in the last 7 days, $1,200 in total; first purchase at this merchant.\nAction: Confirm with the cardholder today; if the purchase is not recognized, block the card.",
+   "outcome": {
+    "fraud": true,
+    "status": "alert_fraud"
+   }
+  }
+ }
+}

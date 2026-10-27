@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stopping the Card</title>
+<meta name="description" content="Model and decision report: a card fraud score validated on unseen months, and what it is worth when confirmed alerts block the card.">
+<link rel="stylesheet" href="assets/tokens.css">
+<style>
+  @page { size: letter; margin: 0; }
+  body { background: #c9cfcb; padding: 32px 0; }
+  .page {
+    width: 8.5in; height: 11in; margin: 0 auto 28px; background: var(--paper); overflow: hidden;
+    padding: 0.45in 0.7in 0.4in; display: flex; flex-direction: column; position: relative;
+    box-shadow: 0 10px 40px rgb(0 0 0 / 0.18);
+  }
+  @media print { body { background: none; padding: 0; } .page { box-shadow: none; margin: 0; break-after: page; } }
+  .running { display: flex; justify-content: space-between; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+  .page > header { margin: 20px 0 8px; }
+  .page .action-title { font-size: 25px; }
+  .lede { font-size: 12.5px; color: var(--ink-2); margin: 8px 0 14px; }
+  .page footer { margin-top: auto; padding-top: 10px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; }
+  h3 { font: 600 13px/1.3 var(--sans); margin: 14px 0 6px; }
+  p, li { font-size: 12px; }
+  p { margin: 0 0 8px; }
+  ul, ol { margin: 0 0 8px; padding-left: 18px; }
+  li { margin-bottom: 4px; }
+  .body .figure-num, p .figure-num, li .figure-num { font-family: var(--sans); font-weight: 600; font-feature-settings: "tnum" 1; }
+  figure { margin: 6px 0 0; }
+  figcaption { display: grid; gap: 5px; margin-bottom: 4px; }
+  figcaption b { font: 600 12px/1.3 var(--sans); }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3in; }
+  .cols-31 { display: grid; grid-template-columns: 1fr 1.6in; gap: 0.3in; }
+  .margin { border-left: 1px solid var(--rule); padding-left: 14px; }
+  .note { margin-bottom: 14px; }
+  .note .figure-num { font-size: 21px; line-height: 1; display: block; margin-bottom: 4px; letter-spacing: -0.02em; }
+  .note p { font-size: 11px; color: var(--ink-2); margin: 0; }
+  table { width: 100%; border-collapse: collapse; margin: 6px 0 4px; font-size: 11px; }
+  th { font: 500 9.5px/1.2 var(--mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-3);
+       text-align: right; padding: 0 0 5px 8px; border-bottom: 1px solid var(--rule-strong); vertical-align: bottom; }
+  td { padding: 4px 0 4px 8px; border-bottom: 1px solid var(--rule); text-align: right; font-family: var(--mono); vertical-align: top; }
+  th:first-child, td:first-child { text-align: left; padding-left: 0; }
+  td.t { font-family: var(--sans); text-align: left; }
+  td code { white-space: nowrap; }
+  tr.hi td { font-weight: 600; }
+  .facts { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid var(--ink); margin: 6px 0 14px; }
+  .facts div { padding: 10px 12px 0 0; }
+  .facts div + div { padding-left: 12px; border-left: 1px solid var(--rule); }
+  .facts .figure-num { font-size: 22px; display: block; letter-spacing: -0.02em; }
+  .facts p { font-size: 11px; color: var(--ink-2); margin: 4px 0 0; }
+  .callout { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 12px 16px; margin: 10px 0; }
+  .callout .kicker { display: block; margin-bottom: 6px; }
+
+  /* Cover */
+  .cover { padding-top: 0.8in; }
+  .cover h1 { font: 600 52px/1.04 var(--serif); letter-spacing: -0.02em; margin: 18px 0 16px; }
+  .cover .sub { font-size: 16px; color: var(--ink-2); max-width: 5.6in; }
+  .cover .by { margin: 22px 0 28px; font-size: 13px; }
+  .toc { columns: 2; column-gap: 0.4in; margin-top: 18px; }
+  .toc div { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; padding: 5px 0; border-bottom: 1px solid var(--rule); break-inside: avoid; }
+  .toc span:last-child { font-family: var(--mono); color: var(--ink-3); }
+
+  /* Memo */
+  .memo-head { display: grid; grid-template-columns: 60px 1fr; gap: 4px 12px; font-size: 12px; margin: 16px 0 14px; padding-bottom: 12px; border-bottom: 2px solid var(--ink); }
+  .memo-head span:nth-child(odd) { font: 500 10px/1.8 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+  .rec { font: 600 17px/1.35 var(--serif); margin: 0 0 12px; }
+  ol.findings { padding-left: 0; list-style: none; counter-reset: f; }
+  ol.findings li { counter-increment: f; display: grid; grid-template-columns: 22px 1fr; margin-bottom: 9px; }
+  ol.findings li::before { content: counter(f); font: 500 12px/1.5 var(--mono); color: var(--ink-3); }
+  ol.findings b { font-weight: 600; }
+
+  .matrix td, .matrix th { text-align: center; }
+  .brief-card { padding: 14px 16px; }
+  .brief-card .bh { font: 600 15px/1.3 var(--serif); margin: 6px 0 2px; }
+  .brief-card .bs { font-size: 11px; color: var(--ink-2); margin-bottom: 8px; }
+  .brief-card ol { margin: 4px 0 6px; padding-left: 18px; }
+  .brief-card li { font-size: 11.5px; margin-bottom: 3px; }
+  .brief-card .act { font-size: 11.5px; margin: 6px 0 0; }
+  .pill { font: 500 9px/1 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 5px; border-radius: 3px; }
+  .pill.urgent { background: var(--lost-wash); color: var(--lost); }
+  .pill.review { border: 1px solid var(--rule-strong); color: var(--ink-2); }
+  .matrix td:first-child, .matrix th:first-child { text-align: left; }
+  .matrix td { font-family: var(--sans); color: var(--ink-2); }
+</style>
+</head>
+<body>
+
+<!-- 1 · Cover -->
+<article class="page cover">
+  <span class="kicker">Model &amp; decision report · October 2026</span>
+  <h1>Stopping the card,<br>not the transaction</h1>
+  <p class="sub">A fraud score for a corporate purchase-card program: how well it holds up on months it never saw, and what it is worth when a confirmed alert blocks the card.</p>
+  <p class="by"><b>Jay Yu</b> · UCLA Anderson, MS in Business Analytics</p>
+  <figure>
+    <figcaption><b>The ten largest card compromises in the out-of-time window, Nov–Dec 2010</b>
+      <span class="legend"><span><i style="background:var(--lost)"></i>lost</span><span><i style="background:var(--stopped)"></i>stopped by blocking the card</span><span><i style="background:var(--ink);width:2px;height:12px"></i>card blocked</span></span></figcaption>
+    <div id="cover-burst"></div>
+  </figure>
+  <div class="toc">
+    <div><span>Executive summary</span><span data-toc="p-exec"></span></div>
+    <div><span>1 · Where the fraud is</span><span data-toc="p-1"></span></div>
+    <div><span>2 · Data and cleaning</span><span data-toc="p-2"></span></div>
+    <div><span>3 · Point-in-time variables</span><span data-toc="p-3"></span></div>
+    <div><span>4 · How much to trust the number</span><span data-toc="p-4"></span></div>
+    <div><span>5 · Model selection and performance</span><span data-toc="p-5"></span></div>
+    <div><span>6 · Card-stop value and alert briefs</span><span data-toc="p-6"></span></div>
+    <div><span>7 · Cutoff, staffing and uncertainty</span><span data-toc="p-7"></span></div>
+    <div><span>8 · Rollout and monitoring</span><span data-toc="p-8"></span></div>
+    <div><span>9 · Limitations and next steps</span><span data-toc="p-9"></span></div>
+    <div><span>A · Data quality report</span><span data-toc="p-a"></span></div>
+    <div><span>B · Assumptions and reproducibility</span><span data-toc="p-b"></span></div>
+  </div>
+  <footer><span class="source">Every figure in this report is generated by the fraudscore pipeline; see Appendix B.</span><span class="source"></span></footer>
+</article>
+
+<!-- 2 · Executive summary -->
+<article class="page" id="p-exec">
+  <div class="running"><span class="kicker">Stopping the card · Model &amp; decision report</span><span class="kicker">Executive summary</span></div>
+  <div class="memo-head">
+    <span>To</span><span>Head of fraud operations, purchase-card program</span>
+    <span>From</span><span>Jay Yu</span>
+    <span>Re</span><span>Whether to deploy a transaction fraud score, and how to run it</span>
+  </div>
+  <p class="rec">Recommendation: deploy the score with a 3% review budget, block a card the same day its alert is confirmed, and run a 60-day shadow pilot before switching on real-time declines.</p>
+  <ol class="findings">
+    <li><span><b>It finds fraud on months it never saw.</b> On Nov–Dec 2010, held out from every modeling choice, the top 3% of scores contain
+      <span class="figure-num" data-v="head.oot_fdr_at_3|pct1"></span> of fraud transactions (Sep–Oct validation: <span class="figure-num" data-v="perf.val.fdr@3%|pct1"></span>).
+      Optimized the same way, it is worth about twice the best single-variable rule:
+      <span class="figure-num" data-v="head.oot.net_value|usdK"></span> against <span class="figure-num" data-v="head.rule_baseline.oot_net_value|usdK"></span> net over two months.</span></li>
+    <li><span><b>The value is in blocking the card, and speed decides it.</b> Fraud arrives in runs on a compromised card;
+      <span class="figure-num" data-v="R.data.first_day_dollar_share|pct0"></span> of 2010 fraud dollars fell on a card's first fraud day.
+      With the same alerts, blocking the next day stops <span class="figure-num" data-v="pol.oot.next_day_block.prevented_share|pct0"></span> of out-of-time fraud dollars,
+      the same day <span class="figure-num" data-v="pol.oot.same_day_block.prevented_share|pct0"></span>, and declining in real time
+      <span class="figure-num" data-v="pol.oot.realtime_decline.prevented_share|pct0"></span>.</span></li>
+    <li><span><b>It costs little to run.</b> At this program's volume the score raises
+      <span class="figure-num" data-v="calc.same_per_day|num1"></span>–<span class="figure-num" data-v="calc.next_per_day|num1"></span> alerts a day,
+      under a tenth of one analyst. Review, card reissue and customer friction together cost
+      <span class="figure-num" data-v="calc.cost_share|pct0"></span> of the fraud dollars saved.</span></li>
+    <li><span><b>The headline number is honest.</b> The usual random train/test split would have reported
+      <span class="figure-num" data-v="gap.own.random.test|pct0"></span> detection for a model that delivers
+      <span class="figure-num" data-v="gap.own.random.oot|pct0"></span> on later months. Every choice here was made on earlier data only.</span></li>
+  </ol>
+  <div class="cols">
+    <div>
+      <h3>Value and uncertainty</h3>
+      <p>Over the two out-of-time months the next-day policy nets <span class="figure-num" data-v="head.oot.net_value|usd"></span> at the agreed cost assumptions.
+        Resampling the compromised cards and every assumption gives a 90% range of
+        <span class="figure-num" data-v="R.monte_carlo.p05|usdK"></span>–<span class="figure-num" data-v="R.monte_carlo.p95|usdK"></span>, never below zero.
+        The range is wide because only <span class="figure-num" data-v="R.pilot.oot_fraud_cards|int"></span> cards were compromised in that window and ten cards hold
+        <span class="figure-num" data-v="R.data.top10_card_dollar_share|pct0"></span> of all fraud dollars.</p>
+    </div>
+    <div>
+      <h3>Decision requested</h3>
+      <p>Approve a 60-day shadow pilot: score live purchases, work alerts the same day, and log what a block would have stopped. Go live if the top 3% of scores catch at least 45% of fraud, the lower edge of what a 60-day sample can confirm (§8).</p>
+      <h3>What it rests on</h3>
+      <p>One program's 2010 transactions, fraud labels assumed complete, and cost inputs that are placeholders for the program's own figures (Appendix B).</p>
+    </div>
+  </div>
+  <footer><span class="source">Out-of-time window: Nov 1 – Dec 31 2010 · model trained Jan 15 – Aug 31 · cutoff set on Sep – Oct</span><span class="source pnum"></span></footer>
+</article>
+
+<!-- 3 · Where the fraud is -->
+<article class="page" id="p-1">
+  <div class="running"><span class="kicker">Stopping the card · Model &amp; decision report</span><span class="kicker">1 · Where the fraud is</span></div>
+  <header><h1 class="action-title">Fraud is rare by transaction but concentrated by card: <span class="mark-lost" data-v="R.data.fraud_cards|int"></span> cards carry all <span data-v="R.data.fraud_records|int"></span> fraud records.</h1></header>
+  <div class="facts">
+    <div><span class="figure-num" data-v="R.data.clean_records|int"></span><p>purchases on <span data-v="R.data.cards|int"></span> cards in 2010</p></div>
+    <div><span class="figure-num" data-v="R.data.fraud_rate|pct1"></span><p>of purchases are fraud</p></div>
+    <div><span class="figure-num" data-v="R.data.fraud_dollars|usdK"></span><p>of fraud over the year</p></div>
+    <div><span class="figure-num" data-v="R.data.frauds_per_card_median|int"></span><p>frauds on the median compromised card</p></div>
+  </div>
+  <figure>
+    <figcaption><b>Figure 1.1 · Compromised cards by number of fraud transactions on the card, 2010</b></figcaption>
+    <div id="fig-per-card"></div>
+    <p class="source">Count of the <span data-v="R.data.fraud_cards|int"></span> cards with at least one fraud record.</p>
+  </figure>
+  <div class="cols" style="margin-top:10px">
+    <div>
+      <h3>What the shape means</h3>
+      <p>A third of compromised cards (<span class="figure-num" data-v="R.data.single_fraud_cards|int"></span>) show a single fraud; the rest run for weeks, up to 69 transactions on one card. The ten costliest cards account for <span class="figure-num" data-v="R.data.top10_card_dollar_share|pct0"></span> of fraud dollars, and <span class="figure-num" data-v="R.data.first_day_dollar_share|pct0"></span> of fraud dollars land on a card's first fraud day.</p>
+    </div>
+    <div>
+      <h3>Three design choices follow</h3>
+      <ol>
+        <li><b>Describe the card's recent behavior,</b> not the transaction alone: counts, spend and bursts over the last 0–30 days (§3).</li>
+        <li><b>Test on later months,</b> because a random split puts the same card's burst on both sides (§4).</li>
+        <li><b>Value an alert by the run it ends,</b> not the dollars it flags, and act fast (§6).</li>
+      </ol>
+    </div>
+  </div>
+  <footer><span class="source">Source: card transactions 2010, after exclusions (§2)</span><span class="source pnum"></span></footer>
+</article>
+
+<!-- 4 · Data and cleaning -->
+<article class="page" id="p-2">
+  <div class="running"><span class="kicker">Stopping the card · Model &amp; decision report</span><span class="kicker">2 · Data and cleaning</span></div>
+  <header><h1 class="action-title">Two exclusions and three imputations make the file usable, and none of them looks at the fraud label.</h1>
+    <p class="lede">The raw file has <span data-v="R.data.raw_records|int"></span> records and ten fields: card, date, merchant number, description, state and ZIP, transaction type, amount and the fraud label. The full profile is in Appendix A.</p></header>
+  <h3>Exclusions</h3>
+  <table id="t-excl"><thead><tr><th>Rule</th><th>Records removed</th><th>Of which fraud</th></tr></thead><tbody></tbody></table>
+  <p class="source">Only purchases (type P) are scored. The single $3.1M record is a data error, about 65 times the next largest amount ($47,900).</p>
+  <h3 style="margin-top:16px">Imputation, most specific source first</h3>
+  <table id="t-imp"><thead><tr><th>Field</th><th>Step</th><th>Records</th></tr></thead><tbody></tbody></table>
+  <div class="cols" style="margin-top:12px">
+    <div>
+      <h3>Why this order</h3>
+      <p>A missing merchant number is usually recoverable from its description, which is the same merchant. State comes from the ZIP when present, otherwise from the merchant's other records. ZIP comes from the merchant first and the state's most populated ZIP last, the weakest guess. Merchants that never had a number get a new one built from their description so they still group correctly.</p>
+    </div>
+    <div>
+      <h3>Why it is safe</h3>
+      <p>Cleaning uses identity and location fields only. Nothing here reads the fraud label, so using the whole file to resolve merchants cannot leak the outcome into the model. Statistics that do use the label, such as variable ranking, are computed on training rows only (§3–§5).</p>
+    </div>
+  </div>
+  <footer><span class="source">Source: fraudscore run · artifacts/exclusions.csv, imputation_log.csv</span><span class="source pnum"></span></footer>
+</article>
+
+<!-- 5 · Variables -->
+<article class="page" id="p-3">
+  <div class="running"><span class="kicker">Stopping the card · Model &amp; decision report</span><span class="kicker">3 · Point-in-time variables</span></div>
+  <header><h1 class="action-title"><span data-v="R.variables.candidates|int"></span> variables describe how each card, merchant and pairing behaved over the last 0–30 days, using only earlier records.</h1></header>
+  <table class="matrix">
+    <thead><tr><th>Entity</th><th>Count</th><th>Total $</th><th>Average $</th><th>Largest $</th><th>This $ ÷ average</th><th>Days since last</th><th>Burst ratio</th></tr></thead>
+    <tbody id="t-matrix"></tbody>
+  </table>
+  <p class="source">Each statistic is computed for windows of 0, 1, 3, 7, 14 and 30 days. Burst ratio = transactions in the last 0–1 days ÷ the daily rate over 7, 14 or 30 days. Plus the amount itself and a round-dollar flag.</p>
+  <div class="cols-31" style="margin-top:12px">
+    <div>
+      <h3>The rule that keeps them honest</h3>
+      <p>A variable for a purchase may use that purchase and anything before it, never after. Same-day records count only if their record number is lower. A unit test rebuilds the table from a truncated file and checks that no earlier value changes.</p>
+      <h3>Strongest variables in the final model</h3>
+      <table id="t-vars"><thead><tr><th>Variable</th><th>Meaning</th><th>KS</th></tr></thead><tbody></tbody></table>
+      <p class="source">A w-day window covers the purchase's day plus the previous w days. KS = largest gap between the fraud and non-fraud distributions, on Jan 15 – Aug 31 training rows. Top 10 of the <span data-v="R.tuning.final.n_vars|int"></span> selected.</p>
+    </div>
+    <aside class="margin">
+      <div class="note"><span class="figure-num" data-v="calc.card_top|int"></span><p>of the ten strongest variables describe the card itself: its recent count and spend.</p></div>
+      <div class="note"><span class="figure-num" data-v="R.tuning.final.n_vars|int"></span><p>variables kept, ranked by KS on training rows only, with near-duplicates (rank correlation &gt; 0.95) removed.</p></div>
+      <div class="note"><span class="figure-num">0</span><p>variables use the fraud label of any other record.</p></div>
+    </aside>
+  </div>
+  <footer><span class="source">Source: fraudscore.features, fraudscore.models.ks_filter</span><span class="source pnum"></span></footer>
+</article>
+
+<!-- 6 · Validation audit -->
+<article class="page" id="p-4">
+  <div class="running"><span class="kicker">Stopping the card · Model &amp; decision report</span><span class="kicker">4 · How much to trust the number</span></div>
+  <header><h1 class="action-title">A random test split overstates detection by <span class="mark-lost" data-v="calc.rand_gap_pts|pts"></span>; testing on later months lands within <span data-v="calc.temp_gap_pts|pts"></span> of reality.</h1>
+    <p class="lede">The same model was trained three ways and scored on its own test set and on the shared out-of-time window. A split is trustworthy if its test number predicts the out-of-time one.</p></header>
+  <figure>
+    <figcaption><b>Figure 4.1 · Detection rate in the top 3% of scores (FDR@3%), test set vs out-of-time, mean of 5 seeds</b>
+      <span class="legend"><span><svg width="12" height="12"><circle cx="6" cy="6" r="4.5" fill="none" stroke="var(--ink)" stroke-width="2"/></svg>test set claimed</span><span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="var(--ink)"/></svg>out-of-time, Nov–Dec</span></span></figcaption>
+    <div id="fig-dumbbell"></div>
+  </figure>
+  <table id="t-gap"><thead><tr><th>Model</th><th>Split</th><th>Test</th><th>Out-of-time</th><th>Test − OOT</th><th>Test frauds on cards with fraud in training</th></tr></thead><tbody></tbody></table>
+  <div class="cols" style="margin-top:8px">
+    <div><h3>Why the random split flatters</h3>
+      <p>Under a random split, <span class="figure-num" data-v="gap.own.random.test_frauds_on_train_fraud_cards|pct0"></span> of test frauds sit on a card whose other frauds are in training. The model recognizes the burst it has already seen, which says nothing about the next compromised card.</p></div>
+    <div><h3>What this report does instead</h3>
+      <p>Hyperparameters are chosen on later months (§5), the cutoff on Sep–Oct (§7), and every headline number is out-of-time. A random forest on the same variables, shown for comparison, is also most overstated by the random split.</p></div>
+  </div>
+  <footer><span class="source">Source: fraudscore run · boosted trees and random forest on the same 40 KS-filtered variables</span><span class="source pnum"></span></footer>
+</article>
+
+<!-- 7 · Model selection -->
+<article class="page" id="p-5">
+  <div class="running"><span class="kicker">Stopping the card · Model &amp; decision report</span><span class="kicker">5 · Model selection</span></div>
+  <header><h1 class="action-title">Boosted trees rank best, but the test windows cannot separate close settings, and tighter regularization does not help.</h1>
+    <p class="lede">Each setting was trained on Jan 15 – Jun 30 and tested on Jul – Aug, then trained on Jan 15 – Aug 31 and tested on Sep – Oct. The pick is the best mean test score. Nov–Dec was recorded but never used to choose.</p></header>
+  <table id="t-family"><thead><tr><th>Model family</th><th>Train</th><th>Test (mean of 2 folds)</th><th>± 1 SE</th><th>Out-of-time</th></tr></thead><tbody></tbody></table>
+  <p class="source">Best setting per family, FDR@3%. SE from resampling compromised cards in the test windows.</p>
+  <div class="cols" style="margin-top:8px">
+    <figure>
+      <figcaption><b>Figure 5.1 · More variables help</b><span class="legend"><span><i style="background:var(--stopped);height:2px;width:14px"></i>test</span><span><i style="background:var(--ink-3);height:2px;width:14px"></i>out-of-time</span></span></figcaption>
+      <div id="fig-nvars"></div>
+      <p class="source">FDR@3% by number of variables kept.</p>
+    </figure>
+    <figure>
+      <figcaption><b>Figure 5.2 · Bigger trees memorize, test stays flat</b><span class="legend"><span><i style="background:var(--ink-3);height:2px;width:14px"></i>train</span><span><i style="background:var(--stopped);height:2px;width:14px"></i>test</span></span></figcaption>
+      <div id="fig-complex"></div>
+      <p class="source">FDR@3% by leaves per tree, other settings fixed.</p>
+    </figure>
+  </div>
+  <div class="cols" style="margin-top:6px">
+    <div><h3>Noise sets the limit</h3>
+      <p><span class="figure-num" data-v="R.tuning.within_one_se|int"></span> of <span class="figure-num" data-v="R.tuning.configs|int"></span> settings are within one standard error of the best. Each test window has about 45–50 compromised cards, so a 2-point difference is not evidence. The report treats the choice as "one good boosted model", not "the best one".</p></div>
+    <div><h3>Overfitting, read correctly</h3>
+      <p>Training detection near 100% looks alarming, but cutting trees to 3 leaves lowers it to 81% without raising test detection, and test falls below 7 leaves. The model memorizes training bursts without hurting its ranking of new cards. What does lower the number is time: Sep–Oct 69%, Nov–Dec 64%.</p></div>
+  </div>
+  <footer><span class="source">Source: fraudscore tune · 49 settings across boosted trees, random forest and logistic regression</span><span class="source pnum"></span></footer>
+</article>
+
+<!-- 8 · Final performance -->
+<article class="page">
+  <div class="running"><span class="kicker">Stopping the card · Model &amp; decision report</span><span class="kicker">5 · Final model performance</span></div>
+  <header><h1 class="action-title">On Nov–Dec the model finds <span class="mark-stopped" data-v="head.oot_fdr_at_3|pct1"></span> of fraud in the top 3% of scores and <span data-v="perf.oot.fdr@5%|pct0"></span> in the top 5%.</h1></header>
+  <div class="cols">
+    <figure>
+      <figcaption><b>Figure 5.3 · Share of fraud found by review budget</b>
+        <span class="legend"><span><i style="background:var(--ink-3);height:2px;width:14px"></i>train</span><span><i style="background:var(--context);height:2px;width:14px"></i>validation</span><span><i style="background:var(--stopped);height:2px;width:14px"></i>out-of-time</span></span></figcaption>
+      <div id="fig-budget"></div>
+    </figure>
+    <div>
+      <table id="t-perf"><thead><tr><th>Window</th><th>Frauds</th><th>1%</th><th>2%</th><th>3%</th><th>5%</th></tr></thead><tbody></tbody></table>
+      <p class="source">FDR at each review budget. Training rows are scored in-sample.</p>
+      <h3>Final model</h3>
+      <table><tbody id="t-params"></tbody></table>
+    </div>
+  </div>
+  <div class="cols-31" style="margin-top:12px">
+    <div>
+      <h3>Against a rule an analyst could write</h3>
+      <p>The strongest single variable, a card's spend over the last 3 days, used as a rule and tuned the same way, stops <span class="figure-num" data-v="head.rule_baseline.oot_prevented|usdK"></span> of out-of-time fraud and nets <span class="figure-num" data-v="head.rule_baseline.oot_net_value|usdK"></span>. The model stops <span class="figure-num" data-v="head.oot.fraud_dollars_prevented|usdK"></span> and nets <span class="figure-num" data-v="head.oot.net_value|usdK"></span> with the same next-day policy. The rule settles on a <span class="figure-num" data-v="head.rule_baseline.alert_rate|pct0"></span> budget and <span class="figure-num" data-v="head.rule_baseline.oot_alerts|int"></span> alerts; the model works <span class="figure-num" data-v="head.oot.alerts|int"></span> alerts and stops nearly twice the dollars, a trade worth making when an alert costs about $8 to review.</p>
+      <h3>Stability</h3>
+      <p>The score's distribution barely moved between training and Nov–Dec (population stability index <span class="figure-num" data-v="R.monitoring.score_psi_oot|num3"></span>; below 0.1 is stable). The drop from validation to out-of-time comes from which cards were compromised, not from a shifted population.</p>
+    </div>
+    <aside class="margin">
+      <div class="note"><span class="figure-num" data-v="calc.model_vs_rule|x"></span><p>net value of the model versus the best single-variable rule, Nov–Dec.</p></div>
+      <div class="note"><span class="figure-num" data-v="perf.val.fdr@3%|pct1"></span><p>validation FDR@3% (Sep–Oct), the number the cutoff was set on.</p></div>
+    </aside>
+  </div>
+  <footer><span class="source">Source: fraudscore decide · artifacts/final_model_performance.csv</span><span class="source pnum"></span></footer>
+</article>
+
+<!-- 9 · Card-stop value -->
+<article class="page" id="p-6">
+  <div class="running"><span class="kicker">Stopping the card · Model &amp; decision report</span><span class="kicker">6 · Card-stop value</span></div>
+  <header><h1 class="action-title">Blocking the card on its first confirmed alert stopped <span class="mark-stopped" data-v="pol.oot.next_day_block.prevented_share|pct0"></span> of out-of-time fraud dollars. Acting the same day would have stopped <span class="mark-stopped" data-v="pol.oot.same_day_block.prevented_share|pct0"></span>.</h1>
+    <p class="lede">A confirmed alert is worth the rest of the run, not just the purchase it flags. Replay of Nov–Dec 2010 with the cutoff fixed on Sep–Oct; every alert worked, card blocked the next day.</p></header>
+  <figure>
+    <figcaption><b>Figure 6.1 · Every compromised card in the out-of-time window, Nov 1 – Dec 31</b>
+      <span class="legend"><span><i style="background:var(--lost)"></i>lost</span><span><i style="background:var(--stopped)"></i>stopped</span><span><i style="background:var(--ink);width:2px;height:12px"></i>card blocked</span></span></figcaption>
+    <div id="fig-burst"></div>
+    <p class="source">Bar height ∝ √(daily fraud $); cards renumbered by fraud dollars.</p>
+  </figure>
+  <div class="cols-31" style="margin-top:10px">
+    <div>
+      <h3>The first day decides most of the outcome</h3>
+      <p>Card 01 was flagged on its first fraud day; blocking it the next morning stopped <span class="figure-num" data-v="burst.0.stopped|usd"></span> while <span class="figure-num" data-v="burst.0.lost|usd"></span> was lost. Card 02 was also flagged on its first fraud day, but <span class="figure-num" data-v="burst.1.lost|usd"></span> went through that same day, beyond the reach of a next-day block.</p>
+      <table id="t-policy"><thead><tr><th>Policy, same cutoff</th><th>Stopped</th><th>Share</th><th>Sep–Oct</th><th>Alerts</th><th>Good declined</th></tr></thead><tbody></tbody></table>
+      <p class="source">Good declined: legitimate purchases on a blocked card within the 5-day reissue lag, plus false real-time declines.</p>
+    </div>
+    <aside class="margin">
+      <div class="note"><span class="figure-num" data-v="R.data.first_day_dollar_share|pct0"></span><p>of all 2010 fraud dollars fell on a card's first fraud day.</p></div>
+      <div class="note"><span class="figure-num"><span data-v="R.delay.detected|int"></span> / <span data-v="R.delay.cards|int"></span></span><p>compromised cards in Nov–Dec were detected.</p></div>
+      <div class="note"><span class="figure-num"><span data-v="R.delay.median_frauds|int"></span> · <span data-v="R.delay.median_dollars|usd"></span></span><p>median frauds, and dollars, that got through before a card's first alert.</p></div>
+    </aside>
+  </div>
+  <footer><span class="source">Source: fraudscore decide · fraudscore.value.replay</span><span class="source pnum"></span></footer>
+</article>
+
+<!-- 9b · Alert briefs -->
+<article class="page" id="p-6b">
+  <div class="running"><span class="kicker">Stopping the card · Model &amp; decision report</span><span class="kicker">6 · What an analyst sees</span></div>
+  <header><h1 class="action-title">Every alert arrives with measured reasons and a calibrated fraud rate, so an analyst can confirm or clear it in minutes.</h1>
+    <p class="lede">A score alone tells an analyst where to look, not what to check. Each alert gets a brief: the reasons it fired, how often alerts in its score band were fraud, the card's recent activity, and the action.</p></header>
+  <div class="cols-31">
+    <div>
+      <div class="callout brief-card" id="example-brief"></div>
+      <p class="source">An actual out-of-time alert from the published sample. Card relabeled, dollar amounts rounded to $10.</p>
+      <h3>How reasons are measured</h3>
+      <p>Each variable is reset to its typical value, the median of non-fraud training purchases, and the drop in the score is that variable's contribution. Windows of the same statistic are grouped so a brief never lists "spend over 1 day" and "spend over 3 days" as two reasons. The method needs only the model's predictions, so it works for any model the program swaps in later.</p>
+      <h3>Optional written summary</h3>
+      <p>An LLM can rewrite a brief as two sentences (<code>fraudscore briefs --llm</code>, Claude Opus 5.5). It is kept only if every number in it appears in the brief; otherwise the template text is used. The guard is unit-tested with a stand-in client, so the pipeline never depends on the API.</p>
+    </div>
+    <aside class="margin">
+      <div class="note"><span class="figure-num" data-v="R.alerts.bands.0.fraud_rate|pct0"></span><p>of Sep–Oct alerts in the urgent band (top 1% of scores) were fraud: call now.</p></div>
+      <div class="note"><span class="figure-num" data-v="R.alerts.bands.1.fraud_rate|pct0"></span><p>in the review band (1–3%): confirm today.</p></div>
+      <div class="note"><span class="figure-num"><span data-v="R.alerts.true|int"></span> / <span data-v="R.alerts.total|int"></span></span><p>Nov–Dec alerts worked under same-day blocking were fraud; each one ended a card's run.</p></div>
+    </aside>
+  </div>
+  <h3 style="margin-top:6px">Top reason by outcome, every Nov–Dec alert</h3>
+  <table id="t-mix"><thead><tr><th>Top reason</th><th>True alerts</th><th>False alerts</th></tr></thead><tbody></tbody></table>
+  <footer><span class="source">Source: fraudscore export · fraudscore.explain</span><span class="source pnum"></span></footer>
+</article>
+
+<!-- 10 · Cutoff and staffing -->
+<article class="page" id="p-7">
+  <div class="running"><span class="kicker">Stopping the card · Model &amp; decision report</span><span class="kicker">7 · Cutoff and staffing</span></div>
+  <header><h1 class="action-title">Net value stops rising at a 3% review budget, which at this volume is <span class="mark-stopped" data-v="calc.next_minutes|int"></span> minutes of analyst time a day.</h1>
+    <p class="lede">Net value = loss share × fraud dollars stopped − review time − card reissue − clearing false alerts − declined good purchases. The budget is chosen on Sep–Oct and applied unchanged to Nov–Dec.</p></header>
+  <figure>
+    <figcaption><b>Figure 7.1 · Net value by review budget, next-day blocking</b>
+      <span class="legend"><span><i style="background:var(--context);height:2px;width:14px"></i>Sep–Oct (chosen on)</span><span><i style="background:var(--stopped);height:2px;width:14px"></i>Nov–Dec (out-of-time)</span></span></figcaption>
+    <div id="fig-value"></div>
+    <p class="source">Each window is two months. Steps appear where a large card gets caught earlier.</p>
+  </figure>
+  <div class="cols" style="margin-top:8px">
+    <div>
+      <h3>Why the curve is flat past 3%</h3>
+      <p>Below 3% the score misses the early purchases of big runs, and value climbs in steps as each large card is caught earlier. Past 3% extra alerts are mostly false: going from 3% to 10% raises Nov–Dec alerts from <span class="figure-num" data-v="calc.alerts3|int"></span> to <span class="figure-num" data-v="calc.alerts10|int"></span> but fraud stopped only from <span class="figure-num" data-v="calc.stop3|usdK"></span> to <span class="figure-num" data-v="calc.stop10|usdK"></span>. Review costs are small (<span class="figure-num" data-v="calc.cost_share|pct0"></span> of savings), so the budget is set by where value stops rising, not by analyst cost.</p>
+    </div>
+    <div>
+      <h3>If analyst time is capped</h3>
+      <table id="t-capacity"><thead><tr><th>Alerts worked per day</th><th>Nov–Dec net value</th><th>Unworked alerts</th></tr></thead><tbody></tbody></table>
+      <p class="source">First come, first served; the budget re-chosen on Sep–Oct for each cap.</p>
+      <p>Scaled to a program of about 1M purchases a year, the same 3% budget means roughly <span class="figure-num" data-v="calc.fte_1m|num1"></span> analysts.</p>
+    </div>
+  </div>
+  <footer><span class="source">Source: fraudscore decide · 10 min per review, $50/hour loaded (Appendix B)</span><span class="source pnum"></span></footer>
+</article>
+
+<!-- 11 · Uncertainty -->
+<article class="page">
+  <div class="running"><span class="kicker">Stopping the card · Model &amp; decision report</span><span class="kicker">7 · Uncertainty</span></div>
+  <header><h1 class="action-title">Only one assumption moves the answer, how much of unstopped fraud the program really loses, and the result stays positive across the range.</h1></header>
+  <figure>
+    <figcaption><b>Figure 7.2 · Nov–Dec net value when one assumption moves to the end of its range</b></figcaption>
+    <div id="fig-tornado"></div>
+  </figure>
+  <div class="cols" style="margin-top:6px">
+    <figure>
+      <figcaption><b>Figure 7.3 · Net value across <span data-v="R.monte_carlo.draws|int"></span> simulated outcomes</b></figcaption>
+      <div id="fig-mc"></div>
+      <p class="source">Assumptions drawn from triangular distributions over their ranges; compromised cards resampled with replacement.</p>
+    </figure>
+    <div>
+      <h3>Reading the range</h3>
+      <p>The 90% range runs from <span class="figure-num" data-v="R.monte_carlo.p05|usdK"></span> to <span class="figure-num" data-v="R.monte_carlo.p95|usdK"></span> for two months, with a median of <span class="figure-num" data-v="R.monte_carlo.p50|usdK"></span>, and no draw below zero. Almost all of the width comes from which cards happen to be compromised: holding every cost input at its default and resampling cards alone gives <span class="figure-num" data-v="head.monte_carlo_cards_only.p05|usdK"></span>–<span class="figure-num" data-v="head.monte_carlo_cards_only.p95|usdK"></span>. With <span class="figure-num" data-v="R.pilot.oot_fraud_cards|int"></span> cards, one large compromise more or less moves the total by tens of thousands.</p>
+      <h3>Why no annual number</h3>
+      <p>Fraud dollars swing by month (Appendix A), so multiplying two months by six would mislead. The portable result is the share stopped: <span class="figure-num" data-v="pol.oot.next_day_block.prevented_share|pct0"></span>–<span class="figure-num" data-v="pol.oot.same_day_block.prevented_share|pct0"></span> of fraud dollars, depending on response speed.</p>
+    </div>
+  </div>
+  <footer><span class="source">Source: fraudscore decide · artifacts/tornado.csv, monte_carlo.csv</span><span class="source pnum"></span></footer>
+</article>
+
+<!-- 12 · Rollout and monitoring -->
+<article class="page" id="p-8">
+  <div class="running"><span class="kicker">Stopping the card · Model &amp; decision report</span><span class="kicker">8 · Rollout and monitoring</span></div>
+  <header><h1 class="action-title">A 60-day pilot can confirm the score works, not fine-tune it, so the go-live rule is set to what that sample can show.</h1></header>
+  <div class="cols">
+    <div>
+      <h3>Rollout in three steps</h3>
+      <ol>
+        <li><b>Shadow, 60 days.</b> Score every purchase; analysts work the top 3% the same day but do not block. Log what a block would have stopped.</li>
+        <li><b>Same-day blocking.</b> Switch on blocks for confirmed alerts. Keep a 10% random holdout of cards scored but not blocked as the comparison group.</li>
+        <li><b>Real-time declines for the highest scores.</b> Only once the false-decline rate is known from steps 1–2.</li>
+      </ol>
+      <h3>How precise a pilot can be</h3>
+      <table id="t-pilot"><thead><tr><th>Compromised cards seen</th><th>About</th><th>FDR@3% ± 95%</th></tr></thead><tbody></tbody></table>
+      <p class="source">Card-bootstrap standard error at Nov–Dec, scaled by √cards; months at the Nov–Dec rate of 8 compromised cards a month.</p>
+      <p>A 60-day pilot pins detection only to about ±<span class="figure-num" data-v="calc.pilot_hw|pts"></span>. The go-live rule is therefore "the top 3% catches at least 45%", which a working model clears and a broken one does not. Comparing two models needs a year of data, not a pilot.</p>
+    </div>
+    <div>
+      <h3>What to watch, monthly</h3>
+      <table class="mon"><thead><tr><th>Signal</th><th>Now</th><th>Act when</th></tr></thead><tbody>
+        <tr><td class="t">Score stability (PSI vs training)</td><td data-v="R.monitoring.score_psi_oot|num3"></td><td class="t">&gt; 0.10 review, &gt; 0.25 retrain</td></tr>
+        <tr><td class="t">Most-shifted variable (PSI)</td><td data-v="calc.max_var_psi|num2"></td><td class="t">&gt; 0.25 on a top-10 variable</td></tr>
+        <tr><td class="t">Alert rate vs 3% budget</td><td data-v="head.oot.alert_rate|pct1"></td><td class="t">outside 1–5% for two weeks</td></tr>
+        <tr><td class="t">FDR@3% on confirmed fraud, rolling 90 days</td><td data-v="head.oot_fdr_at_3|pct0"></td><td class="t">below 45%</td></tr>
+        <tr><td class="t">Frauds before first alert, median</td><td data-v="R.delay.median_frauds|int"></td><td class="t">above 5</td></tr>
+      </tbody></table>
+      <p class="source">"Now" = Nov–Dec 2010 values. Most-shifted variable: <span data-v="calc.max_var_name|raw"></span>.</p>
+      <h3>Controls</h3>
+      <ul>
+        <li><b>Labels arrive late.</b> Fraud is confirmed days to weeks after the purchase; measure FDR on a 30-day lag.</li>
+        <li><b>Retrain quarterly</b> on the latest 9 months, re-run the time-fold check, and keep the old model as challenger until the new one matches it.</li>
+        <li><b>Every alert carries measured reasons</b> and its band's fraud rate (§6), so analysts confirm in minutes and reviews are auditable.</li>
+      </ul>
+    </div>
+  </div>
+  <footer><span class="source">Source: fraudscore export · fraudscore.metrics.psi, fraudscore.tuning.fdr_card_se</span><span class="source pnum"></span></footer>
+</article>
+
+<!-- 13 · Limitations -->
+<article class="page" id="p-9">
+  <div class="running"><span class="kicker">Stopping the card · Model &amp; decision report</span><span class="kicker">9 · Limitations and next steps</span></div>
+  <header><h1 class="action-title">The direction of the result is robust; its size rests on one year, one program and sixteen compromised cards.</h1></header>
+  <div class="cols">
+    <div>
+      <h3>Limitations</h3>
+      <ul>
+        <li><b>One program, one year.</b> Transactions are from 2010. Fraud tactics change; the time-fold design tests for drift over months, not years.</li>
+        <li><b>Small out-of-time sample.</b> <span data-v="R.pilot.oot_fraud_cards|int"></span> compromised cards in Nov–Dec. Shares are stable across validation and out-of-time in direction, not in size: next-day blocking stopped <span data-v="pol.validation.next_day_block.prevented_share|pct0"></span> in Sep–Oct and <span data-v="pol.oot.next_day_block.prevented_share|pct0"></span> in Nov–Dec.</li>
+        <li><b>Labels assumed complete.</b> Undetected fraud would be counted as good, which understates both fraud and the model's catch.</li>
+        <li><b>Blocking is assumed to work.</b> The replay counts every later fraud on a blocked card as stopped. A fraudster with several stolen cards would move on, so per-card value can be overstated.</li>
+        <li><b>Costs are placeholders.</b> Review time, analyst cost and friction costs are agreed planning values, not the program's figures. Only the loss share materially changes the conclusion (§7).</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Next steps, in order of value</h3>
+      <ol>
+        <li><b>Same-day operating model.</b> The largest lever is process, not modeling: alerts worked within hours lift the share stopped from <span data-v="pol.oot.next_day_block.prevented_share|pct0"></span> to <span data-v="pol.oot.same_day_block.prevented_share|pct0"></span>.</li>
+        <li><b>Cardholder self-confirmation</b> by text message for review-band alerts, to cut analyst time further.</li>
+        <li><b>Merchant-side detection.</b> Compromises often share a merchant; a merchant-level score could block cards before their first fraud.</li>
+        <li><b>Real-time scoring service</b> with the same point-in-time variables, for declines at the highest scores.</li>
+        <li><b>Longer history.</b> Two to three years of data to measure year-over-year drift and tighten the value range.</li>
+      </ol>
+      <div class="callout"><span class="kicker">What would change the recommendation</span>
+        <p style="margin:0">If the program recovers most fraud losses through chargebacks, the case weakens but holds: at a loss share of 0.3 the next-day policy still nets <span class="figure-num" data-v="calc.net_ls03|usdK"></span> over Nov–Dec. If the pilot's FDR@3% comes in under 45%, stop and revisit the variables before going live.</p></div>
+    </div>
+  </div>
+  <footer><span class="source">Stopping the card · Model &amp; decision report</span><span class="source pnum"></span></footer>
+</article>
+
+<!-- 14 · Appendix A: DQR fields -->
+<article class="page" id="p-a">
+  <div class="running"><span class="kicker">Stopping the card · Model &amp; decision report</span><span class="kicker">A · Data quality report</span></div>
+  <header><h1 class="action-title">Appendix A · Data quality report</h1>
+    <p class="lede">Raw file before exclusions: <span data-v="R.dqr.records|int"></span> records, 10 fields, one row per card transaction, Jan 1 – Dec 31 2010.</p></header>
+  <h3>Field summary</h3>
+  <table id="t-dqr"><thead><tr><th>Field</th><th>Type</th><th>Populated</th><th>Unique</th><th>Min</th><th>Median</th><th>Max</th><th>Most common share</th></tr></thead><tbody></tbody></table>
+  <div class="cols" style="margin-top:10px">
+    <div>
+      <h3>Field notes</h3>
+      <ul id="dqr-notes">
+        <li><b>Recnum</b> is a row identifier in date order; it breaks ties within a day.</li>
+        <li><b>Cardnum</b> has no missing values; <span data-v="calc.raw_cards|int"></span> cards.</li>
+        <li><b>Merchnum</b> is blank on <span data-v="calc.merch_missing|pct1"></span> of records and '0' on 237 more; recovered from descriptions where possible (§2).</li>
+        <li><b>Merch state</b> includes numeric codes for foreign merchants, grouped as FOREIGN.</li>
+        <li><b>Merch zip</b> is the least complete location field; imputed from merchant, then state.</li>
+        <li><b>Transtype</b> is almost entirely P (purchase); the others carry no fraud and are excluded.</li>
+        <li><b>Amount</b> runs from $0.01 to $3.1M; the $3.1M record is an error.</li>
+        <li><b>Fraud</b> is the label: 1 for fraud.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Transaction types</h3>
+      <table id="t-types"><thead><tr><th>Type</th><th>Records</th></tr></thead><tbody></tbody></table>
+      <h3>Top merchant states</h3>
+      <table id="t-states"><thead><tr><th>State</th><th>Records</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
+  <footer><span class="source">Source: fraudscore export · data_quality()</span><span class="source pnum"></span></footer>
+</article>
+
+<!-- 15 · Appendix A: distributions -->
+<article class="page">
+  <div class="running"><span class="kicker">Stopping the card · Model &amp; decision report</span><span class="kicker">A · Data quality report</span></div>
+  <header><h1 class="action-title">Appendix A · Distributions</h1></header>
+  <figure>
+    <figcaption><b>Figure A.1 · Purchase amount, share of records per bin (log scale)</b>
+      <span class="legend"><span><i style="background:var(--context);height:2px;width:14px"></i>not fraud</span><span><i style="background:var(--lost);height:2px;width:14px"></i>fraud</span></span></figcaption>
+    <div id="fig-amount"></div>
+    <p class="source">Bins evenly spaced on a log scale from $0.01 to $10M. Fraud skews to mid-sized purchases.</p>
+  </figure>
+  <div class="cols" style="margin-top:10px">
+    <figure>
+      <figcaption><b>Figure A.2 · Records per month</b></figcaption>
+      <div id="fig-month-n"></div>
+    </figure>
+    <figure>
+      <figcaption><b>Figure A.3 · Fraud rate per month</b></figcaption>
+      <div id="fig-month-rate"></div>
+    </figure>
+  </div>
+  <p class="source" style="margin-top:8px">October volume is well below other months, and monthly fraud rates move between <span data-v="calc.rate_min|pct1"></span> and <span data-v="calc.rate_max|pct1"></span>. Both are reasons to judge the model on later months rather than a random sample.</p>
+  <footer><span class="source">Source: fraudscore export · data_quality()</span><span class="source pnum"></span></footer>
+</article>
+
+<!-- 16 · Appendix B -->
+<article class="page" id="p-b">
+  <div class="running"><span class="kicker">Stopping the card · Model &amp; decision report</span><span class="kicker">B · Assumptions and reproducibility</span></div>
+  <header><h1 class="action-title">Appendix B · Assumptions and reproducibility</h1></header>
+  <h3>Cost assumptions</h3>
+  <table id="t-assume"><thead><tr><th>Assumption</th><th>Used</th><th>Range tested</th></tr></thead><tbody></tbody></table>
+  <p class="source">Planning values agreed for this analysis, not sourced benchmarks. Replace with the program's own figures; the decision tool recomputes every result.</p>
+  <div class="cols" style="margin-top:10px">
+    <div>
+      <h3>Reproduce every number</h3>
+      <table><tbody>
+        <tr><td class="t"><code>fraudscore run</code></td><td class="t">cleaning, variables, validation audit</td></tr>
+        <tr><td class="t"><code>fraudscore tune</code></td><td class="t">time-fold search, final model</td></tr>
+        <tr><td class="t"><code>fraudscore decide</code></td><td class="t">cutoff, staffing, response policy, uncertainty</td></tr>
+        <tr><td class="t"><code>fraudscore briefs</code></td><td class="t">reason codes and analyst briefs</td></tr>
+        <tr><td class="t"><code>fraudscore export</code></td><td class="t">aggregates for site, report, deck, README</td></tr>
+        <tr><td class="t"><code>fraudscore synth</code></td><td class="t">synthetic data to run it all without the dataset</td></tr>
+        <tr><td class="t"><code>scripts/build.sh</code></td><td class="t">PDFs and figures</td></tr>
+      </tbody></table>
+      <p><code>fraudscore all</code> runs everything in about eight minutes on a laptop. Unit tests cover cleaning order, point-in-time variables, split boundaries, FDR, PSI, replay policies, cost arithmetic, reason codes and the LLM grounding guard; CI also runs the whole pipeline on synthetic data.</p>
+    </div>
+    <div>
+      <h3>Definitions</h3>
+      <ul>
+        <li><b>FDR@k%</b>: share of fraud transactions found among the k% highest-scored transactions.</li>
+        <li><b>Out-of-time (OOT)</b>: Nov 1 – Dec 31 2010, never used for any choice.</li>
+        <li><b>Review budget</b>: share of purchases raised as alerts, set as a score cutoff on Sep–Oct.</li>
+        <li><b>Prevented</b>: fraud dollars declined because the card was already blocked (or, in real time, declined at the alert).</li>
+      </ul>
+      <h3>Data and authorship</h3>
+      <p>About 98,000 labeled purchases from one purchase-card program in 2010. The transaction file is not redistributed; this report and the site publish only aggregates and a relabeled, rounded alert sample. Analysis, code and report: Jay Yu.</p>
+    </div>
+  </div>
+  <footer><span class="source">Stopping the card · Model &amp; decision report</span><span class="source pnum"></span></footer>
+</article>
+
+<script type="module">
+  import { burstStrip, dumbbell, bars, lines, tornado, fmt } from "./assets/charts.js";
+  const load = (n) => fetch(`data/${n}.json`).then((r) => r.json());
+  const [R, head, policy, bursts] = await Promise.all(["report", "headline", "policy", "bursts"].map(load));
+
+  // Lookups used by data-v bindings
+  const pol = {};
+  for (const r of policy) (pol[r.window] ||= {})[r.policy] = r;
+  const gap = {};
+  for (const r of R.split_gap) (gap[r.model === "boosted_trees" ? "own" : "rf"] ||= {})[r.split] = r;
+  const perfRow = (w) => R.performance.find((r) => r.window.startsWith(w));
+  const perf = { train: perfRow("train"), val: perfRow("validation"), oot: perfRow("out-of-time") };
+  const maxVar = R.variables.final.reduce((a, b) => (b.psi_oot > a.psi_oot ? b : a));
+  const days = head.oot_days;
+  const calc = {
+    same_per_day: pol.oot.same_day_block.alerts / days,
+    next_per_day: pol.oot.next_day_block.alerts / days,
+    next_minutes: (pol.oot.next_day_block.alerts / days) * R.assumptions.minutes_per_review,
+    cost_share: head.oot.cost_total / head.oot.benefit,
+    rand_gap_pts: gap.own.random.test - gap.own.random.oot,
+    temp_gap_pts: gap.own.temporal.test - gap.own.temporal.oot,
+    model_vs_rule: head.oot.net_value / head.rule_baseline.oot_net_value,
+    card_top: [...R.variables.final].sort((a, b) => b.ks - a.ks).slice(0, 10).filter((v) => v.variable.startsWith("card_") && !/^card_(merch|zip|state)/.test(v.variable)).length,
+    fte_1m: (head.oot.alerts / days) * (1e6 / 365) / (R.data.clean_records / 365) * R.assumptions.minutes_per_review / 60 / 6,
+    pilot_hw: 1.96 * R.pilot.se_by_cards["16"],
+    max_var_psi: maxVar.psi_oot, max_var_name: maxVar.variable,
+    alerts3: R.value_curve.oot.find((r) => r.target_alert_rate === 0.03).alerts,
+    alerts10: R.value_curve.oot.find((r) => r.target_alert_rate === 0.1).alerts,
+    stop3: R.value_curve.oot.find((r) => r.target_alert_rate === 0.03).fraud_dollars_prevented,
+    stop10: R.value_curve.oot.find((r) => r.target_alert_rate === 0.1).fraud_dollars_prevented,
+    net_ls03: 0.3 * head.oot.fraud_dollars_prevented - head.oot.cost_total,
+    raw_cards: R.dqr.fields.find((f) => f.field === "Cardnum").unique,
+    merch_missing: 1 - R.dqr.fields.find((f) => f.field === "Merchnum").populated,
+    rate_min: Math.min(...R.dqr.months.map((m) => m.fraud_rate)), rate_max: Math.max(...R.dqr.months.map((m) => m.fraud_rate)),
+  };
+  const ctx = { R, head, pol, gap, perf, calc, burst: bursts.cards };
+  const F = {
+    pct0: (v) => fmt.pct(v), pct1: (v) => fmt.pct(v, 1), usd: fmt.usd, usdK: fmt.usdK, int: (v) => fmt.num(v),
+    num1: (v) => fmt.num(v, 1), num2: (v) => fmt.num(v, 2), num3: (v) => fmt.num(v, 3),
+    pts: (v) => fmt.num(v * 100) + " points", x: (v) => fmt.num(v, 1) + "×", raw: (v) => v,
+  };
+  const get = (path) => path.split(".").reduce((o, k) => (o == null ? o : o[k]), ctx);
+  for (const n of document.querySelectorAll("[data-v]")) {
+    const [path, f] = n.dataset.v.split("|");
+    const v = get(path);
+    if (v === undefined || v === null) { console.error("missing binding", path); n.textContent = "??"; continue; }
+    n.textContent = F[f || "raw"](v);
+  }
+  const cell = (c, i) => (c && typeof c === "object" ? `<td class="t">${c.t}</td>` : `<td${i === 0 ? ' class="t"' : ""}>${c}</td>`);
+  const rowsHtml = (sel, rows) => (document.querySelector(sel).innerHTML = rows.map((r) => `<tr${r.hi ? ' class="hi"' : ""}>${r.cells.map(cell).join("")}</tr>`).join(""));
+
+  // Cover + §6
+  burstStrip(document.getElementById("cover-burst"), bursts, { width: 680, rowH: 22, rows: 10 });
+  burstStrip(document.getElementById("fig-burst"), bursts, { width: 680, rowH: 19 });
+
+  // §1 frauds per card
+  const buckets = [["1", 1, 1], ["2–4", 2, 4], ["5–9", 5, 9], ["10–19", 10, 19], ["20–29", 20, 29], ["30–39", 30, 39], ["40+", 40, 1e9]];
+  const hist = R.data.frauds_per_card_hist;
+  bars(document.getElementById("fig-per-card"), buckets.map(([label, lo, hi]) => ({
+    label, value: Object.entries(hist).filter(([k]) => +k >= lo && +k <= hi).reduce((s, [, v]) => s + v, 0),
+  })), { width: 680, height: 200, valueLabels: true, color: "var(--lost)", title: "Compromised cards by number of frauds" });
+
+  // §2 tables
+  rowsHtml("#t-excl tbody", R.exclusions.map((r) => ({ cells: [r.rule, fmt.num(r.records), fmt.num(r.fraud_records)] })));
+  const fieldName = { Merchnum: "Merchant number", Merch_state: "Merchant state", Merch_zip: "Merchant ZIP" };
+  rowsHtml("#t-imp tbody", R.imputation.map((r) => ({ cells: [fieldName[r.field] || r.field, { t: r.step[0].toUpperCase() + r.step.slice(1) }, fmt.num(r.records)] })));
+
+  // §3 matrix + variables
+  const ent = { card: "Card", merch: "Merchant", card_merch: "Card × merchant", card_zip: "Card × merchant ZIP", card_state: "Card × merchant state", merch_zip: "Merchant × ZIP" };
+  document.getElementById("t-matrix").innerHTML = R.variables.entities.map((e) =>
+    `<tr><td class="t">${ent[e]}</td>${"●●●●●●●".split("").map(() => "<td>●</td>").join("")}</tr>`).join("");
+  const win = (w) => (w === "0" ? "same day" : `${w}-day window`);
+  function describe(v) {
+    if (v === "amount") return "Purchase amount";
+    if (v === "amount_cents_zero") return "Round-dollar amount";
+    const e = Object.keys(ent).sort((a, b) => b.length - a.length).find((k) => v.startsWith(k + "_"));
+    const rest = v.slice(e.length + 1);
+    let m;
+    if ((m = rest.match(/^count_(\d+)$/))) return `${ent[e]}: transactions, ${win(m[1])}`;
+    if ((m = rest.match(/^total_(\d+)$/))) return `${ent[e]}: total spend, ${win(m[1])}`;
+    if ((m = rest.match(/^avg_(\d+)$/))) return `${ent[e]}: average amount, ${win(m[1])}`;
+    if ((m = rest.match(/^max_(\d+)$/))) return `${ent[e]}: largest amount, ${win(m[1])}`;
+    if ((m = rest.match(/^actual_over_avg_(\d+)$/))) return `${ent[e]}: this amount ÷ average, ${win(m[1])}`;
+    if ((m = rest.match(/^velocity_(\d+)_by_(\d+)$/))) return `${ent[e]}: activity ${win(m[1])} vs ${m[2]}-day rate`;
+    if (rest === "days_since") return `${ent[e]}: days since previous purchase`;
+    return v;
+  }
+  rowsHtml("#t-vars tbody", [...R.variables.final].sort((a, b) => b.ks - a.ks).slice(0, 10)
+    .map((v) => ({ cells: [`<code>${v.variable}</code>`, { t: describe(v.variable) }, fmt.num(v.ks, 3)] })));
+
+  // §4
+  const splitName = { random: "Random records", card_grouped: "Whole cards held out", temporal: "Later months held out" };
+  dumbbell(document.getElementById("fig-dumbbell"), [
+    { key: "random", label: splitName.random, note: "the usual default", ...gap.own.random },
+    { key: "card_grouped", label: splitName.card_grouped, note: "no card on both sides", ...gap.own.card_grouped },
+    { key: "temporal", label: splitName.temporal, note: "train Jan–Aug, test Sep–Oct", ...gap.own.temporal },
+  ], { width: 680, rowH: 52, domain: [0.5, 0.9], left: 190, fs: 11 });
+  rowsHtml("#t-gap tbody", ["own", "rf"].flatMap((k) => ["random", "card_grouped", "temporal"].map((s) => {
+    const r = gap[k][s];
+    return { cells: [s === "random" ? (k === "own" ? "Boosted trees" : "Random forest") : "", { t: splitName[s] },
+      fmt.pct(r.test, 1), fmt.pct(r.oot, 1), (r.test_minus_oot >= 0 ? "+" : "") + fmt.num(r.test_minus_oot * 100, 1) + " pts", fmt.pct(r.test_frauds_on_train_fraud_cards)] };
+  })));
+
+  // §5
+  const famName = { boosted_trees: "Boosted trees", random_forest: "Random forest", logistic: "Logistic regression" };
+  rowsHtml("#t-family tbody", [...R.tuning.best_by_family].sort((a, b) => b.test - a.test).map((r, i) => ({ hi: i === 0,
+    cells: [famName[r.model], fmt.pct(r.train, 1), fmt.pct(r.test, 1), "± " + fmt.num(r.test_se * 100, 1), fmt.pct(r.oot, 1)] })));
+  const pctAxis = (v) => fmt.pct(v);
+  lines(document.getElementById("fig-nvars"), [
+    { name: "test", color: "var(--stopped)", points: R.tuning.n_vars.map((r) => ({ x: r.n_vars, y: r.test })) },
+    { name: "OOT", color: "var(--ink-3)", dash: "4 3", points: R.tuning.n_vars.map((r) => ({ x: r.n_vars, y: r.oot })) },
+  ], { width: 330, height: 180, yFmt: pctAxis, yDomain: [0.4, 0.75], markers: true, title: "FDR by variables kept" });
+  const cx = R.complexity.filter((r) => r.param === "max_leaf_nodes");
+  lines(document.getElementById("fig-complex"), [
+    { name: "train", color: "var(--ink-3)", dash: "4 3", points: cx.map((r) => ({ x: r.value, y: r.train })) },
+    { name: "test", color: "var(--stopped)", points: cx.map((r) => ({ x: r.value, y: r.test })) },
+  ], { width: 330, height: 180, yFmt: pctAxis, yDomain: [0.5, 1.02], logX: true, xTicks: cx.map((r) => r.value), markers: true, title: "FDR by leaves per tree" });
+
+  const budgets = [0.01, 0.02, 0.03, 0.05], key = (b) => `fdr@${b * 100}%`;
+  lines(document.getElementById("fig-budget"), [
+    { name: "train", color: "var(--ink-3)", dash: "4 3", points: budgets.map((b) => ({ x: b, y: perf.train[key(b)] })) },
+    { name: "validation", color: "var(--context)", points: budgets.map((b) => ({ x: b, y: perf.val[key(b)] })) },
+    { name: "out-of-time", color: "var(--stopped)", points: budgets.map((b) => ({ x: b, y: perf.oot[key(b)] })) },
+  ], { width: 330, height: 220, xFmt: (v) => fmt.pct(v), yFmt: pctAxis, yDomain: [0, 1], markers: true, title: "FDR by review budget" });
+  rowsHtml("#t-perf tbody", [["Train", perf.train], ["Sep–Oct", perf.val], ["Nov–Dec", perf.oot]].map(([n, r], i) => ({ hi: i === 2,
+    cells: [n, fmt.num(r.frauds), ...budgets.map((b) => fmt.pct(r[key(b)]))] })));
+  const p = R.tuning.final.params;
+  document.getElementById("t-params").innerHTML = [
+    ["Algorithm", "histogram gradient boosting"], ["Variables", R.tuning.final.n_vars], ["Learning rate", p.learning_rate],
+    ["Trees", p.max_iter], ["Leaves per tree", p.max_leaf_nodes], ["Min. purchases per leaf", p.min_samples_leaf],
+    ["L2 regularization", "1.0"], ["Trained on", "Jan 15 – Aug 31 2010"],
+  ].map(([k, v]) => `<tr><td class="t">${k}</td><td>${v}</td></tr>`).join("");
+
+  // §6 policy table
+  const pname = { next_day_block: "Block next day", same_day_block: "Block same day", realtime_decline: "Decline in real time" };
+  rowsHtml("#t-policy tbody", Object.keys(pname).map((k) => ({ hi: k === "same_day_block",
+    cells: [pname[k] + (k === "same_day_block" ? " · recommended" : ""), fmt.usd(pol.oot[k].fraud_dollars_prevented), fmt.pct(pol.oot[k].prevented_share),
+      fmt.pct(pol.validation[k].prevented_share), pol.oot[k].alerts, pol.oot[k].legit_txns_declined] })));
+
+  // §6 briefs
+  const ex = R.alerts.example;
+  document.getElementById("example-brief").innerHTML = `<span class="pill ${ex.priority}">${ex.priority}</span>
+    <div class="bh">${ex.id} · ${ex.card} · ${fmt.usd(ex.amount)}</div>
+    <div class="bs">${new Date(ex.date + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })} 2010 · score in the top ${fmt.pct(ex.score_pct, 1)} of purchases · ${fmt.pct(ex.band_fraud_rate)} of Sep–Oct alerts in this band were fraud</div>
+    <ol>${ex.reasons.map((r) => `<li><b>${r.label}:</b> ${r.value_text} (typical ${r.typical_text}${r.first_seen ? "; no earlier purchase" : `; above ${fmt.pct(r.percentile)} of purchases`})</li>`).join("")}</ol>
+    <div class="bs">${ex.context.card_count_7} purchases on this card in the last 7 days, ${fmt.usd(ex.context.card_total_7)} in total; ${ex.context.new_merchant ? "first purchase at this merchant" : "card has bought here before"}.</div>
+    <p class="act"><b>Action:</b> ${ex.action}</p>`;
+  rowsHtml("#t-mix tbody", R.alerts.reason_mix.slice(0, 6).map((r) => ({ cells: [r.top_reason, r.true_alerts, r.false_alerts] })));
+
+  // §7
+  lines(document.getElementById("fig-value"), [
+    { name: "Sep–Oct", color: "var(--context)", dash: "4 3", points: R.value_curve.validation.map((r) => ({ x: r.target_alert_rate, y: r.net_value })) },
+    { name: "Nov–Dec", color: "var(--stopped)", points: R.value_curve.oot.map((r) => ({ x: r.target_alert_rate, y: r.net_value })) },
+  ], { width: 680, height: 230, xFmt: (v) => fmt.pct(v, v < 0.01 ? 2 : 0), yFmt: fmt.usdK, xTicks: [0.0025, 0.01, 0.02, 0.03, 0.05, 0.075, 0.1], markers: true, labelW: 56, title: "Net value by review budget" });
+  rowsHtml("#t-capacity tbody", R.capacity.map((r) => ({ hi: false,
+    cells: [String(r.capacity_per_day), fmt.usd(r.oot_net_value), fmt.num(r.oot_unworked)] })));
+  const label = { loss_share: "Share of fraud actually lost", minutes_per_review: "Minutes per review", false_alert_cost: "Cost to clear a false alert",
+    analyst_cost_per_hour: "Analyst cost per hour", declined_purchase_cost: "Cost of a declined good purchase", reissue_cost: "Card reissue cost", reissue_lag_days: "Days to replacement card" };
+  tornado(document.getElementById("fig-tornado"), R.tornado.map((r) => ({ label: label[r.assumption], atLow: r.net_at_low, atHigh: r.net_at_high })), R.tornado[0].base,
+    { width: 680, rowH: 28, labelW: 220, title: "Sensitivity of net value" });
+  const mc = R.monte_carlo;
+  bars(document.getElementById("fig-mc"), mc.hist.map((c, i) => ({ label: fmt.usdK((mc.edges[i] + mc.edges[i + 1]) / 2), value: c })),
+    { width: 330, height: 190, labelEvery: 6, color: "var(--stopped)", title: "Monte Carlo net value" });
+
+  // §8
+  rowsHtml("#t-pilot tbody", Object.entries(R.pilot.se_by_cards).map(([n, se]) => ({ hi: n === "16",
+    cells: [n, `${+n / 8} months`, "± " + fmt.num(1.96 * se * 100, 0) + " pts"] })));
+
+  // Appendix A
+  const fn = { Recnum: "Recnum", Cardnum: "Cardnum", Date: "Date", Merchnum: "Merchnum", "Merch description": "Merch description", "Merch state": "Merch state", "Merch zip": "Merch zip", Merch_desc: "Merch description", Merch_state: "Merch state", Merch_zip: "Merch zip", Transtype: "Transtype", Amount: "Amount", Fraud: "Fraud" };
+  const v = (x, f) => (x === undefined || x === null ? "–" : f(x));
+  rowsHtml("#t-dqr tbody", R.dqr.fields.map((r) => ({ cells: [fn[r.field] || r.field, `${r.type}`, fmt.pct(r.populated, 1), fmt.num(r.unique),
+    r.type === "date" ? r.min : v(r.min, (x) => fmt.num(x, 2)), v(r.median, (x) => fmt.num(x, 2)), r.type === "date" ? r.max : v(r.max, (x) => fmt.num(x, 2)), v(r.most_common_share, (x) => fmt.pct(x, 1))] })));
+  rowsHtml("#t-types tbody", Object.entries(R.dqr.transtype).map(([k, n]) => ({ cells: [k, fmt.num(n)] })));
+  rowsHtml("#t-states tbody", Object.entries(R.dqr.states_top10).slice(0, 6).map(([k, n]) => ({ cells: [k, fmt.num(n)] })));
+  const ah = R.dqr.amount_hist, mid = ah.edges.slice(0, -1).map((e, i) => Math.sqrt(e * ah.edges[i + 1]));
+  lines(document.getElementById("fig-amount"), [
+    { name: "not fraud", color: "var(--context)", points: mid.map((x, i) => ({ x, y: ah.legit[i] })) },
+    { name: "fraud", color: "var(--lost)", points: mid.map((x, i) => ({ x, y: ah.fraud[i] })) },
+  ], { width: 680, height: 230, logX: true, xTicks: [0.1, 1, 10, 100, 1000, 10000, 100000, 1000000], xFmt: (x) => x >= 1 ? fmt.usdK(x) : "$" + x, yFmt: (y) => fmt.pct(y), title: "Amount distribution" });
+  const months = ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"];
+  bars(document.getElementById("fig-month-n"), R.dqr.months.map((m) => ({ label: months[m.month - 1], value: m.records })), { width: 330, height: 180, yFmt: (x) => fmt.num(x / 1000) + "k", title: "Records per month" });
+  bars(document.getElementById("fig-month-rate"), R.dqr.months.map((m) => ({ label: months[m.month - 1], value: m.fraud_rate })), { width: 330, height: 180, yFmt: (x) => fmt.pct(x, 1), color: "var(--lost)", title: "Fraud rate per month" });
+
+  // Appendix B
+  const af = { loss_share: (x) => fmt.pct(x), minutes_per_review: (x) => x + " min", analyst_cost_per_hour: (x) => "$" + x, reissue_cost: (x) => "$" + x,
+    false_alert_cost: (x) => "$" + x, declined_purchase_cost: (x) => "$" + x, reissue_lag_days: (x) => x + " days" };
+  rowsHtml("#t-assume tbody", Object.keys(af).map((k) => ({ cells: [label[k], af[k](R.assumptions[k]), `${af[k](R.ranges[k][0])} – ${af[k](R.ranges[k][1])}`] })));
+
+  // Page numbers and contents, from page order
+  document.querySelectorAll(".page").forEach((pg, i) => { const n = pg.querySelector(".pnum"); if (n) n.textContent = i + 1; });
+  document.querySelectorAll("[data-toc]").forEach((n) => {
+    n.textContent = [...document.querySelectorAll(".page")].indexOf(document.getElementById(n.dataset.toc)) + 1;
+  });
+
+  // Layout guard: report pages must not overflow
+  document.querySelectorAll(".page").forEach((pg, i) => {
+    const last = [...pg.children].filter((c) => c.tagName !== "FOOTER").at(-1);
+    const footer = pg.querySelector("footer");
+    if (last && footer && last.getBoundingClientRect().bottom > footer.getBoundingClientRect().top + 1) console.error(`page ${i + 1} overflows`);
+  });
+  // ?only=<page id> shows a single page with no backdrop (used for README screenshots)
+  const only = new URLSearchParams(location.search).get("only");
+  if (only) {
+    document.querySelectorAll(".page").forEach((pg) => { if (pg.id !== only) pg.remove(); });
+    document.body.style.cssText = "padding:0;background:var(--paper)";
+    document.querySelector(".page").style.cssText = "margin:0;box-shadow:none";
+  }
+  document.body.dataset.ready = "1";
+</script>
+</body>
+</html>

@@ -1,0 +1,1465 @@
+{
+ "start": "2010-11-01",
+ "days": 61,
+ "policy": "next_day_block",
+ "cards": [
+  {
+   "card": "Card 01",
+   "first_fraud_day": 17,
+   "first_alert_day": 17,
+   "lost": 1887.71,
+   "stopped": 92157.26999999999,
+   "days": [
+    {
+     "day": 8,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 9,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 14,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 17,
+     "lost": 1887.71,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 18,
+     "lost": 0.0,
+     "stopped": 1395.18,
+     "legit": 0
+    },
+    {
+     "day": 19,
+     "lost": 0.0,
+     "stopped": 1385.51,
+     "legit": 0
+    },
+    {
+     "day": 20,
+     "lost": 0.0,
+     "stopped": 2786.91,
+     "legit": 0
+    },
+    {
+     "day": 22,
+     "lost": 0.0,
+     "stopped": 3416.87,
+     "legit": 0
+    },
+    {
+     "day": 23,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 24,
+     "lost": 0.0,
+     "stopped": 28986.41,
+     "legit": 0
+    },
+    {
+     "day": 26,
+     "lost": 0.0,
+     "stopped": 3050.89,
+     "legit": 0
+    },
+    {
+     "day": 27,
+     "lost": 0.0,
+     "stopped": 723.5,
+     "legit": 0
+    },
+    {
+     "day": 29,
+     "lost": 0.0,
+     "stopped": 6934.22,
+     "legit": 0
+    },
+    {
+     "day": 30,
+     "lost": 0.0,
+     "stopped": 142.88,
+     "legit": 1
+    },
+    {
+     "day": 31,
+     "lost": 0.0,
+     "stopped": 8024.73,
+     "legit": 0
+    },
+    {
+     "day": 33,
+     "lost": 0.0,
+     "stopped": 1286.7,
+     "legit": 0
+    },
+    {
+     "day": 35,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 36,
+     "lost": 0.0,
+     "stopped": 13269.73,
+     "legit": 0
+    },
+    {
+     "day": 37,
+     "lost": 0.0,
+     "stopped": 41.93,
+     "legit": 0
+    },
+    {
+     "day": 38,
+     "lost": 0.0,
+     "stopped": 3234.39,
+     "legit": 1
+    },
+    {
+     "day": 39,
+     "lost": 0.0,
+     "stopped": 636.63,
+     "legit": 1
+    },
+    {
+     "day": 40,
+     "lost": 0.0,
+     "stopped": 2044.17,
+     "legit": 0
+    },
+    {
+     "day": 41,
+     "lost": 0.0,
+     "stopped": 1216.07,
+     "legit": 0
+    },
+    {
+     "day": 42,
+     "lost": 0.0,
+     "stopped": 6909.450000000001,
+     "legit": 1
+    },
+    {
+     "day": 43,
+     "lost": 0.0,
+     "stopped": 320.14,
+     "legit": 0
+    },
+    {
+     "day": 44,
+     "lost": 0.0,
+     "stopped": 5825.26,
+     "legit": 0
+    },
+    {
+     "day": 45,
+     "lost": 0.0,
+     "stopped": 525.7,
+     "legit": 0
+    },
+    {
+     "day": 46,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 52,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    }
+   ]
+  },
+  {
+   "card": "Card 02",
+   "first_fraud_day": 24,
+   "first_alert_day": 24,
+   "lost": 22651.09,
+   "stopped": 18837.49,
+   "days": [
+    {
+     "day": 16,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 24,
+     "lost": 22651.09,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 25,
+     "lost": 0.0,
+     "stopped": 18837.49,
+     "legit": 0
+    },
+    {
+     "day": 30,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    }
+   ]
+  },
+  {
+   "card": "Card 03",
+   "first_fraud_day": 32,
+   "first_alert_day": 48,
+   "lost": 8308.28,
+   "stopped": 4698.99,
+   "days": [
+    {
+     "day": 1,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 4,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 9,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 11,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 17,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 23,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 29,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 31,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 32,
+     "lost": 23.8,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 37,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 38,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 39,
+     "lost": 71.53,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 41,
+     "lost": 370.1,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 42,
+     "lost": 62.56,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 43,
+     "lost": 32.79,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 44,
+     "lost": 33.79,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 45,
+     "lost": 228.46,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 46,
+     "lost": 993.1600000000001,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 47,
+     "lost": 49.29,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 48,
+     "lost": 6442.8,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 49,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 50,
+     "lost": 0.0,
+     "stopped": 2078.27,
+     "legit": 0
+    },
+    {
+     "day": 51,
+     "lost": 0.0,
+     "stopped": 712.66,
+     "legit": 1
+    },
+    {
+     "day": 52,
+     "lost": 0.0,
+     "stopped": 71.51,
+     "legit": 0
+    },
+    {
+     "day": 53,
+     "lost": 0.0,
+     "stopped": 57.15,
+     "legit": 0
+    },
+    {
+     "day": 56,
+     "lost": 0.0,
+     "stopped": 38.4,
+     "legit": 0
+    },
+    {
+     "day": 57,
+     "lost": 0.0,
+     "stopped": 401.49,
+     "legit": 0
+    },
+    {
+     "day": 58,
+     "lost": 0.0,
+     "stopped": 42.73,
+     "legit": 0
+    },
+    {
+     "day": 59,
+     "lost": 0.0,
+     "stopped": 1030.8700000000001,
+     "legit": 0
+    },
+    {
+     "day": 60,
+     "lost": 0.0,
+     "stopped": 265.91,
+     "legit": 0
+    }
+   ]
+  },
+  {
+   "card": "Card 04",
+   "first_fraud_day": 14,
+   "first_alert_day": 15,
+   "lost": 7507.47,
+   "stopped": 5483.029999999999,
+   "days": [
+    {
+     "day": 11,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 14,
+     "lost": 4989.62,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 15,
+     "lost": 2517.85,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 16,
+     "lost": 0.0,
+     "stopped": 5483.03,
+     "legit": 0
+    },
+    {
+     "day": 30,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 31,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    }
+   ]
+  },
+  {
+   "card": "Card 05",
+   "first_fraud_day": 32,
+   "first_alert_day": 48,
+   "lost": 7121.88,
+   "stopped": 1110.4,
+   "days": [
+    {
+     "day": 9,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 32,
+     "lost": 696.25,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 34,
+     "lost": 658.91,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 35,
+     "lost": 512.16,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 36,
+     "lost": 867.9000000000001,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 37,
+     "lost": 94.02,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 38,
+     "lost": 1061.1100000000001,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 40,
+     "lost": 539.1,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 41,
+     "lost": 175.55,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 42,
+     "lost": 285.44000000000005,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 43,
+     "lost": 220.18,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 44,
+     "lost": 711.8199999999999,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 45,
+     "lost": 1088.6,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 48,
+     "lost": 210.84,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 50,
+     "lost": 0.0,
+     "stopped": 616.04,
+     "legit": 0
+    },
+    {
+     "day": 51,
+     "lost": 0.0,
+     "stopped": 338.78,
+     "legit": 0
+    },
+    {
+     "day": 52,
+     "lost": 0.0,
+     "stopped": 113.6,
+     "legit": 0
+    },
+    {
+     "day": 54,
+     "lost": 0.0,
+     "stopped": 41.98,
+     "legit": 0
+    }
+   ]
+  },
+  {
+   "card": "Card 06",
+   "first_fraud_day": 46,
+   "first_alert_day": 46,
+   "lost": 6790.68,
+   "stopped": 1227.07,
+   "days": [
+    {
+     "day": 0,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 1,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 4,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 4
+    },
+    {
+     "day": 8,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 3
+    },
+    {
+     "day": 9,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 3
+    },
+    {
+     "day": 10,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 11,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 14,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 15,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 16,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 3
+    },
+    {
+     "day": 17,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 18,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 20,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 21,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 28,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 3
+    },
+    {
+     "day": 29,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 3
+    },
+    {
+     "day": 30,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 31,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 32,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 4
+    },
+    {
+     "day": 33,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 36,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 5
+    },
+    {
+     "day": 37,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 3
+    },
+    {
+     "day": 38,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 4
+    },
+    {
+     "day": 39,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 42,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 43,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 3
+    },
+    {
+     "day": 44,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 4
+    },
+    {
+     "day": 45,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 3
+    },
+    {
+     "day": 46,
+     "lost": 6790.68,
+     "stopped": 0.0,
+     "legit": 14
+    },
+    {
+     "day": 47,
+     "lost": 0.0,
+     "stopped": 1227.07,
+     "legit": 3
+    },
+    {
+     "day": 49,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 50,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 4
+    },
+    {
+     "day": 51,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 52,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 56,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 58,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 7
+    },
+    {
+     "day": 59,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    }
+   ]
+  },
+  {
+   "card": "Card 07",
+   "first_fraud_day": 42,
+   "first_alert_day": 42,
+   "lost": 1296.68,
+   "stopped": 5264.99,
+   "days": [
+    {
+     "day": 15,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 4
+    },
+    {
+     "day": 16,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 18,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 4
+    },
+    {
+     "day": 21,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 22,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 28,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 29,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 31,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 3
+    },
+    {
+     "day": 35,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 42,
+     "lost": 1296.68,
+     "stopped": 0.0,
+     "legit": 4
+    },
+    {
+     "day": 43,
+     "lost": 0.0,
+     "stopped": 3435.13,
+     "legit": 1
+    },
+    {
+     "day": 44,
+     "lost": 0.0,
+     "stopped": 1829.8600000000001,
+     "legit": 1
+    },
+    {
+     "day": 46,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 49,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    }
+   ]
+  },
+  {
+   "card": "Card 08",
+   "first_fraud_day": 50,
+   "first_alert_day": 50,
+   "lost": 282.12,
+   "stopped": 5321.13,
+   "days": [
+    {
+     "day": 22,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 49,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 50,
+     "lost": 282.12,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 51,
+     "lost": 0.0,
+     "stopped": 2587.0299999999997,
+     "legit": 2
+    },
+    {
+     "day": 52,
+     "lost": 0.0,
+     "stopped": 2734.1,
+     "legit": 0
+    }
+   ]
+  },
+  {
+   "card": "Card 09",
+   "first_fraud_day": 29,
+   "first_alert_day": 29,
+   "lost": 462.08,
+   "stopped": 3896.74,
+   "days": [
+    {
+     "day": 2,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 15,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 17,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 18,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 29,
+     "lost": 462.08,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 30,
+     "lost": 0.0,
+     "stopped": 3896.74,
+     "legit": 5
+    },
+    {
+     "day": 31,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 35,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 37,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 46,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 3
+    },
+    {
+     "day": 49,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    }
+   ]
+  },
+  {
+   "card": "Card 10",
+   "first_fraud_day": 15,
+   "first_alert_day": 15,
+   "lost": 2776.36,
+   "stopped": 628.5699999999999,
+   "days": [
+    {
+     "day": 0,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 1,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 2,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 7,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 10,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 11,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 14,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 15,
+     "lost": 2776.36,
+     "stopped": 0.0,
+     "legit": 3
+    },
+    {
+     "day": 16,
+     "lost": 0.0,
+     "stopped": 628.57,
+     "legit": 1
+    },
+    {
+     "day": 29,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 30,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    }
+   ]
+  },
+  {
+   "card": "Card 11",
+   "first_fraud_day": 3,
+   "first_alert_day": 3,
+   "lost": 1099.03,
+   "stopped": 1446.42,
+   "days": [
+    {
+     "day": 3,
+     "lost": 1099.03,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 4,
+     "lost": 0.0,
+     "stopped": 1063.05,
+     "legit": 2
+    },
+    {
+     "day": 5,
+     "lost": 0.0,
+     "stopped": 383.37,
+     "legit": 0
+    },
+    {
+     "day": 17,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 22,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 3
+    },
+    {
+     "day": 29,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 36,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 45,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 50,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    }
+   ]
+  },
+  {
+   "card": "Card 12",
+   "first_fraud_day": 0,
+   "first_alert_day": 0,
+   "lost": 1057.63,
+   "stopped": 1279.91,
+   "days": [
+    {
+     "day": 0,
+     "lost": 1057.63,
+     "stopped": 0.0,
+     "legit": 9
+    },
+    {
+     "day": 1,
+     "lost": 0.0,
+     "stopped": 1279.91,
+     "legit": 6
+    },
+    {
+     "day": 2,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 3,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 4,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 8,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 3
+    },
+    {
+     "day": 9,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 11,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 15,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 19,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 3
+    },
+    {
+     "day": 23,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 6
+    },
+    {
+     "day": 25,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 29,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 39,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 41,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 9
+    },
+    {
+     "day": 42,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 45,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 49,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 50,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 51,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 56,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 59,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 5
+    }
+   ]
+  },
+  {
+   "card": "Card 13",
+   "first_fraud_day": 32,
+   "first_alert_day": 32,
+   "lost": 1185.19,
+   "stopped": 1043.42,
+   "days": [
+    {
+     "day": 32,
+     "lost": 1185.19,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 33,
+     "lost": 0.0,
+     "stopped": 16.5,
+     "legit": 0
+    },
+    {
+     "day": 34,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 35,
+     "lost": 0.0,
+     "stopped": 1026.92,
+     "legit": 3
+    },
+    {
+     "day": 52,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    }
+   ]
+  },
+  {
+   "card": "Card 14",
+   "first_fraud_day": 7,
+   "first_alert_day": 7,
+   "lost": 1043.97,
+   "stopped": 959.96,
+   "days": [
+    {
+     "day": 7,
+     "lost": 1043.97,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 28,
+     "lost": 0.0,
+     "stopped": 390.98,
+     "legit": 0
+    },
+    {
+     "day": 39,
+     "lost": 0.0,
+     "stopped": 568.98,
+     "legit": 0
+    }
+   ]
+  },
+  {
+   "card": "Card 15",
+   "first_fraud_day": 1,
+   "first_alert_day": 1,
+   "lost": 985.0,
+   "stopped": 985.0,
+   "days": [
+    {
+     "day": 0,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 1,
+     "lost": 985.0,
+     "stopped": 0.0,
+     "legit": 0
+    },
+    {
+     "day": 23,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 31,
+     "lost": 0.0,
+     "stopped": 985.0,
+     "legit": 0
+    },
+    {
+     "day": 36,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 37,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    }
+   ]
+  },
+  {
+   "card": "Card 16",
+   "first_fraud_day": 0,
+   "first_alert_day": 0,
+   "lost": 169.97,
+   "stopped": 86.87,
+   "days": [
+    {
+     "day": 0,
+     "lost": 169.97,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 1,
+     "lost": 0.0,
+     "stopped": 86.87,
+     "legit": 1
+    },
+    {
+     "day": 10,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 11,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 15,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 29,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 38,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    },
+    {
+     "day": 40,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 2
+    },
+    {
+     "day": 57,
+     "lost": 0.0,
+     "stopped": 0.0,
+     "legit": 1
+    }
+   ]
+  }
+ ]
+}
