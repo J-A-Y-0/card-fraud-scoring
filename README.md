@@ -89,3 +89,7 @@ To browse the tools locally: `python -m http.server -d site`, then open <http://
 - **Small sample.** 16 compromised cards in the test window: the direction of each finding is solid, its size is uncertain.
 - **Assumptions.** Labels are taken as complete, and a blocked card is assumed to stop the fraudster. Costs are planning values you can change in the planner.
 - **Data.** The transaction file is not redistributed. `site/data/` holds only aggregates and a relabeled, rounded alert sample.
+
+---
+
+By [Jay Yu](https://jayyu.me/) · [Case study](https://jayyu.me/work/card-fraud/)
